@@ -49,8 +49,23 @@
 header,
 .mainContent,
 footer {
+    .row;
     & > .section {
         margin: 0 auto;
         width: @siteWidth;
+    }
+}
+
+.mainContent > .section {
+    & > nav {
+        .colSpan(2);
+    }
+    
+    & > article {
+        .colSpan(7, 2);
+    }
+    
+    & > aside {
+        .colSpan(3, 9);
     }
 }

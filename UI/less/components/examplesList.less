@@ -1,7 +1,13 @@
 .examplesList {
+    .resetList();
+
     li:not(:last-child) { 
         border-bottom: dashed 3px @mainBorderColor;
         margin-bottom: 2em;
         padding-bottom: 2em; 
+    }
+
+    li {
+        overflow: auto;
     }
 }

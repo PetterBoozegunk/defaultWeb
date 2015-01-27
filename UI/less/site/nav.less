@@ -8,4 +8,16 @@ nav,
         color: @fontColor;
         text-decoration: none;
     }
+
+    &.submenu {
+        a {
+            &:before {
+                font-family: @iconFont;
+                content: "\f054 ";
+                font-size: 0.7em;
+                line-height: 1.6;
+                margin-right: 0.5em;
+            }
+        }
+    }
 }

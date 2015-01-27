@@ -1,20 +1,32 @@
 code {
-    background-color: #e2e2e2;
-
     .remFont(15px);
 
     .comment,
     .multiLineComment {
         color: green;
+        margin: 1em 0 0.3em;
     }
 
     .comment {
+        display: inline-block;
         &:before {
             content: "//";
         }
     }
 
     .multiLineComment {
+        display: block;
+        @indent: 2em;
+
+        padding-left: @indent;
+
+        &:before,
+        &:after {
+            position: relative;
+            left: ~"-@{indent}";
+            display: block;
+        }
+
         &:before {
             content: "/*";
         }

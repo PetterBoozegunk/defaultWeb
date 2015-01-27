@@ -41,8 +41,8 @@
 
                 return {
                     "center": center,
-                    "zoom": zoom,
-                    "scrollwheel": false
+                    "zoom": zoom //,
+                    //"scrollwheel": false
                 };
             },
             getMarkers: function (data) {
