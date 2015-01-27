@@ -16,37 +16,55 @@
                 spinners.js uses "<a href="http://fgnass.github.io/spin.js/">spin.js</a>"
             </p>
             
-            <div class="spinnerTest1"> <!-- --> </div>
-
-            <div class="spinnerTest2"> <!-- --> </div>
-
-            <div class="spinnerTest3"> <!-- --> </div>
-            
-            <div class="example">
-                <h3>Syntax examples</h3>
-                        <code>
-<pre>   
+            <ol>
+                <li>
+                    <div class="spinnerTest1"> <!-- --> </div>
+                    <code class="html">
+                        &lt;div class="spinnerTest1"&gt; &lt;!-- --&gt; &lt;/div&gt;
+                    </code>
+                    <code class="js">
+                        $(".spinnerTest1").trigger("spinner:get");
+                    </code>
+                </li>
+                <li>
+                    <div class="spinnerTest2"> <!-- --> </div>
+                    <code>
+<pre>
 <span class="multiLineComment">
     A spinner will get the same color as the parent element (css) color.
     To get the right color in ie8 and below the color has to be a hex value (ex: '#ff0000/#f00' not 'red')
 </span>
+</pre>  
+                    </code>
+                    <code class="html">
+                        &lt;div class="spinnerTest2"&gt; &lt;!-- --&gt; &lt;/div&gt;
+                    </code>
+                    <code class="js">
+                        $(".spinnerTest2").trigger("spinner:get");
+                    </code>
+                </li>
+                <li>
+                    <div class="spinnerTest3"> <!-- --> </div>
 
-$(".spinnerTest1").trigger("spinner:get");
-$(".spinnerTest2").trigger("spinner:get");
-    
+                    <code class="html">
+                        &lt;div class="spinnerTest3"&gt; &lt;!-- --&gt; &lt;/div&gt;
+                    </code><pre>
+<code class="js">
 <span class="comment"> The spinnerObj will overwrite the spinner defaults</span>
 var spinnerObj = {
     color: "#90ee90" <span class="comment"> lightgreen</span>
 };
 
 $(".spinnerTest3").trigger("spinner:get", spinnerObj);
+</code>
 </pre>
-                        </code>
-                </div>
+                    
+                </li>
+            </ol>
             
-                <!-- include("/blocks/examples.html") -->
-            </div>
+            <!-- include("/blocks/examples.html") -->
         </div>
+    </div>
 
 <!-- include("/blocks/footer.html") -->
     

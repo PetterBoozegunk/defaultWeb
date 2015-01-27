@@ -1,4 +1,6 @@
 code {
+    background-color: #e2e2e2;
+
     .remFont(15px);
 
     .comment,
@@ -6,8 +8,10 @@ code {
         color: green;
     }
 
-    .comment:before {
-        content: "//";
+    .comment {
+        &:before {
+            content: "//";
+        }
     }
 
     .multiLineComment {
@@ -18,5 +22,22 @@ code {
         &:after {
             content: "*/";
         }
+    }
+
+    &.html,
+    &.js {
+        &:before {
+            margin-top: 1em;
+            font-weight: bold;
+            display: block;
+        }
+    }
+
+    &.html:before {
+        content: "HTML for this example: ";
+    }
+
+    &.js:before {
+        content: "Javascript for this example: ";
     }
 }
