@@ -42,6 +42,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+/UI/dist/
+/UI/dist/*
+/UI/dist/**
+
 /UI/node_modules/
 /UI/node_modules/*
 /UI/node_modules/**
