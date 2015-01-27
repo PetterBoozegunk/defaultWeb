@@ -1,0 +1,22 @@
+code {
+    .remFont(15px);
+
+    .comment,
+    .multiLineComment {
+        color: green;
+    }
+
+    .comment:before {
+        content: "//";
+    }
+
+    .multiLineComment {
+        &:before {
+            content: "/*";
+        }
+        
+        &:after {
+            content: "*/";
+        }
+    }
+}

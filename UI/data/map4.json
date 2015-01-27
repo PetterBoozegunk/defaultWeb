@@ -1,0 +1,9 @@
+﻿{
+    "markers" : [
+        {"lat":59.334156,"lng":18.098511,"title":"Cloudnine"},
+        {"lat":59.334156,"lng":18.098511,"title":"Circuit"},
+        {"lat":59.334156,"lng":18.086511,"title":"Test 1"},
+        {"lat":59.434156,"lng":18.786511,"title":"Test 2"}
+    ],
+    "zoom":5
+}

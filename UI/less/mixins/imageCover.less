@@ -1,0 +1,21 @@
+.imageCover(@height: 100px, @width: 100%) {
+    position: relative;
+    height: @height;
+    width: @width;
+    overflow: hidden;
+
+    img {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+
+        visibility: hidden;
+    }
+
+    img.coverHeight {
+        width: auto;
+    }
+}

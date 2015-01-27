@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Spinner</title>
+<!-- include("/blocks/styles.html") -->
+</head>
+<body>
+<!-- include("/blocks/ieScripts.html") -->  
+    
+<!-- include("/blocks/header.html") -->
+    
+    <div class="mainContent">
+        <div class="section">
+            <h1>Spinners!</h1>
+            <p class="uses">
+                spinners.js uses "<a href="http://fgnass.github.io/spin.js/">spin.js</a>"
+            </p>
+            
+            <div class="spinnerTest1"> <!-- --> </div>
+
+            <div class="spinnerTest2"> <!-- --> </div>
+
+            <div class="spinnerTest3"> <!-- --> </div>
+            
+            <div class="example">
+                <h3>Syntax examples</h3>
+                        <code>
+<pre>   
+<span class="multiLineComment">
+    A spinner will get the same color as the parent element (css) color.
+    To get the right color in ie8 and below the color has to be a hex value (ex: '#ff0000/#f00' not 'red')
+</span>
+
+$(".spinnerTest1").trigger("spinner:get");
+$(".spinnerTest2").trigger("spinner:get");
+    
+<span class="comment"> The spinnerObj will overwrite the spinner defaults</span>
+var spinnerObj = {
+    color: "#90ee90" <span class="comment"> lightgreen</span>
+};
+
+$(".spinnerTest3").trigger("spinner:get", spinnerObj);
+</pre>
+                        </code>
+                </div>
+            
+                <!-- include("/blocks/examples.html") -->
+            </div>
+        </div>
+
+<!-- include("/blocks/footer.html") -->
+    
+<!-- include("/blocks/scripts.html") -->
+</body>
+</html>

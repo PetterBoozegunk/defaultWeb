@@ -1,0 +1,56 @@
+//@siteWidth: 978px;
+//@gutter: 30px;
+//@nbrColumns: 12;
+        
+//The grid-vars is set in /UI/less/vars/vars.less
+
+.col,
+.row {
+   .boxSizing(border-box); 
+    min-height: 1px;
+}
+
+.col {
+    margin-right: -100%;
+    float: left;
+}
+
+.row {
+    zoom: 1;
+    clear: both;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@nbrGutters: (@nbrColumns - 1);
+@totalGutterPixelWidth: @nbrGutters * @gutter;
+
+@columnPixelWidth: (@siteWidth - @totalGutterPixelWidth) / @nbrColumns;
+
+.colSpan(@nbrCols: 1, @offsetLeft: 0, @parentColSpan: @nbrColumns) {
+    @currentNbrGutters: (@parentColSpan - 1);
+    @parentPixelWidth: (@columnPixelWidth * @parentColSpan) + (@currentNbrGutters * @gutter);
+
+    @gutterPercentWidth: unit((@gutter / (@parentPixelWidth - @currentNbrGutters)) * 100, %);
+    @columnPercentWidth: (100 / @parentColSpan) + (@gutterPercentWidth / @parentColSpan);
+        
+    @marginLeft: unit(@columnPercentWidth * @offsetLeft, %);
+    margin-left: @marginLeft;
+
+    @width: unit(((@columnPercentWidth * @nbrCols) - @gutterPercentWidth), %);
+    width: @width;
+}
+
+header,
+.mainContent,
+footer {
+    & > .section {
+        margin: 0 auto;
+        width: @siteWidth;
+    }
+}

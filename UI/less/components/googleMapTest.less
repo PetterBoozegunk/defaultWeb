@@ -1,0 +1,85 @@
+.googleMap {
+
+    + .markersList {
+        .resetList();
+        position: absolute;
+        overflow: auto;
+        background: #fff;
+        padding: 10px;
+        border: solid 1px @mainBorderColor;
+
+        @boxShadow: 8px;
+        box-shadow: @boxShadow @boxShadow @boxShadow 0 rgba(0, 0, 0, .5);
+
+        .remFont(10px);
+
+        li {
+            position: relative;
+            padding-left: 50px;
+            min-height: 52px;
+            margin-bottom: 5px;
+
+            &:hover {
+                background-color: @mainBorderColor;
+            }
+
+            &,
+            a,
+            h2,
+            p {
+                text-decoration: none;
+            }
+
+            p {
+                color: @fontColor;
+            }
+
+            a {
+                display: block;
+                padding-top: 3px;
+            }
+        }
+    }
+
+    &.map1 { 
+        @dims: 200px;
+
+        width: @dims;
+        height: @dims;
+    }
+
+    &.map2 { 
+        width: 400px;
+        height: 300px;
+    }
+
+    &.map3 { 
+        width: 300px;
+        height: 200px;
+    }
+
+    &.map4 {
+        display: block;
+        width: auto;
+        height: 500px;
+    }
+}
+
+.googgleMapsExamples {
+    ol li { 
+        border-bottom: dashed 3px @mainBorderColor;
+        margin-bottom: 2em;
+        padding-bottom: 2em; 
+
+        code {
+            background-color: #e2e2e2;
+
+            &:before {
+                margin-top: 1em;
+                content: "HTML for this map: ";
+                font-weight: bold;
+                display: block;
+            }
+        }
+    }
+}
