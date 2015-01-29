@@ -3,15 +3,13 @@
 /// <reference path="../mixins/mixins.less" />
 
 .examplesList {
+    @marginPaddingTop: 2em;
     .resetList();
 
-    li:not(:last-child) { 
-        border-bottom: dashed 3px @mainBorderColor;
-        padding-bottom: 2em; 
-    }
-
-    li {
+    li { 
+        border-top: dashed 3px @mainBorderColor;
+        padding-top: @marginPaddingTop; 
+        margin-top: @marginPaddingTop;
         overflow: auto;
-        margin-bottom: 2em;
     }
 }

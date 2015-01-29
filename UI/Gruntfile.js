@@ -109,7 +109,7 @@ module.exports = function (grunt) {
             less: {
                 "default": {
                     options: {
-                        compress: true
+                        compress: false
                     },
                     files: paths.css.toFrom
                 }
