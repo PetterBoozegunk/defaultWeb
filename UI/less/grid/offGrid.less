@@ -1,3 +1,7 @@
+/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/static.mixins.less" />
+/// <reference path="../mixins/mixins.less" />
+
 .offGrid(@nbrCols: 1, @margin: 0, @parentWidth: @siteWidth) { 
     @marginPercentWidth: unit((@margin / (@parentWidth - @nbrCols)) * 100, %);
     @elemWidth: unit(((100 / @nbrCols) - @marginPercentWidth) - (@marginPercentWidth / @nbrCols), %);
