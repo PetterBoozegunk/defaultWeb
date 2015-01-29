@@ -4,10 +4,10 @@
     "use strict";
 
     var webConfig = {
-        hostname: "localhost",
-        port: 8080,
-        defaultfile: "index.html"
-    },
+            hostname: "defaultweb.local",
+            port: 666,
+            defaultfile: "index.html"
+        },
         zlib = require("zlib"),
         sys = require("sys"),
         http = require("http"),
