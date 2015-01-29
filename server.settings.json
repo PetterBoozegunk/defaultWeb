@@ -1,0 +1,5 @@
+{
+    "hostname": "defaultweb.local",
+    "port": 666,
+    "defaultfile": "index.html"
+}
