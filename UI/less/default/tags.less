@@ -11,13 +11,33 @@ body {
     margin: 0;
     padding: 0;
 
-    .remFont(16px);
-
     font-family: @mainFontFamily;
 }
 
+
+h1 {
+    .remFont(@baseFontSize * 1.5);
+}
+
 h2 { 
+    .remFont(@baseFontSize * 1.4);
     margin-bottom: 0;
+}
+
+h3 {
+    .remFont(@baseFontSize * 1.3);
+}
+
+h4 {
+    .remFont(@baseFontSize * 1.2);
+}
+
+h5 {
+    .remFont(@baseFontSize * 1.1);
+}
+
+h6 {
+    .remFont(@baseFontSize);
 }
 
 p { 

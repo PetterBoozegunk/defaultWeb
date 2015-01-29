@@ -2,7 +2,6 @@
 "use strict";
 
 module.exports = function (grunt) {
-
     var util = {
             trim: function (str) {
                 return str.replace(/(^\s+)(\s+$)/g, "");
@@ -25,7 +24,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         paths = {
             css: {
                 concat: {
@@ -71,7 +69,6 @@ module.exports = function (grunt) {
                 root: "dist"
             }
         },
-
         config = {
             pkg: grunt.file.readJSON('package.json'),
             chmod: {
@@ -109,7 +106,7 @@ module.exports = function (grunt) {
             less: {
                 "default": {
                     options: {
-                        compress: true
+                        compress: false
                     },
                     files: paths.css.toFrom
                 }
@@ -129,7 +126,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         defaultTasks = [
             "chmod",
             "clean:dist",
@@ -139,7 +135,6 @@ module.exports = function (grunt) {
             "uglify",
             "clean:less"
         ],
-
         tasks = {
             npmTasks: [
                 "grunt-chmod",
