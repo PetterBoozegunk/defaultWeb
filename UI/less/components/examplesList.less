@@ -1,13 +1,17 @@
+/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/static.mixins.less" />
+/// <reference path="../mixins/mixins.less" />
+
 .examplesList {
     .resetList();
 
     li:not(:last-child) { 
         border-bottom: dashed 3px @mainBorderColor;
-        margin-bottom: 2em;
         padding-bottom: 2em; 
     }
 
     li {
         overflow: auto;
+        margin-bottom: 2em;
     }
 }

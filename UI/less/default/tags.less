@@ -1,3 +1,8 @@
+/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/static.mixins.less" />
+/// <reference path="../mixins/font.mixins.less" />
+/// <reference path="../mixins/mixins.less" />
+
 html { 
     font-size: @baseFontSize;
 }
@@ -6,7 +11,9 @@ body {
     margin: 0;
     padding: 0;
 
-    .remFont(20px);
+    .remFont(16px);
+
+    font-family: @mainFontFamily;
 }
 
 h2 { 
