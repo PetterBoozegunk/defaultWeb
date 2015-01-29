@@ -4,10 +4,10 @@
     "use strict";
 
     var webConfig = {
-            hostname: "defaultweb.local",
-            port: 666,
-            defaultfile: "index.html"
-        },
+        hostname: "localhost",
+        port: 8080,
+        defaultfile: "index.html"
+    },
         zlib = require("zlib"),
         sys = require("sys"),
         http = require("http"),
@@ -138,6 +138,8 @@
         getInclude: function (rnrObject) {
             var includeUrl = rnrObject.includes[0].match(/["'][\w\_\/\.]+["']/).join().replace(/['"]/g, ""),
                 fullPath = path.join(process.cwd(), includeUrl);
+
+            rnrObject.fullPath = fullPath;
 
             fs.readFile(fullPath, rnrObject.readFileInclude);
         },
