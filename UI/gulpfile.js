@@ -10,6 +10,7 @@ var gulp = require("gulp"),
     autoprefix = new LessPluginAutoPrefix({
         browsers: ["last 4 versions"]
     }),
+    jslint = require('gulp-jslint'),
     uglify = require("gulp-uglify"),
     includeSources = require("gulp-include-source"),
 
@@ -37,6 +38,10 @@ var gulp = require("gulp"),
                 }))
                 .pipe(minifyCSS())
                 .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
+            },
+            "jslint" : function () {
+                return gulp.src(["!js/lib", "js/*.js"])
+                    .pipe(jslint());
             },
             "js": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
@@ -66,9 +71,11 @@ var gulp = require("gulp"),
             },
             "watch" : function () {
                 gulp.watch("js/lib/**.js", ["js"]);
-                gulp.watch("js/**.js", ["js", "oldIeJs", "tests"]);
+                gulp.watch("js/**.js", ["jslint", "js", "oldIeJs", "tests"]);
 
                 gulp.watch("less/**/*.less", ["less", "odlIeCss"]);
+
+                gulp.watch("gulpfile.js", tasksArray);
             }
         },
         eachTask : function (func, that) {
