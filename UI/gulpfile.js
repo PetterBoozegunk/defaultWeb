@@ -4,40 +4,40 @@
 var gulp = require("gulp"),
     watch = require("gulp-watch"),
     concat = require("gulp-concat"),
+
+    lessPluginGlob = require("less-plugin-glob"),
     less = require("gulp-less"),
+    autoprefixer = require('gulp-autoprefixer'),
     minifyCSS = require("gulp-minify-css"),
-    LessPluginAutoPrefix = require("less-plugin-autoprefix"),
-    autoprefix = new LessPluginAutoPrefix({
-        browsers: ["last 4 versions"]
-    }),
+
     jslint = require('gulp-jslint'),
     uglify = require("gulp-uglify"),
-    includeSources = require("gulp-include-source"),
+
+    sourcemaps = require("gulp-sourcemaps"),
 
     gulpSettings = {
 
         srcDest: "dist",
         cssDest: "/css",
         jsDest: "/js",
+        sourceMapDest: "./",
+        autoprefixerOptions : {
+            browsers: ["last 6 versions"],
+            cascade: false,
+            remove: true
+        },
 
         tasks: {
             "less": function () {
-                return gulp.src([
-                    "less/fonts/*",
-                    "less/vars/*",
-                    "less/mixins/*",
-                    "less/default/*",
-                    "less/grid/*",
-                    "less/site/*",
-                    "less/pages/*",
-                    "less/components/*"
-                ])
-                .pipe(concat("styles.less"))
-                .pipe(less({
-                    plugins: [autoprefix]
-                }))
-                .pipe(minifyCSS())
-                .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
+                return gulp.src("less/styles.less")
+                    .pipe(sourcemaps.init())
+                    .pipe(less({
+                        plugins: [lessPluginGlob]
+                    }))
+                    //.pipe(autoprefixer(gulpSettings.autoprefixerOptions))
+                    .pipe(minifyCSS())
+                    .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
+                    .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "jslint" : function () {
                 return gulp.src(["!js/lib", "js/*.js"])
@@ -45,18 +45,20 @@ var gulp = require("gulp"),
             },
             "js": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
+                    .pipe(sourcemaps.init())
                     .pipe(concat("scripts.js"))
                     .pipe(uglify())
+                    .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
             "odlIeCss" : function () {
                 return gulp.src("less/oldIe/*")
-                .pipe(concat("oldIe.less"))
-                .pipe(less({
-                    plugins: [autoprefix]
-                }))
-                .pipe(minifyCSS())
-                .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
+                    .pipe(concat("oldIe.less"))
+                    .pipe(less({
+                        plugins: [lessPluginGlob]
+                    }))
+                    .pipe(minifyCSS())
+                    .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "oldIeJs" : function () {
                 return gulp.src("js/oldIe/*.js")
@@ -73,7 +75,7 @@ var gulp = require("gulp"),
                 gulp.watch("js/lib/**.js", ["js"]);
                 gulp.watch("js/**.js", ["jslint", "js", "oldIeJs", "tests"]);
 
-                gulp.watch("less/**/*.less", ["less", "odlIeCss"]);
+                gulp.watch("less/**", ["less", "odlIeCss"]);
 
                 gulp.watch("gulpfile.js", tasksArray);
             }
