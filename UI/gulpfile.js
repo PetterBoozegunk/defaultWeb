@@ -7,13 +7,33 @@ var gulp = require("gulp"),
 
     lessPluginGlob = require("less-plugin-glob"),
     less = require("gulp-less"),
-    autoprefixer = require('gulp-autoprefixer'),
+    autoprefixer = require("gulp-autoprefixer"),
     minifyCSS = require("gulp-minify-css"),
 
     jslint = require('gulp-jslint'),
     uglify = require("gulp-uglify"),
 
     sourcemaps = require("gulp-sourcemaps"),
+
+    util = {
+        eachTask : function (func, that, tasks) {
+            var k;
+
+            for (k in tasks) {
+                if (tasks.hasOwnProperty(k)) {
+                    func.call(that, tasks[k], k, tasks);
+                }
+            }
+        },
+        setAllTasks : function (tasks) {
+            util.eachTask(function () {
+                var taskName = arguments[1],
+                    taskFuncOrArray = arguments[0];
+
+                gulp.task(taskName, taskFuncOrArray);
+            }, this, tasks);
+        }
+    },
 
     gulpSettings = {
 
@@ -26,6 +46,11 @@ var gulp = require("gulp"),
             cascade: false,
             remove: true
         },
+        watchTasks: {
+            "js/lib/**.js": ["scripts"],
+            "js/**.js": ["jslint", "scripts", "oldIeJs", "tests"],
+            "less/**": ["less", "odlIeCss"]
+        },
 
         tasks: {
             "less": function () {
@@ -34,7 +59,7 @@ var gulp = require("gulp"),
                     .pipe(less({
                         plugins: [lessPluginGlob]
                     }))
-                    //.pipe(autoprefixer(gulpSettings.autoprefixerOptions))
+                    .pipe(autoprefixer(gulpSettings.autoprefixerOptions))
                     .pipe(minifyCSS())
                     .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
@@ -43,7 +68,7 @@ var gulp = require("gulp"),
                 return gulp.src(["!js/lib", "js/*.js"])
                     .pipe(jslint());
             },
-            "js": function () {
+            "scripts": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
                     .pipe(sourcemaps.init())
                     .pipe(concat("scripts.js"))
@@ -51,7 +76,7 @@ var gulp = require("gulp"),
                     .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
-            "odlIeCss" : function () {
+            "oldIeCss" : function () {
                 return gulp.src("less/oldIe/*")
                     .pipe(concat("oldIe.less"))
                     .pipe(less({
@@ -72,43 +97,11 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
             "watch" : function () {
-                gulp.watch("js/lib/**.js", ["js"]);
-                gulp.watch("js/**.js", ["jslint", "js", "oldIeJs", "tests"]);
-
-                gulp.watch("less/**", ["less", "odlIeCss"]);
-
-                gulp.watch("gulpfile.js", tasksArray);
+                gulp.task("less/**", ["less", "odlIeCss"]);
             }
-        },
-        eachTask : function (func, that) {
-            var k,
-                tasks = gulpSettings.tasks;
-
-            for (k in tasks) {
-                if (tasks.hasOwnProperty(k)) {
-                    func.call(that, tasks[k], k, tasks);
-                }
-            }
-        },
-        getAllTasks: function () {
-            var tasksArray = [];
-
-            gulpSettings.eachTask(function () {
-                tasksArray.push(arguments[1]);
-            });
-
-            return tasksArray;
-        },
-        setAllTasks : function () {
-            gulpSettings.eachTask(function () {
-                var taskName = arguments[1],
-                    taskFunc = arguments[0];
-
-                gulp.task(taskName, taskFunc);
-            });
         }
-    },
-    tasksArray = gulpSettings.getAllTasks();
+    };
 
-gulpSettings.setAllTasks();
-gulp.task("default", tasksArray);
+util.setAllTasks(gulpSettings.tasks);
+
+gulp.task("default", ["less", "jslint", "scripts", "oldIeCss", "oldIeJs", "tests", "watch"]);
