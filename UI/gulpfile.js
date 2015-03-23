@@ -1,16 +1,19 @@
 ﻿/*jslint node: true */
 "use strict";
 
-var gulp = require("gulp"),
-    watch = require("gulp-watch"),
+var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
+
+    gulp = require("gulp"),
     concat = require("gulp-concat"),
+    watch = require("gulp-watch"),
 
     lessPluginGlob = require("less-plugin-glob"),
     less = require("gulp-less"),
+
     autoprefixer = require("gulp-autoprefixer"),
     minifyCSS = require("gulp-minify-css"),
 
-    jslint = require('gulp-jslint'),
+    jslint = require("gulp-jslint"),
     uglify = require("gulp-uglify"),
 
     sourcemaps = require("gulp-sourcemaps"),
@@ -42,9 +45,7 @@ var gulp = require("gulp"),
         jsDest: "/js",
         sourceMapDest: ".",
         autoprefixerOptions : {
-            browsers: ["last 6 versions"],
-            cascade: false,
-            remove: true
+            browsers: browsers
         },
 
         watch : {
@@ -56,13 +57,13 @@ var gulp = require("gulp"),
         tasks: {
             "less": function () {
                 return gulp.src("less/styles.less")
-                    .pipe(sourcemaps.init())
+                    //.pipe(sourcemaps.init())
                     .pipe(less({
                         plugins: [lessPluginGlob]
                     }))
-                    //.pipe(autoprefixer(gulpSettings.autoprefixerOptions))
+                    .pipe(autoprefixer(gulpSettings.autoprefixerOptions))
                     .pipe(minifyCSS())
-                    .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
+                    //.pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "oldIeCss" : function () {
