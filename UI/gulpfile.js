@@ -62,7 +62,7 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
                         plugins: [lessPluginGlob]
                     }))
                     .pipe(autoprefixer(gulpSettings.autoprefixerOptions))
-                    .pipe(minifyCSS())
+                    //.pipe(minifyCSS())
                     //.pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },

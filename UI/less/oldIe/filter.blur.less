@@ -1,0 +1,15 @@
+﻿.blur(@blur: 0) {
+    @minusBlur: ~"-@{blur}";
+
+    position: relative;
+    top: @minusBlur;
+    left: @minusBlur;
+}
+
+.blur-test-10 {
+    .blur(10px);
+}
+
+.blur-test-70 {
+    .blur(70px);
+}
