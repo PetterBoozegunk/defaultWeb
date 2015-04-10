@@ -24,7 +24,8 @@
     "gulp-jslint": "^0.2.2",
     "less-plugin-glob": "^1.1.0",
     "gulp-autoprefixer": "^2.1.0",
-    "gulp-concat": "^2.5.2"
+    "gulp-concat": "^2.5.2",
+    "gulp-pleeease": "^1.2.0"
   },
   "dependencies": {
     "parsleyjs": "~2.0.0-rc2"

@@ -10,13 +10,12 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
     lessPluginGlob = require("less-plugin-glob"),
     less = require("gulp-less"),
 
-    autoprefixer = require("gulp-autoprefixer"),
     minifyCSS = require("gulp-minify-css"),
 
     jslint = require("gulp-jslint"),
     uglify = require("gulp-uglify"),
 
-    sourcemaps = require("gulp-sourcemaps"),
+    please = require("gulp-pleeease"),
 
     util = {
         forEach: function (func, that, obj) {
@@ -57,13 +56,17 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
         tasks: {
             "less": function () {
                 return gulp.src("less/styles.less")
-                    //.pipe(sourcemaps.init())
-                    .pipe(less({
+                     .pipe(less({
                         plugins: [lessPluginGlob]
                     }))
-                    .pipe(autoprefixer(gulpSettings.autoprefixerOptions))
-                    //.pipe(minifyCSS())
-                    //.pipe(sourcemaps.write(gulpSettings.sourceMapDest))
+                    .pipe(please({
+                        "browsers": ["last 4 versions"],
+                        "minifier": true,
+                        "sourcemaps": false,
+                        "filters": {
+                            "oldIE": true
+                        }
+                    }))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "oldIeCss" : function () {
@@ -81,10 +84,8 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
             },
             "scripts": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
-                    .pipe(sourcemaps.init())
                     .pipe(concat("scripts.js"))
                     .pipe(uglify())
-                    .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
             "oldIeJs" : function () {
