@@ -1,0 +1,16 @@
+﻿.blur (@blur: 0) {
+
+    @noUnitBlur: unit(@blur);
+
+    filter: blur(@blur);
+    
+    filter: ~"progid:DXImageTransform.Microsoft.Blur(PixelRadius='@{noUnitBlur}')"; 
+}
+
+.blur-test-10 {
+    .blur(10px);
+}
+
+.blur-test-70 {
+    .blur(70px);
+}
