@@ -43,9 +43,6 @@ var browsers = ["last 4 versions"],
         cssDest: "/css",
         jsDest: "/js",
         sourceMapDest: ".",
-        //autoprefixerOptions : {
-        //    browsers: browsers
-        //},
 
         watch : {
             "js/lib/**.js": ["scripts"],
