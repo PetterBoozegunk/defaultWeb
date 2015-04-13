@@ -3,24 +3,16 @@
     @ieOpacity: (@opacity * 100);
     @ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{ieOpacity})";
 
-    //-moz-opacity: @opacity;
-    //-khtml-opacity: @opacity;
     opacity: @opacity;
 
-    -ms-filter: "@{ms-filter}";  //* IE 8 */
-    //filter: ~"alpha(opacity = @{ieOpacity})";  //* IE 5-7 */
+    -ms-filter: "@{ms-filter}"; 
 }
 
 .boxSizing(@boxSize: border-box) { 
-    //-moz-box-sizing: @boxSize; 
-    //-webkit-box-sizing: @boxSize; 
     box-sizing: @boxSize;
 }
 
 .transition(@transition: all 1s ease-in-out) { 
-    //-webkit-transition: @transition;
-    //-moz-transition: @transition;
-    //-o-transition: @transition;
     transition: @transition;
 }
 
