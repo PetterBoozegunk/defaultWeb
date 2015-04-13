@@ -1,7 +1,7 @@
 ﻿/*jslint node: true */
 "use strict";
 
-var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
+var browsers = ["last 4 versions"],
 
     gulp = require("gulp"),
     concat = require("gulp-concat"),
@@ -43,13 +43,13 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
         cssDest: "/css",
         jsDest: "/js",
         sourceMapDest: ".",
-        autoprefixerOptions: {
-            browsers: browsers
-        },
 
+        //autoprefixerOptions : {
+        //    browsers: browsers
+        //},
         watch: {
             "js/lib/**.js": ["scripts"],
-            "js/**.js": ["jslint", "scripts", "oldIeJs", "tests"],
+            "js/**.js": ["scripts", "oldIeJs", "tests"],
             "less/**": ["less", "oldIeCss"]
         },
 
@@ -57,11 +57,11 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
             "less": function () {
                 return gulp.src("less/styles.less")
                      .pipe(less({
-                         plugins: [lessPluginGlob]
-                     }))
+                        plugins: [lessPluginGlob]
+                    }))
                     .pipe(please({
-                        "browsers": ["last 4 versions"],
-                        "minifier": true,
+                        "browsers": browsers,
+                        "minifier": false,
                         "sourcemaps": false,
                         "filters": {
                             "oldIE": true
@@ -85,7 +85,7 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
             "scripts": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
                     .pipe(concat("scripts.js"))
-                    .pipe(uglify())
+                    //.pipe(uglify())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
             "oldIeJs": function () {
