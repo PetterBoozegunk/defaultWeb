@@ -10,13 +10,12 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
     lessPluginGlob = require("less-plugin-glob"),
     less = require("gulp-less"),
 
-    autoprefixer = require("gulp-autoprefixer"),
     minifyCSS = require("gulp-minify-css"),
 
     jslint = require("gulp-jslint"),
     uglify = require("gulp-uglify"),
 
-    sourcemaps = require("gulp-sourcemaps"),
+    please = require("gulp-pleeease"),
 
     util = {
         forEach: function (func, that, obj) {
@@ -44,11 +43,11 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
         cssDest: "/css",
         jsDest: "/js",
         sourceMapDest: ".",
-        autoprefixerOptions : {
+        autoprefixerOptions: {
             browsers: browsers
         },
 
-        watch : {
+        watch: {
             "js/lib/**.js": ["scripts"],
             "js/**.js": ["jslint", "scripts", "oldIeJs", "tests"],
             "less/**": ["less", "oldIeCss"]
@@ -57,16 +56,20 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
         tasks: {
             "less": function () {
                 return gulp.src("less/styles.less")
-                    //.pipe(sourcemaps.init())
-                    .pipe(less({
-                        plugins: [lessPluginGlob]
+                     .pipe(less({
+                         plugins: [lessPluginGlob]
+                     }))
+                    .pipe(please({
+                        "browsers": ["last 4 versions"],
+                        "minifier": true,
+                        "sourcemaps": false,
+                        "filters": {
+                            "oldIE": true
+                        }
                     }))
-                    .pipe(autoprefixer(gulpSettings.autoprefixerOptions))
-                    //.pipe(minifyCSS())
-                    //.pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
-            "oldIeCss" : function () {
+            "oldIeCss": function () {
                 return gulp.src("less/oldIe/*")
                     .pipe(concat("oldIe.less"))
                     .pipe(less({
@@ -75,19 +78,17 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
                     .pipe(minifyCSS())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
-            "jslint" : function () {
+            "jslint": function () {
                 return gulp.src(["!js/lib", "js/*.js"])
                     .pipe(jslint());
             },
             "scripts": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
-                    .pipe(sourcemaps.init())
                     .pipe(concat("scripts.js"))
                     .pipe(uglify())
-                    .pipe(sourcemaps.write(gulpSettings.sourceMapDest))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
-            "oldIeJs" : function () {
+            "oldIeJs": function () {
                 return gulp.src("js/oldIe/*.js")
                     .pipe(concat("oldIe.js"))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
@@ -98,7 +99,7 @@ var browsers = ["last 2 versions", "ie 7", "ie 8", "ie 9"],
                     .pipe(uglify())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
-            "watch" : function () {
+            "watch": function () {
                 util.setGulp("watch", gulpSettings.watch);
             },
             "default": ["less", "oldIeCss", "jslint", "scripts", "oldIeJs", "tests", "watch"]
