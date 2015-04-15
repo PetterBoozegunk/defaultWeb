@@ -5,7 +5,6 @@
 
     var settings = require("./server.settings.json"),
         zlib = require("zlib"),
-        sys = require("sys"),
         http = require("http"),
         path = require("path"),
         fs = require("fs"),
@@ -121,6 +120,25 @@
                 that.response.writeHead(that.statusCode, that.headers);
                 that.response.end(result);
             };
+
+            this.methodCallback = function (method, args) {
+                var callback = (args.length && typeof args[args.length - 1] === "function") ? args[args.length - 1] : null,
+                    newArgs = []; 
+               
+                args.forEach(function (item, i) {
+                    if (i < (args.length - 1) || (i === (args.length - 1) && typeof item !== "function")) {
+                        newArgs.push(item);
+                    }
+                });
+
+                if (callback) {
+                    newArgs.push(function () {
+                        callback.apply(that, arguments);
+                    });
+                }
+
+                method.apply(that, newArgs);
+            }
         },
         createRnRObject = function (request, response) {// RnR = Request aNd Response
             return new RnRObject(request, response);
@@ -186,11 +204,11 @@
         create: function (request, response) {
             var rnrObject = createRnRObject(request, response);
 
-            path.exists(rnrObject.fullPath, rnrObject.exists);
+            rnrObject.methodCallback(fs.exists, [rnrObject.fullPath, rnrObject.exists]);
         }
     };
 
     http.createServer(server.create).listen(settings.port, settings.hostname);
 
-    sys.puts("Server Running on http://" + settings.hostname + ":" + settings.port);
+    console.log("Server Running on http://" + settings.hostname + ":" + settings.port);
 }());

@@ -1,21 +1,19 @@
 ﻿/*jslint node: true */
 "use strict";
 
-var browsers = ["last 4 versions"],
-
-    gulp = require("gulp"),
+var gulp = require("gulp"),
     concat = require("gulp-concat"),
     watch = require("gulp-watch"),
 
     lessPluginGlob = require("less-plugin-glob"),
+    stripCssComments = require("gulp-strip-css-comments"),
     less = require("gulp-less"),
-
-    minifyCSS = require("gulp-minify-css"),
+    please = require("gulp-pleeease"),
 
     jslint = require("gulp-jslint"),
     uglify = require("gulp-uglify"),
 
-    please = require("gulp-pleeease"),
+    imagemin = require("gulp-imagemin"),
 
     util = {
         forEach: function (func, that, obj) {
@@ -44,48 +42,54 @@ var browsers = ["last 4 versions"],
         jsDest: "/js",
         sourceMapDest: ".",
 
+        less : {
+            "plugins": [lessPluginGlob]
+        },
+        comments: {
+            all: true
+        },
+        please : {
+            "browsers": ["last 4 versions"],
+            "minifier": false,
+            "sourcemaps": false,
+            "filters": {
+                "oldIE": true
+            }
+        },
+
         watch : {
-            "js/lib/**.js": ["scripts"],
-            "js/**.js": ["scripts", "oldIeJs", "tests"],
-            "less/**": ["less", "oldIeCss"]
+            "js/lib/**.js": ["scripts:main"],
+            "js/**.js": ["scripts:main", "scripts:ie", "tests"],
+            "less/**": ["less:main", "less:ie"]
         },
 
         tasks: {
-            "less": function () {
+            "less:main": function () {
                 return gulp.src("less/styles.less")
-                     .pipe(less({
-                        plugins: [lessPluginGlob]
-                    }))
-                    .pipe(please({
-                        "browsers": browsers,
-                        "minifier": false,
-                        "sourcemaps": false,
-                        "filters": {
-                            "oldIE": true
-                        }
-                    }))
+                    .pipe(less(gulpSettings.less))
+                    .pipe(please(gulpSettings.please))
+                    .pipe(stripCssComments(gulpSettings.comments))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
-            "oldIeCss" : function () {
+            "less:ie" : function () {
                 return gulp.src("less/oldIe/*")
                     .pipe(concat("oldIe.less"))
-                    .pipe(less({
-                        plugins: [lessPluginGlob]
-                    }))
-                    .pipe(minifyCSS())
+                    .pipe(less(gulpSettings.less))
+                    .pipe(please(gulpSettings.please))
+                    .pipe(stripCssComments(gulpSettings.comments))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "jslint" : function () {
                 return gulp.src(["!js/lib", "js/*.js"])
                     .pipe(jslint());
             },
-            "scripts": function () {
+            "scripts:main": function () {
                 return gulp.src(["js/lib/*.js", "js/*.js"])
                     .pipe(concat("scripts.js"))
-                    //.pipe(uglify())
+                    .pipe(uglify())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
-            "oldIeJs" : function () {
+            "scripts:ie" : function () {
                 return gulp.src("js/oldIe/*.js")
                     .pipe(concat("oldIe.js"))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
@@ -96,10 +100,15 @@ var browsers = ["last 4 versions"],
                     .pipe(uglify())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
-            "watch" : function () {
+            "images": function () {
+                return gulp.src("images/**")
+                    .pipe(imagemin())
+                    .pipe(gulp.dest("images/"));
+            },
+            "watch": function () {
                 util.setGulp("watch", gulpSettings.watch);
             },
-            "default": ["less", "oldIeCss", "jslint", "scripts", "oldIeJs", "tests", "watch"]
+            "default": ["less:main", "less:ie", "jslint", "scripts:main", "scripts:ie", "tests", "images", "watch"]
         }
     };
 
