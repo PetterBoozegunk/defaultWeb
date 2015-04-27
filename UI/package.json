@@ -1,10 +1,11 @@
 {
-  "name": "default",
-  "version": "1.0.0",
+  "name": "SV",
+  "version": "0.1.0",
   "author": "Petter Ahlberg",
   "description": "Gulp workflow",
   "repository": " ",
   "devDependencies": {
+    "browser-sync": "^2.6.4",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.5.2",
