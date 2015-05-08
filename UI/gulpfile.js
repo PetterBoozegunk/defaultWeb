@@ -139,6 +139,7 @@ var gulp = require("gulp"),
                         stream: true
                     }));
             },
+
             "scripts:prod": function () {
                 return gulp.src(gulpSettings.jsSrc)
                     .pipe(concat("scripts.js"))
