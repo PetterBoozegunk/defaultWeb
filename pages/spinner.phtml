@@ -1,0 +1,50 @@
+<!-- layout("/pages/layout/index.phtml") --> 
+
+<h1>Spinners!</h1>
+<p class="uses">
+<a href="/UI/js/spinner.js">spinners.js</a> uses "<a href="http://fgnass.github.io/spin.js/">spin.js</a>"
+</p>
+            
+<ol class="examplesList">
+    <li>
+        <div class="spinnerTest1"> <!-- --> </div>
+        <code class="html">
+            &lt;div class="spinnerTest1"&gt; &lt;!-- --&gt; &lt;/div&gt;
+        </code>
+        <code class="js">
+            $(".spinnerTest1").trigger("spinner:get");
+        </code>
+    </li>
+    <li>
+        <div class="spinnerTest2"> <!-- --> </div>
+        <code>
+            <span class="multiLineComment">
+                A spinner will get the same color as the parent element (css) color.
+                To get the right color in ie8 and below the color has to be a hex value (ex: '#ff0000/#f00' not 'red')
+            </span>
+ 
+        </code>
+        <code class="html">
+            &lt;div class="spinnerTest2"&gt; &lt;!-- --&gt; &lt;/div&gt;
+        </code>
+        <code class="js">
+            $(".spinnerTest2").trigger("spinner:get");
+        </code>
+    </li>
+    <li>
+        <div class="spinnerTest3"> <!-- --> </div>
+
+        <code class="html">
+            &lt;div class="spinnerTest3"&gt; &lt;!-- --&gt; &lt;/div&gt;
+        </code>
+        <code class="js">
+            <span class="comment block"> The spinnerObj will overwrite the spinner defaults</span>
+
+            var spinnerObj = {
+                color: "#90ee90" <span class="comment"> lightgreen</span>
+            };
+
+            $(".spinnerTest3").trigger("spinner:get", spinnerObj);
+        </code>
+    </li>
+</ol>
