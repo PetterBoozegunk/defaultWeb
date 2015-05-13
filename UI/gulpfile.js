@@ -21,6 +21,9 @@ var gulp = require("gulp"),
 
     imagemin = require("gulp-imagemin"),
 
+    iconfont = require("gulp-iconfont"),
+    consolidate = require("gulp-consolidate"),
+
     sourcemaps = require("gulp-sourcemaps"),
 
     util = {
@@ -62,6 +65,10 @@ var gulp = require("gulp"),
                 "oldIE": true
             }
         },
+        iconFont : {
+            name: "icon",
+            dest: "fonts/"
+        },
 
         watch: {
             "js/lib/**.js": ["scripts:dev"],
@@ -94,6 +101,23 @@ var gulp = require("gulp"),
                 return gulp.src("images/**")
                     .pipe(imagemin())
                     .pipe(gulp.dest("images/"));
+            },
+            "iconFont": function () {
+                gulp.src(["fonts/svg/*.svg"])
+                    .pipe(iconfont({
+                        fontName: gulpSettings.iconFont.name
+                    }))
+                    .on("codepoints", function (codepoints) {
+                        gulp.src("fonts/templates/icon.less")
+                            .pipe(consolidate("lodash", {
+                                glyphs: codepoints,
+                                fontName: gulpSettings.iconFont.name,
+                                fontPath: "/UI/fonts/",
+                                className: "icon"
+                            }))
+                            .pipe(gulp.dest("less/fonts/"));
+                    })
+                    .pipe(gulp.dest(gulpSettings.iconFont.dest));
             },
             "jslint": function () {
                 return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
@@ -170,7 +194,7 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
 
-            "default": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev", "images", "jslint"],
+            "default": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev", "images", "iconFont", "jslint"],
 
             //"sync-watch": ["browser-sync", "watch"],
 
