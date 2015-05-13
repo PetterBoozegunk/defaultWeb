@@ -1,0 +1,68 @@
+<!-- layout("/pages/layout/index.phtml") -->
+
+<h1>Google maps</h1>
+<p>
+    This plugin (or feature) shows one ore more (google) maps on a page.
+</p>
+<p class="uses">
+    <a href="/UI/js/googleMaps.js">googleMaps.js</a> uses "<a href="http://fgnass.github.io/spin.js/">spin.js</a>" and "<a href="/UI/js/spinner.js">spinner.js</a>"
+</p>
+<div>
+    <h2>These files are loaded by "googleMaps.js":</h2>
+    <ol class="fileList">
+        <li>
+            <code><a href="https://maps.googleapis.com/maps/api/js">https://maps.googleapis.com/maps/api/js</a></code>
+        </li>
+        <li>
+            <code><a href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js">http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js</a></code>
+        </li>
+    </ol>
+</div>
+            
+            
+<ol class="examplesList">
+    <li>
+        <div class="googleMap map1" data-map='{"markers":[{"lat":59.334156,"lng":18.098511,"title":"Cloudnine"}]}'>
+            <!-- -->
+        </div>
+
+        <code class="html">
+            &lt;div class="googleMap map1" data-map='{"markers":[{"lat":59.334156,"lng":18.098511,"title":"Cloudnine"}]}'&gt;
+                &lt;!-- --&gt;
+            &lt;/div&gt;
+        </code>
+    </li>
+    <li>
+        <div class="googleMap map2" data-map='{"markers":[{"lat":59.334156,"lng":18.098511,"title":"Cloudnine"},{"lat":59.334156,"lng":18.098511,"title":"Circuit"},{"lat":59.334156,"lng":18.086511,"title":"Test"}],"zoom":5}'>
+            <!-- -->
+        </div>
+
+        <code class="html">
+            &lt;div class="googleMap map2" data-map='{"markers":[{"lat":59.334156,"lng":18.098511,"title":"Cloudnine"},{"lat":59.334156,"lng":18.098511,"title":"Circuit"},{"lat":59.334156,"lng":18.086511,"title":"Test"}],"zoom":5}'&gt;
+                &lt;!-- --&gt;
+            &lt;/div&gt;
+        </code>
+    </li>
+    <li>
+        <div class="googleMap map3" data-map='{"markers":[{"lat":59.334183,"lng":18.098520},{"lat":59.334100,"lng":18.098550}]}'>
+            <!-- -->
+        </div>
+                    
+        <code class="html">
+            &lt;div class="googleMap map3" data-map='{"markers":[{"lat":59.334183,"lng":18.098520},{"lat":59.334100,"lng":18.098550}]}'&gt;
+                &lt;!-- --&gt;
+            &lt;/div&gt;
+        </code>
+    </li>
+    <li>
+        <div class="googleMap map4" data-map-url="/UI/data/map4.json">
+            <!-- -->
+        </div>
+                    
+        <code class="html">
+            &lt;div class="googleMap map4" data-map-url="/UI/data/map4.json"&gt;
+                &lt;!-- --&gt;
+            &lt;/div&gt;
+        </code>
+    </li>
+</ol>
