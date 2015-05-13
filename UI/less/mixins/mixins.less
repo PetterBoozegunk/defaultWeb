@@ -1,19 +1,10 @@
-﻿
-.opacity(@opacity: 0) {
+﻿.opacity(@opacity: 0) {
     @ieOpacity: (@opacity * 100);
     @ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{ieOpacity})";
 
     opacity: @opacity;
 
     -ms-filter: "@{ms-filter}"; 
-}
-
-.boxSizing(@boxSize: border-box) { 
-    box-sizing: @boxSize;
-}
-
-.transition(@transition: all 1s ease-in-out) { 
-    transition: @transition;
 }
 
 .ellipsis() { 
