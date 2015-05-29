@@ -159,27 +159,41 @@
 
                 return addressDiv;
             },
-            getMarkerUlListStyle: function (jqMapDiv) {
-                var width = jqMapDiv.width(),
-                    height = jqMapDiv.height(),
-
-                    ofs = jqMapDiv.offset(),
-                    top = Math.round(ofs.top),
-                    left = Math.round(ofs.left),
-
-                    ulHeight = Math.round(height / 1.2),
-                    ulWidth = Math.round(width / 2),
-                    ulMarginTop = Math.round(((height - ulHeight) / 2) - 10),
-                    ulMarginLeft = Math.round((width - ulWidth) / 2),
-
+            setTopLeft: function (jqMapDiv) {
+                var ofs = jqMapDiv.offset(),
                     ulCss = {
-                        width: ulWidth,
-                        height: ulHeight,
-                        top: top,
-                        left: left,
-                        marginTop: ulMarginTop,
-                        marginLeft: ulMarginLeft
+                        top: Math.round(ofs.top),
+                        left: Math.round(ofs.left)
                     };
+
+                return ulCss;
+            },
+            setHeightWidth: function (ulCss, jqMapDiv) {
+                var width = jqMapDiv.width(),
+                    height = jqMapDiv.height();
+
+                ulCss.height = Math.round(height / 1.2);
+                ulCss.width = Math.round(width / 2);
+
+                return ulCss;
+            },
+            getTopMargin: function (height, ulCss) {
+                return Math.round(((height - ulCss.height) / 2) - 10);
+            },
+            setMargin: function (ulCss, jqMapDiv) {
+                var width = jqMapDiv.width(),
+                    height = jqMapDiv.height();
+
+                ulCss.marginTop = maps.getTopMargin(height, ulCss);
+                ulCss.marginLeft = Math.round((width - ulCss.width) / 2);
+
+                return ulCss;
+            },
+            getMarkerUlListStyle: function (jqMapDiv) {
+                var ulCss = maps.setTopLeft(jqMapDiv);
+
+                ulCss = maps.setHeightWidth(ulCss, jqMapDiv);
+                ulCss = maps.setMargin(ulCss, jqMapDiv);
 
                 return ulCss;
             },
