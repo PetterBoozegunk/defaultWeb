@@ -4,27 +4,33 @@
 
     var $ = window.jQuery,
         spinner = {
+            copy: function (k, spinOpts, spinnerOpts) {
+                spinOpts[k] = spinnerOpts[k];
+            },
             addSpinnerOpts: function (spinOpts, spinnerOpts) {
                 var k;
 
                 for (k in spinnerOpts) {
                     if (spinnerOpts.hasOwnProperty(k)) {
-                        spinOpts[k] = spinnerOpts[k];
+                        spinner.copy(k, spinOpts, spinnerOpts);
                     }
                 }
 
                 return spinOpts;
             },
+            opts : function (t, height, lines) {
+                return {
+                    lines: lines,
+                    width: Math.floor(height / lines),
+                    length: ((height / 3) * 0.6),
+                    radius: ((height / 3) * 0.4),
+                    color: t.css("color") || "#000"
+                };
+            },
             getOpts: function (t, spinnerOpts) {
                 var height = (t.height() - 4),
                     lines = 10,
-                    spinOpts = {
-                        lines: lines,
-                        width: Math.floor(height / lines),
-                        length: ((height / 3) * 0.6),
-                        radius: ((height / 3) * 0.4),
-                        color: t.css("color") || "#000"
-                    };
+                    spinOpts = spinner.opts(t, height, lines);
 
                 spinOpts = spinner.addSpinnerOpts(spinOpts, spinnerOpts);
 

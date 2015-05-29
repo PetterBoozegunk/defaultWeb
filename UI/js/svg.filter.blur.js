@@ -4,9 +4,12 @@
 
     var $ = window.jQuery,
         blur = {
+            getWidth: function (parent, img) {
+                return (parent.offsetWidth < img.offsetWidth) ? parent.offsetWidth : img.offsetWidth;
+            },
             getDims: function (img) {
                 var parent = img.offsetParent,
-                    width = (parent.offsetWidth < img.offsetWidth) ? parent.offsetWidth : img.offsetWidth;
+                    width = blur.getWidth(parent, img);
                 return {
                     width: width,
                     height: img.offsetHeight
@@ -32,12 +35,12 @@
                 svg.find("image").attr("filter", "url(#blur-filter-" + blurBy + ")");
             },
             init : function () {
-                $("[data-ie-blur]").each(blur.svg);
+                if (window.docModeIE && window.docModeIE >= 10) {
+                    $("[data-ie-blur]").each(blur.svg);
+                }
             }
         };
 
-    if (window.docModeIE && window.docModeIE >= 10) {
-        $(window).on("load", blur.init);
-    }
+    $(window).on("load", blur.init);
 
 }(window));

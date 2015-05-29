@@ -6,6 +6,21 @@
         google,
         ua = window.navigator.userAgent,
         isOldIe = /MSIE\s[678]/.test(ua),
+        util = {
+            createScriptElem: function (scriptUrl) {
+                var script = document.createElement("script");
+
+                script.type = "text/javascript";
+                script.src = scriptUrl;
+
+                return script;
+            },
+            getHtmlStr: function (tagName, str, className) {
+                var htmlStr = (tagName && str) ? "<" + tagName + (className ? " class=\"" + className + "\">" : ">") + str + "</" + tagName + ">" : "";
+
+                return htmlStr;
+            }
+        },
         maps = {
             blocks: $(".googleMap"),
             "default": {
@@ -18,16 +33,19 @@
 
                 return new google.maps.LatLng(lat, lng);
             },
-            getBounds: function (markers) {
-                var bounds = new google.maps.LatLngBounds(),
-                    latlng,
-                    i,
-                    l = markers.length;
+            extendBounds: function (marker, bounds) {
+                var latlng = maps.getLatLng(marker);
 
-                for (i = 0; i < l; i += 1) {
-                    latlng = maps.getLatLng(markers[i]);
-                    bounds.extend(latlng);
-                }
+                bounds.extend(latlng);
+
+                return bounds;
+            },
+            getBounds: function (markers) {
+                var bounds = new google.maps.LatLngBounds();
+
+                markers.forEach(function (marker) {
+                    bounds = maps.extendBounds(marker, bounds);
+                });
 
                 return bounds;
             },
@@ -59,6 +77,22 @@
 
                 return newAddressObject;
             },
+            getMarkerOptions: function (latLng, map, marker) {
+                return {
+                    position: latLng,
+                    map: map,
+                    //icon: markerIcon,
+                    title: marker.title || "",
+                    address: maps.getAddressObject(marker),
+                    url: marker.url || ""
+                };
+            },
+            getMapMarker: function (latLng, map, marker) {
+                var options = maps.getMarkerOptions(latLng, map, marker),
+                    mapMarker = new google.maps.Marker(options);
+
+                return mapMarker;
+            },
             addMarker: function (marker, map) {
                 var latLng = maps.getLatLng(marker),
                     url = marker.url,
@@ -68,14 +102,7 @@
                     //    origin: new google.maps.Point(0, 0),
                     //    anchor: new google.maps.Point(35, 65)
                     //},
-                    mapMarker = new google.maps.Marker({
-                        position: latLng,
-                        map: map,
-                        //icon: markerIcon,
-                        title: marker.title || "",
-                        address: maps.getAddressObject(marker),
-                        url: url || ""
-                    });
+                    mapMarker = maps.getMapMarker(latLng, map, marker);
 
                 if (url) {
                     google.maps.event.addListener(mapMarker, "click", function () {
@@ -86,13 +113,11 @@
                 return mapMarker;
             },
             addMarkers: function (markers, map) {
-                var i,
-                    l = markers.length,
-                    mapMarkers = [];
+                var mapMarkers = [];
 
-                for (i = 0; i < l; i += 1) {
-                    mapMarkers.push(maps.addMarker(markers[i], map));
-                }
+                markers.forEach(function (marker) {
+                    mapMarkers.push(maps.addMarker(marker, map));
+                });
 
                 return mapMarkers;
             },
@@ -113,56 +138,40 @@
             allMarkersHaveTheSamePosition: function (markers) {
                 var lastPosition = markers[0].getPosition().toString(),
                     sharedPosition = 0,
-                    position,
-                    i,
-                    l = markers.length,
-                    // ReSharper disable once JoinDeclarationAndInitializerJs (cant be done here)
-                    allMarkersHaveTheSamePosition;
+                    position;
 
-                for (i = 0; i < l; i += 1) {
-                    position = markers[i].getPosition().toString();
+                markers.forEach(function (marker) {
+                    position = marker.getPosition().toString();
 
                     if (position === lastPosition) {
                         sharedPosition += 1;
                     }
 
                     lastPosition = position;
-                }
+                });
 
-                allMarkersHaveTheSamePosition = (sharedPosition === markers.length);
-
-                return allMarkersHaveTheSamePosition;
+                return (sharedPosition === markers.length);
             },
             getAddressHtmlStr: function (marker) {
                 var address = marker.address,
-                    addressDiv = "";
-
-                if (address.address || address.postalCode || address.city) {
-                    addressDiv = "<div class=\"address\">";
-
-                    if (address.address) {
-                        addressDiv += "<p>" + address.address + "</p>";
-                    }
-
-                    if (address.postalCode || address.city) {
-                        addressDiv += "<p>" + $.trim(address.postalCode + " " + address.city) + "</p>";
-                    }
-
-                    addressDiv += "</div>";
-                }
+                    addressP = util.getHtmlStr("p", address.address) + util.getHtmlStr("p", $.trim((address.postalCode || "") + " " + (address.city || ""))),
+                    addressDiv = util.getHtmlStr("div", addressP, "address");
 
                 return addressDiv;
             },
             getMarkerUlListStyle: function (jqMapDiv) {
                 var width = jqMapDiv.width(),
                     height = jqMapDiv.height(),
+
                     ofs = jqMapDiv.offset(),
                     top = Math.round(ofs.top),
                     left = Math.round(ofs.left),
+
                     ulHeight = Math.round(height / 1.2),
                     ulWidth = Math.round(width / 2),
                     ulMarginTop = Math.round(((height - ulHeight) / 2) - 10),
                     ulMarginLeft = Math.round((width - ulWidth) / 2),
+
                     ulCss = {
                         width: ulWidth,
                         height: ulHeight,
@@ -203,9 +212,11 @@
                 jqMapDiv.after(ul);
             },
             removeEvents: function (mapEventsObjArray) {
-                while (mapEventsObjArray[0]) {
-                    google.maps.event.removeListener(mapEventsObjArray[0]);
-                    mapEventsObjArray.shift();
+                if (mapEventsObjArray) {
+                    while (mapEventsObjArray[0]) {
+                        google.maps.event.removeListener(mapEventsObjArray[0]);
+                        mapEventsObjArray.shift();
+                    }
                 }
             },
             removeMultipleEvents: function (map, events) {
@@ -215,10 +226,15 @@
                     mapEventsObj = map.get("eventsObj") || {};
 
                 for (i = 0; i < l; i += 1) {
-                    if (mapEventsObj[evts[i]]) {
-                        maps.removeEvents(mapEventsObj[evts[i]]);
-                    }
+                    maps.removeEvents(mapEventsObj[evts[i]]);
                 }
+            },
+            addEvent: function (map, mapEventsObj, evts, i, func) {
+                if (!mapEventsObj[evts[i]]) {
+                    mapEventsObj[evts[i]] = [];
+                }
+
+                mapEventsObj[evts[i]].push(google.maps.event.addListener(map, evts[i], func));
             },
             addMultipleEvents: function (map, events, func) {
                 var evts = events.split(" "),
@@ -227,11 +243,7 @@
                     mapEventsObj = map.get("eventsObj") || {};
 
                 for (i = 0; i < l; i += 1) {
-                    if (!mapEventsObj[evts[i]]) {
-                        mapEventsObj[evts[i]] = [];
-                    }
-
-                    mapEventsObj[evts[i]].push(google.maps.event.addListener(map, evts[i], func));
+                    maps.addEvent(map, mapEventsObj, evts, i, func);
                 }
 
                 map.set("eventsObj", mapEventsObj);
@@ -262,70 +274,97 @@
 
                 return zoom;
             },
-            setMap: function (data) {
-                var mapBlock = this,
-                    jsonData = (typeof data === "string") ? $.parseJSON(data) : data,
-                    markers = maps.getMarkers(jsonData),
-                    zoom = maps.getZoom(jsonData),
-                    latLngCenter = maps.getLatLngCenter(jsonData),
-                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter),
-                    map = new google.maps.Map(mapBlock, mapOptions),
-                    bounds,
-                    mapMarkers = maps.addMarkers(markers, map),
-                    clusterer;
+            setCenter: function (map, markers, jsonData) {
+                var latLngCenter = maps.getLatLngCenter(jsonData),
+                    bounds;
 
                 if (!latLngCenter && (markers.length > 1)) {
                     bounds = maps.getBounds(markers);
                     map.fitBounds(bounds);
                 }
-
+            },
+            initClusterer: function (map, markers) {
                 if (window.MarkerClusterer) {
-                    clusterer = maps.setClusterer(map, mapMarkers);
+                    var mapMarkers = maps.addMarkers(markers, map),
+                        clusterer = maps.setClusterer(map, mapMarkers);
                     map.set("clusterer", clusterer);
 
                     google.maps.event.addListener(clusterer, "clusterclick", maps.checkCluster);
                 }
-
+            },
+            offsetCenter: function (map, jsonData) {
                 if (jsonData.offsetCenter) {
                     map.panBy(jsonData.offsetCenter.x || 0, jsonData.offsetCenter.y || 0);
                 }
             },
+            getJsonData : function (data) {
+                return (typeof data === "string") ? $.parseJSON(data) : data;
+            },
+            setMap: function (data) {
+                var mapBlock = this,
+                    jsonData = maps.getJsonData(data),
+
+                    markers = maps.getMarkers(jsonData),
+                    zoom = maps.getZoom(jsonData),
+
+                    latLngCenter = maps.getLatLngCenter(jsonData),
+
+                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter),
+
+                    map = new google.maps.Map(mapBlock, mapOptions);
+
+                maps.setCenter(map, markers, jsonData);
+                maps.initClusterer(map, markers);
+                maps.offsetCenter(map, jsonData);
+            },
             setSpinner: function (jqMapBlock) {
                 jqMapBlock.trigger("spinner:get");
+            },
+            getAjaxMap: function (url, mapBlock, jqMapBlock) {
+                maps.setSpinner(jqMapBlock);
+
+                $.ajax({
+                    url: url,
+                    context: mapBlock
+                }).done(maps.setMap);
+            },
+            getJsonMap: function (mapBlock, mapObj, jqMapBlock) {
+                maps.setSpinner(jqMapBlock);
+                maps.setMap.call(mapBlock, mapObj);
+            },
+            getMapObj: function (jqMapBlock) {
+                var dataMap = jqMapBlock.attr("data-map") || "",
+                    mapObj = dataMap ? $.parseJSON(dataMap) : null;
+
+                return mapObj;
             },
             getMapData: function (mapBlock) {
                 var jqMapBlock = $(mapBlock),
                     url = jqMapBlock.attr("data-map-url") || "",
-                    dataMap = jqMapBlock.attr("data-map") || "",
-                    mapObj = dataMap ? $.parseJSON(dataMap) : null;
-
-                maps.setSpinner(jqMapBlock);
+                    mapObj = maps.getMapObj(jqMapBlock);
 
                 if (url) {
-                    $.ajax({
-                        url: url,
-                        context: mapBlock
-                    }).done(maps.setMap);
+                    maps.getAjaxMap(url, mapBlock, jqMapBlock);
                 } else if (mapObj) {
-                    maps.setMap.call(mapBlock, mapObj);
+                    maps.getJsonMap(mapBlock, mapObj, jqMapBlock);
                 }
             },
-            init: function () {
+            setMaps : function () {
                 var mapBlocks = maps.blocks,
                     i,
                     l = mapBlocks.length;
-
-                google = window.google;
 
                 for (i = 0; i < l; i += 1) {
                     maps.getMapData(mapBlocks[i]);
                 }
             },
-            loadScript: function (scriptUrl, callback) {
-                var script = document.createElement("script");
+            init: function () {
+                google = window.google;
 
-                script.type = "text/javascript";
-                script.src = scriptUrl;
+                maps.setMaps();
+            },
+            loadScript: function (scriptUrl, callback) {
+                var script = util.createScriptElem(scriptUrl);
 
                 if (callback) {
                     $(script).on("load", callback);
@@ -338,25 +377,28 @@
             },
             loadMarkerClusterer: function () {
                 maps.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
+            },
+            checkLoad : function () {
+                if (!isOldIe) {
+                    if (maps.blocks.length) {
+                        window.initMaps = function () {
+                            maps.init();
+
+                            try {
+                                delete window.initMaps;
+                            } catch (e) {
+                                window.initMaps = null;
+                            }
+                        };
+
+                        maps.loadMarkerClusterer();
+                    }
+                } else {
+                    maps.blocks.remove();
+                }
             }
         };
 
-    if (!isOldIe) {
-        if (maps.blocks.length) {
-            window.initMaps = function () {
-                maps.init();
-
-                try {
-                    delete window.initMaps;
-                } catch (e) {
-                    window.initMaps = null;
-                }
-            };
-
-            maps.loadMarkerClusterer();
-        }
-    } else {
-        maps.blocks.remove();
-    }
+    maps.checkLoad();
 
 }(window));
