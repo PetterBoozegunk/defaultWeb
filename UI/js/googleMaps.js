@@ -238,13 +238,13 @@
             },
             addMultipleEvents: function (map, events, func) {
                 var evts = events.split(" "),
-                    i,
-                    l = evts.length,
                     mapEventsObj = map.get("eventsObj") || {};
 
-                for (i = 0; i < l; i += 1) {
+                evts.forEach(function () {
+                    var i = arguments[1];
+
                     maps.addEvent(map, mapEventsObj, evts, i, func);
-                }
+                });
 
                 map.set("eventsObj", mapEventsObj);
             },
