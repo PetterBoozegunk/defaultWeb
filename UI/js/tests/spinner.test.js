@@ -4,10 +4,12 @@
 
     var $ = window.jQuery,
         spinnerTest = {
-            addSpinners : function () {
+            addSpinners: function () {
                 $(".spinnerTest1").trigger("spinner:get");
                 $(".spinnerTest2").trigger("spinner:get");
-                $(".spinnerTest3").trigger("spinner:get", { color: "#90ee90" });
+                $(".spinnerTest3").trigger("spinner:get", {
+                    color: "#90ee90"
+                });
             }
         };
 

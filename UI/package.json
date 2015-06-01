@@ -13,6 +13,7 @@
     "gulp-consolidate": "^0.1.2",
     "gulp-iconfont": "^1.0.0",
     "gulp-imagemin": "^2.2.1",
+    "gulp-jsbeautifier": "0.0.8",
     "gulp-jslint": "^0.2.2",
     "gulp-less": "^3.0.1",
     "gulp-minify-css": "^1.0.0",

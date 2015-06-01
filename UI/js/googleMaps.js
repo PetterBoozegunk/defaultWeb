@@ -24,7 +24,11 @@
         maps = {
             blocks: $(".googleMap"),
             "default": {
-                markers: [{ "lat": 59.334156, "lng": 18.098511, "title": "Cloudnine" }], // linnégatan 89e
+                markers: [{
+                    "lat": 59.334156,
+                    "lng": 18.098511,
+                    "title": "Cloudnine"
+                }], // linnégatan 89e
                 zoom: 13
             },
             getLatLng: function (marker) {
@@ -60,7 +64,7 @@
                 return {
                     "center": center,
                     "zoom": zoom //,
-                    //"scrollwheel": false
+                        //"scrollwheel": false
                 };
             },
             getMarkers: function (data) {
@@ -123,12 +127,12 @@
             },
             setClusterer: function (map, mapMarkers) {
                 var mc = new window.MarkerClusterer(map, mapMarkers); //,
-                    //styleObj = {
-                    //    width: 70,
-                    //    height: 75,
-                    //    url: "/UI/images/marker.png",
-                    //    textColor: "#fff"
-                    //};
+                //styleObj = {
+                //    width: 70,
+                //    height: 75,
+                //    url: "/UI/images/marker.png",
+                //    textColor: "#fff"
+                //};
 
                 //mc.setStyles([styleObj, styleObj, styleObj, styleObj, styleObj]);
                 mc.redraw();
@@ -309,7 +313,7 @@
                     map.panBy(jsonData.offsetCenter.x || 0, jsonData.offsetCenter.y || 0);
                 }
             },
-            getJsonData : function (data) {
+            getJsonData: function (data) {
                 return (typeof data === "string") ? $.parseJSON(data) : data;
             },
             setMap: function (data) {
@@ -361,7 +365,7 @@
                     maps.getJsonMap(mapBlock, mapObj, jqMapBlock);
                 }
             },
-            setMaps : function () {
+            setMaps: function () {
                 var mapBlocks = maps.blocks,
                     i,
                     l = mapBlocks.length;
@@ -390,7 +394,7 @@
             loadMarkerClusterer: function () {
                 maps.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
             },
-            checkLoad : function () {
+            checkLoad: function () {
                 if (!isOldIe) {
                     if (maps.blocks.length) {
                         window.initMaps = function () {

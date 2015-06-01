@@ -20,6 +20,8 @@ var gulp = require("gulp"),
     complexity = require("gulp-complexity"),
     uglify = require("gulp-uglify"),
 
+    prettify = require("gulp-jsbeautifier"),
+
     imagemin = require("gulp-imagemin"),
 
     iconfont = require("gulp-iconfont"),
@@ -109,12 +111,14 @@ var gulp = require("gulp"),
                 util.setGulp("watch", gulpSettings.watch);
             },
             "file-watch": function () {
-                setTimeout(browserSync.reload, 500);
+                //setTimeout(browserSync.reload, 500);
+                console.log("file-watch");
             },
             "browser-sync": function () {
-                browserSync.init({
-                    proxy: "http://defaultweb.local:666"
-                });
+                //browserSync.init({
+                //    proxy: "http://defaultweb.local:666"
+                //});
+                console.log("browser-sync");
             },
 
             "images": function () {
@@ -142,6 +146,15 @@ var gulp = require("gulp"),
             "complexity": function () {
                 return gulp.src(["js/*.js", "gulpfile.js"])
                     .pipe(complexity());
+            },
+            "prettify": function () {
+                return gulp.src(["!js/lib", "js/*.js"])
+                    .pipe(prettify({
+                        js: {
+                            jslintHappy: true
+                        }
+                    }))
+                    .pipe(gulp.dest("js"));
             },
             "jslint": function () {
                 return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])

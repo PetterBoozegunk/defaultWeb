@@ -1,4 +1,4 @@
-﻿/*jslint browser: true */
+/*jslint browser: true */
 (function (window) {
     "use strict";
 
@@ -18,7 +18,7 @@
 
                 return spinOpts;
             },
-            opts : function (t, height, lines) {
+            opts: function (t, height, lines) {
                 return {
                     lines: lines,
                     width: Math.floor(height / lines),
@@ -36,7 +36,7 @@
 
                 return spinOpts;
             },
-            addSpinnerParentStyles : function (spinnerParent) {
+            addSpinnerParentStyles: function (spinnerParent) {
                 spinnerParent.css({
                     position: "relative"
                 });
