@@ -10,6 +10,7 @@
             getDims: function (img) {
                 var parent = img.offsetParent,
                     width = blur.getWidth(parent, img);
+
                 return {
                     width: width,
                     height: img.offsetHeight
