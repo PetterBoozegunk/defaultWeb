@@ -143,10 +143,6 @@ var gulp = require("gulp"),
                     })
                     .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
             },
-            "complexity": function () {
-                return gulp.src(["js/*.js", "gulpfile.js"])
-                    .pipe(complexity());
-            },
             "prettify": function () {
                 return gulp.src(["!js/lib", "js/*.js"])
                     .pipe(prettify({
@@ -155,6 +151,10 @@ var gulp = require("gulp"),
                         }
                     }))
                     .pipe(gulp.dest("js"));
+            },
+            "complexity": function () {
+                return gulp.src(["js/*.js", "gulpfile.js"])
+                    .pipe(complexity());
             },
             "jslint": function () {
                 return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
