@@ -65,16 +65,6 @@ var gulp = require("gulp"),
             oldIeFileName: "oldIe.js",
             oldIeSrc: ["js/oldIe/*.js"]
         },
-        complexity : {
-            src: ["js/*.js", "gulpfile.js"]
-        },
-        jsLint : {
-            src: ["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"]
-        },
-        images : {
-            src: "images/**",
-            dest : "images/"
-        },
 
         comments: {
             all: true
@@ -128,9 +118,9 @@ var gulp = require("gulp"),
             },
 
             "images": function () {
-                return gulp.src(gulpSettings.images.src)
+                return gulp.src("images/**")
                     .pipe(imagemin())
-                    .pipe(gulp.dest(gulpSettings.images.dest));
+                    .pipe(gulp.dest("images/"));
             },
             "iconFont": function () {
                 gulp.src(gulpSettings.iconFont.src)
@@ -150,11 +140,11 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
             },
             "complexity": function () {
-                return gulp.src(gulpSettings.complexity.src)
+                return gulp.src(["js/*.js", "gulpfile.js"])
                     .pipe(complexity());
             },
             "jslint": function () {
-                return gulp.src(gulpSettings.jsLint.src)
+                return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
                     .pipe(jslint());
             },
 
@@ -228,12 +218,13 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
 
-            "default": ["iconFont", "less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev", "images", "complexity", "jslint"],
-
+            "check-js": ["complexity", "jslint"],
             "sync-watch": ["browser-sync", "watch"],
 
             "dev": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev"],
-            "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"]
+            "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"],
+
+            "default": ["iconFont", "images", "check-js", "dev"]
         }
     };
 

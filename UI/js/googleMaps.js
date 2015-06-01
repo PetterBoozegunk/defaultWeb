@@ -243,21 +243,19 @@
                     maps.removeEvents(mapEventsObj[evts[i]]);
                 }
             },
-            addEvent: function (map, mapEventsObj, evts, i, func) {
-                if (!mapEventsObj[evts[i]]) {
-                    mapEventsObj[evts[i]] = [];
+            addEvent: function (map, mapEventsObj, evt, func) {
+                if (!mapEventsObj[evt]) {
+                    mapEventsObj[evt] = [];
                 }
 
-                mapEventsObj[evts[i]].push(google.maps.event.addListener(map, evts[i], func));
+                mapEventsObj[evt].push(google.maps.event.addListener(map, evt, func));
             },
             addMultipleEvents: function (map, events, func) {
                 var evts = events.split(" "),
                     mapEventsObj = map.get("eventsObj") || {};
 
-                evts.forEach(function () {
-                    var i = arguments[1];
-
-                    maps.addEvent(map, mapEventsObj, evts, i, func);
+                evts.forEach(function (evt) {
+                    maps.addEvent(map, mapEventsObj, evt, func);
                 });
 
                 map.set("eventsObj", mapEventsObj);
