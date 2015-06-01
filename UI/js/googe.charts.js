@@ -21,14 +21,14 @@
                 return chartData;
             },
             set: function () {
-                var json = $.parseJSON(this.getAttribute("data-chart")),
+                var elem = this,
+                    json = $.parseJSON(elem.getAttribute("data-chart")),
 
                     data = charts.getData(json.data),
                     options = json.options,
 
-                    chart = new google.visualization.PieChart(this);
+                    chart = new google.visualization.PieChart(elem);
 
-                chart.clearChart();
                 chart.draw(data, options);
             },
             setAll: function () {
