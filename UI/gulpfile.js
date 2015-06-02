@@ -144,7 +144,7 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
             },
             "prettify": function () {
-                return gulp.src(["!js/lib", "js/*.js"])
+                return gulp.src(["js/*.js"])
                     .pipe(prettify({
                         js: {
                             jslintHappy: true
