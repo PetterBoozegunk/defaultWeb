@@ -17,7 +17,7 @@
                             text: "De svenska årstiderna"
                         },
                         series: [{
-                            type : "pie",
+                            type: "pie",
                             name: "Årstider",
                             tooltip: {
                                 headerFormat: "",
@@ -45,7 +45,7 @@
                     },
                     chart = t.highcharts(options);
 
-                console.log(chart);
+                window.console.log(chart);
             },
             init: function () {
                 if (charts.elems.length) {
