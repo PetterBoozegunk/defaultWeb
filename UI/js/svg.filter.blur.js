@@ -1,18 +1,22 @@
-﻿/*jslint browser: true */
+/*jslint browser: true */
 (function (window) {
     "use strict";
 
     var $ = window.jQuery,
         blur = {
+            getWidth: function (parent, img) {
+                return (parent.offsetWidth < img.offsetWidth) ? parent.offsetWidth : img.offsetWidth;
+            },
             getDims: function (img) {
                 var parent = img.offsetParent,
-                    width = (parent.offsetWidth < img.offsetWidth) ? parent.offsetWidth : img.offsetWidth;
+                    width = blur.getWidth(parent, img);
+
                 return {
                     width: width,
                     height: img.offsetHeight
                 };
             },
-            createSvg : function (img, blurBy) {
+            createSvg: function (img, blurBy) {
                 var dims = blur.getDims(img),
                     svgElemStr = "<svg id=\"blur-" + blurBy + "\" class=\"" + (img.className || "") + "\" style=\"width: " + dims.width + "px; height: " + dims.height + "px;\">";
 
@@ -22,7 +26,7 @@
 
                 return $(svgElemStr);
             },
-            svg : function () {
+            svg: function () {
                 var t = $(this),
                     blurBy = t.attr("data-ie-blur"),
                     svg = blur.createSvg(this, blurBy);
@@ -31,13 +35,13 @@
 
                 svg.find("image").attr("filter", "url(#blur-filter-" + blurBy + ")");
             },
-            init : function () {
-                $("[data-ie-blur]").each(blur.svg);
+            init: function () {
+                if (window.docModeIE && window.docModeIE >= 10) {
+                    $("[data-ie-blur]").each(blur.svg);
+                }
             }
         };
 
-    if (window.docModeIE && window.docModeIE >= 10) {
-        $(window).on("load", blur.init);
-    }
+    $(window).on("load", blur.init);
 
 }(window));

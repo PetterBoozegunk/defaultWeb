@@ -17,9 +17,15 @@ var gulp = require("gulp"),
     minifyCSS = require("gulp-minify-css"),
 
     jslint = require("gulp-jslint"),
+    complexity = require("gulp-complexity"),
     uglify = require("gulp-uglify"),
 
+    prettify = require("gulp-jsbeautifier"),
+
     imagemin = require("gulp-imagemin"),
+
+    iconfont = require("gulp-iconfont"),
+    consolidate = require("gulp-consolidate"),
 
     sourcemaps = require("gulp-sourcemaps"),
 
@@ -46,11 +52,21 @@ var gulp = require("gulp"),
         cssDest: "/css",
         jsDest: "/js",
 
-        lessSrc: ["less/styles.less"],
         less: {
-            "plugins": [lessPluginGlob]
+            src: ["less/styles.less"],
+            options: {
+                "plugins": [lessPluginGlob]
+            },
+            oldIeSrc: ["less/oldIe/*.less"],
+            oldIeFileName: "oldIe.less"
         },
-        jsSrc: ["js/lib/*.js", "js/*.js", "js/tests/*js"],
+        js: {
+            fileName: "scripts.js",
+            src: ["js/lib/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*js"],
+
+            oldIeFileName: "oldIe.js",
+            oldIeSrc: ["js/oldIe/*.js"]
+        },
 
         comments: {
             all: true
@@ -58,23 +74,36 @@ var gulp = require("gulp"),
         please: {
             "browsers": ["last 4 versions"],
             "minifier": false,
+            "pseudoElements": true,
             "filters": {
                 "oldIE": true
             }
         },
+        iconFont: {
+            name: "icon",
+            src: ["fonts/svg/*.svg"],
+            lesstemplate: "fonts/templates/icon.less",
+            lessdest: "fonts/",
+            fontdest: "less/fonts/",
+            dir: "/UI/fonts/",
+            className: "icon"
+        },
 
         watch: {
             "js/lib/**.js": ["scripts:dev"],
+            "js/plugins/**.js": ["scripts:dev"],
             "js/**.js": ["scripts:dev"],
             "js/oldIe/**.js": ["scripts:ie:dev"],
 
             "less/**": ["less:dev"],
-            "less/oldIe/**": ["less:ie:dev"] //,
+            "less/oldIe/**": ["less:ie:dev"],
 
-            //"dist/**/*.js": ["file-watch"],
-            //"dist/**/*.css": ["file-watch"],
-            //"../Views/**/*.cshtml": ["file-watch"],
-            //"../Views/**/**/*.cshtml": ["file-watch"]
+            "dist/**/*.js": ["file-watch"],
+            "dist/**/*.css": ["file-watch"],
+            "styleguide/*": ["file-watch"],
+
+            "../Views/**/*.cshtml": ["file-watch"],
+            "../Views/**/**/*.cshtml": ["file-watch"]
         },
 
         tasks: {
@@ -82,12 +111,14 @@ var gulp = require("gulp"),
                 util.setGulp("watch", gulpSettings.watch);
             },
             "file-watch": function () {
-                setTimeout(browserSync.reload, 500);
+                //setTimeout(browserSync.reload, 500);
+                console.log("file-watch");
             },
             "browser-sync": function () {
-                browserSync.init({
-                    proxy: "http://defaultweb.local"
-                });
+                //browserSync.init({
+                //    proxy: "http://defaultweb.local:666"
+                //});
+                console.log("browser-sync");
             },
 
             "images": function () {
@@ -95,23 +126,53 @@ var gulp = require("gulp"),
                     .pipe(imagemin())
                     .pipe(gulp.dest("images/"));
             },
+            "iconFont": function () {
+                gulp.src(gulpSettings.iconFont.src)
+                    .pipe(iconfont({
+                        fontName: gulpSettings.iconFont.name
+                    }))
+                    .on("codepoints", function (codepoints) {
+                        gulp.src(gulpSettings.iconFont.lesstemplate)
+                            .pipe(consolidate("lodash", {
+                                glyphs: codepoints,
+                                fontName: gulpSettings.iconFont.name,
+                                fontPath: gulpSettings.iconFont.dir,
+                                className: gulpSettings.iconFont.className
+                            }))
+                            .pipe(gulp.dest(gulpSettings.iconFont.fontdest));
+                    })
+                    .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
+            },
+            "prettify": function () {
+                return gulp.src(["js/*.js"])
+                    .pipe(prettify({
+                        js: {
+                            jslintHappy: true
+                        }
+                    }))
+                    .pipe(gulp.dest("js"));
+            },
+            "complexity": function () {
+                return gulp.src(["js/*.js", "gulpfile.js"])
+                    .pipe(complexity());
+            },
             "jslint": function () {
                 return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
                     .pipe(jslint());
             },
 
             "less:prod": function () {
-                return gulp.src(gulpSettings.lessSrc)
-                    .pipe(less(gulpSettings.less))
+                return gulp.src(gulpSettings.less.src)
+                    .pipe(less(gulpSettings.less.options))
                     .pipe(please(gulpSettings.please))
                     .pipe(minifyCSS())
                     .pipe(stripCssComments(gulpSettings.comments))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "less:dev": function () {
-                return gulp.src(gulpSettings.lessSrc)
+                return gulp.src(gulpSettings.less.src)
                     .pipe(sourcemaps.init())
-                    .pipe(less(gulpSettings.less))
+                    .pipe(less(gulpSettings.less.options))
                     .pipe(please(gulpSettings.please))
                     .pipe(stripCssComments(gulpSettings.comments))
                     .pipe(sourcemaps.write("."))
@@ -121,18 +182,18 @@ var gulp = require("gulp"),
                     }));
             },
             "less:ie:prod": function () {
-                return gulp.src("less/oldIe/*.less")
-                    .pipe(concat("oldIe.less"))
-                    .pipe(less(gulpSettings.less))
+                return gulp.src(gulpSettings.less.oldIeSrc)
+                    .pipe(concat(gulpSettings.less.oldIeFileName))
+                    .pipe(less(gulpSettings.less.options))
                     .pipe(please(gulpSettings.please))
                     .pipe(minifyCSS())
                     .pipe(stripCssComments(gulpSettings.comments))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest));
             },
             "less:ie:dev": function () {
-                return gulp.src("less/oldIe/*.less")
-                    .pipe(concat("oldIe.less"))
-                    .pipe(less(gulpSettings.less))
+                return gulp.src(gulpSettings.less.oldIeSrc)
+                    .pipe(concat(gulpSettings.less.oldIeFileName))
+                    .pipe(less(gulpSettings.less.options))
                     .pipe(please(gulpSettings.please))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest))
                     .pipe(reload({
@@ -141,15 +202,15 @@ var gulp = require("gulp"),
             },
 
             "scripts:prod": function () {
-                return gulp.src(gulpSettings.jsSrc)
-                    .pipe(concat("scripts.js"))
+                return gulp.src(gulpSettings.js.src)
+                    .pipe(concat(gulpSettings.js.fileName))
                     .pipe(uglify())
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
             "scripts:dev": function () {
-                return gulp.src(gulpSettings.jsSrc)
+                return gulp.src(gulpSettings.js.src)
                     .pipe(sourcemaps.init())
-                    .pipe(concat("scripts.js"))
+                    .pipe(concat(gulpSettings.js.fileName))
                     .pipe(sourcemaps.write("."))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest))
                     .pipe(reload({
@@ -157,25 +218,26 @@ var gulp = require("gulp"),
                     }));
             },
             "scripts:ie:dev": function () {
-                return gulp.src("js/oldIe/*.js")
-                    .pipe(concat("oldIe.js"))
+                return gulp.src(gulpSettings.js.oldIeSrc)
+                    .pipe(concat(gulpSettings.js.oldIeFileName))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest))
                     .pipe(reload({
                         stream: true
                     }));
             },
             "scripts:ie:prod": function () {
-                return gulp.src("js/oldIe/*.js")
-                    .pipe(concat("oldIe.js"))
+                return gulp.src(gulpSettings.js.oldIeSrc)
+                    .pipe(concat(gulpSettings.js.oldIeFileName))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
 
-            "default": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev", "images", "jslint"],
-
-            //"sync-watch": ["browser-sync", "watch"],
+            "check-js": ["complexity", "jslint"],
+            "sync-watch": ["browser-sync", "watch"],
 
             "dev": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev"],
-            "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"]
+            "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"],
+
+            "default": ["iconFont", "images", "check-js", "dev"]
         }
     };
 
