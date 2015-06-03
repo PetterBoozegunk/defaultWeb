@@ -80,12 +80,16 @@ var gulp = require("gulp"),
             "js/**.js": ["scripts:dev"],
             "js/oldIe/**.js": ["scripts:ie:dev"],
 
+            "js/*.js": ["prettify"],
+
             "less/**": ["less:dev"],
             "less/oldIe/**": ["less:ie:dev"],
 
+            "fonts/svg/*.svg": ["iconFont"],
+            //"images/**": ["images"],
+
             "dist/**/*.js": ["file-watch"],
             "dist/**/*.css": ["file-watch"],
-            "styleguide/*": ["file-watch"],
 
             "../Views/**/*.cshtml": ["file-watch"],
             "../Views/**/**/*.cshtml": ["file-watch"]
@@ -130,7 +134,7 @@ var gulp = require("gulp"),
             },
             "prettify": function () {
                 return gulp.src(["js/*.js"])
-                    .pipe(plugins.prettify({
+                    .pipe(plugins.jsbeautifier({
                         js: {
                             jslintHappy: true
                         }
@@ -214,7 +218,7 @@ var gulp = require("gulp"),
             "dev": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev"],
             "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"],
 
-            "default": ["iconFont", "images", "check-js", "dev"]
+            "default": ["prettify", "check-js", "dev"]
         }
     };
 
