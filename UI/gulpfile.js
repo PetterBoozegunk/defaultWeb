@@ -70,6 +70,9 @@ var gulp = require("gulp"),
             dir: "/UI/fonts/",
             className: "icon"
         },
+        browserReload: {
+            stream: true
+        },
 
         watch: {
             "js/lib/**.js": ["scripts:dev"],
@@ -159,9 +162,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.stripCssComments(gulpSettings.comments))
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest))
-                    .pipe(reload({
-                        stream: true
-                    }));
+                    .pipe(reload(gulpSettings.browserReload));
             },
             "less:ie:prod": function () {
                 return gulp.src(gulpSettings.less.oldIeSrc)
@@ -178,9 +179,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.less(gulpSettings.less.options))
                     .pipe(plugins.pleeease(gulpSettings.please))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.cssDest))
-                    .pipe(reload({
-                        stream: true
-                    }));
+                    .pipe(reload(gulpSettings.browserReload));
             },
 
             "scripts:prod": function () {
@@ -195,17 +194,13 @@ var gulp = require("gulp"),
                     .pipe(plugins.concat(gulpSettings.js.fileName))
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest))
-                    .pipe(reload({
-                        stream: true
-                    }));
+                    .pipe(reload(gulpSettings.browserReload));
             },
             "scripts:ie:dev": function () {
                 return gulp.src(gulpSettings.js.oldIeSrc)
                     .pipe(plugins.concat(gulpSettings.js.oldIeFileName))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest))
-                    .pipe(reload({
-                        stream: true
-                    }));
+                    .pipe(reload(gulpSettings.browserReload));
             },
             "scripts:ie:prod": function () {
                 return gulp.src(gulpSettings.js.oldIeSrc)
