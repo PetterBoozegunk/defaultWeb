@@ -21,9 +21,17 @@ var gulp = require("gulp"),
                 }
             }
         },
+        setGulpTask: function (type, name, funcArrayObj) {
+            if (funcArrayObj.beforetask && funcArrayObj.task) {
+                gulp[type](name, funcArrayObj.beforetask, funcArrayObj.task);
+            } else {
+                gulp[type](name, funcArrayObj);
+            }
+        },
         setGulp: function (type, obj) {
-            util.forEach(function (funcArray, name) {
-                gulp[type](name, funcArray); // "funcArray" === "function OR Array"
+            util.forEach(function (funcArrayObj, name) {
+                // "funcArrayObj" === "function OR Array Or Object"
+                util.setGulpTask(type, name, funcArrayObj);
             }, this, obj);
         }
     },
@@ -132,6 +140,10 @@ var gulp = require("gulp"),
                     })
                     .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
             },
+            "complexity": function () {
+                return gulp.src(["js/*.js", "gulpfile.js"])
+                    .pipe(plugins.complexity());
+            },
             "prettify": function () {
                 return gulp.src(["js/*.js"])
                     .pipe(plugins.jsbeautifier({
@@ -141,13 +153,21 @@ var gulp = require("gulp"),
                     }))
                     .pipe(gulp.dest("js"));
             },
-            "complexity": function () {
-                return gulp.src(["js/*.js", "gulpfile.js"])
-                    .pipe(plugins.complexity());
+            "prettifyGulpFile": function () {
+                return gulp.src(["gulpfile.js"])
+                    .pipe(plugins.jsbeautifier({
+                        js: {
+                            jslintHappy: true
+                        }
+                    }))
+                    .pipe(gulp.dest("."));
             },
-            "jslint": function () {
-                return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
-                    .pipe(plugins.jslint());
+            "jslint": {
+                beforetask: ["prettify", "prettifyGulpFile"],
+                task: function () {
+                    return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
+                        .pipe(plugins.jslint());
+                }
             },
 
             "less:prod": function () {
