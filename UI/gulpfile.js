@@ -1,4 +1,4 @@
-﻿/*global require */
+/*global require */
 /*jslint node: true */
 "use strict";
 
@@ -88,13 +88,8 @@ var gulp = require("gulp"),
             "js/**.js": ["scripts:dev"],
             "js/oldIe/**.js": ["scripts:ie:dev"],
 
-            "js/*.js": ["prettify"],
-
             "less/**": ["less:dev"],
             "less/oldIe/**": ["less:ie:dev"],
-
-            "fonts/svg/*.svg": ["iconFont"],
-            //"images/**": ["images"],
 
             "dist/**/*.js": ["file-watch"],
             "dist/**/*.css": ["file-watch"],
@@ -120,16 +115,19 @@ var gulp = require("gulp"),
 
             "images": function () {
                 return gulp.src("images/**")
+                    .pipe(plugins.plumber())
                     .pipe(plugins.imagemin())
                     .pipe(gulp.dest("images/"));
             },
             "iconFont": function () {
                 gulp.src(gulpSettings.iconFont.src)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.iconfont({
                         fontName: gulpSettings.iconFont.name
                     }))
                     .on("codepoints", function (codepoints) {
                         gulp.src(gulpSettings.iconFont.lesstemplate)
+                            .pipe(plugins.plumber())
                             .pipe(plugins.consolidate("lodash", {
                                 glyphs: codepoints,
                                 fontName: gulpSettings.iconFont.name,
@@ -142,10 +140,12 @@ var gulp = require("gulp"),
             },
             "complexity": function () {
                 return gulp.src(["js/*.js", "gulpfile.js"])
+                    .pipe(plugins.plumber())
                     .pipe(plugins.complexity());
             },
             "prettify": function () {
                 return gulp.src(["js/*.js"])
+                    .pipe(plugins.plumber())
                     .pipe(plugins.jsbeautifier({
                         js: {
                             jslintHappy: true
@@ -155,6 +155,7 @@ var gulp = require("gulp"),
             },
             "prettifyGulpFile": function () {
                 return gulp.src(["gulpfile.js"])
+                    .pipe(plugins.plumber())
                     .pipe(plugins.jsbeautifier({
                         js: {
                             jslintHappy: true
@@ -166,6 +167,7 @@ var gulp = require("gulp"),
                 beforetask: ["prettify", "prettifyGulpFile"],
                 task: function () {
                     return gulp.src(["!js/lib", "js/*.js", "js/tests/*.js", "gulpfile.js"])
+                        .pipe(plugins.plumber())
                         .pipe(plugins.jslint());
                 }
             },
@@ -180,6 +182,7 @@ var gulp = require("gulp"),
             },
             "less:dev": function () {
                 return gulp.src(gulpSettings.less.src)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.sourcemaps.init())
                     .pipe(plugins.less(gulpSettings.less.options))
                     .pipe(plugins.pleeease(gulpSettings.please))
@@ -199,6 +202,7 @@ var gulp = require("gulp"),
             },
             "less:ie:dev": function () {
                 return gulp.src(gulpSettings.less.oldIeSrc)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.concat(gulpSettings.less.oldIeFileName))
                     .pipe(plugins.less(gulpSettings.less.options))
                     .pipe(plugins.pleeease(gulpSettings.please))
@@ -214,6 +218,7 @@ var gulp = require("gulp"),
             },
             "scripts:dev": function () {
                 return gulp.src(gulpSettings.js.src)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.sourcemaps.init())
                     .pipe(plugins.concat(gulpSettings.js.fileName))
                     .pipe(plugins.sourcemaps.write("."))
@@ -222,6 +227,7 @@ var gulp = require("gulp"),
             },
             "scripts:ie:dev": function () {
                 return gulp.src(gulpSettings.js.oldIeSrc)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.concat(gulpSettings.js.oldIeFileName))
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest))
                     .pipe(reload(gulpSettings.browserReload));
