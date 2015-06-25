@@ -1,4 +1,4 @@
-﻿/*jslint browser: true */
+/*jslint browser: true */
 (function (window) {
     "use strict";
 
@@ -17,7 +17,7 @@
                             text: "De svenska årstiderna"
                         },
                         series: [{
-                            type : "pie",
+                            type: "pie",
                             name: "Årstider",
                             tooltip: {
                                 headerFormat: "",
