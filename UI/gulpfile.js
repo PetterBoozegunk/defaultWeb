@@ -30,7 +30,7 @@ var gulp = require("gulp"),
         },
         setGulp: function (type, obj) {
             util.forEach(function (funcArrayObj, name) {
-                // "funcArrayObj" === "function OR Array Or Object"
+                // "funcArrayObj" === "function OR Array OR Object"
                 util.setGulpTask(type, name, funcArrayObj);
             }, this, obj);
         }
