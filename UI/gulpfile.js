@@ -113,6 +113,11 @@ var gulp = require("gulp"),
                 console.log("browser-sync");
             },
 
+            "clean": function () {
+                return gulp.src(gulpSettings.srcDest)
+                    .pipe(plugins.clean());
+            },
+
             "images": function () {
                 return gulp.src("images/**")
                     .pipe(plugins.plumber())
@@ -242,7 +247,12 @@ var gulp = require("gulp"),
             "sync-watch": ["browser-sync", "watch"],
 
             "dev": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev"],
-            "prod": ["less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod"],
+            "prod": {
+                beforetask: ["clean"],
+                task: function () {
+                    gulp.start("less:prod", "less:ie:prod", "scripts:prod", "scripts:ie:prod");
+                }
+            },
 
             "default": ["prettify", "check-js", "dev"]
         }
