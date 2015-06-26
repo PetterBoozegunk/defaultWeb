@@ -2,12 +2,6 @@
 /// <reference path="../mixins/static.mixins.less" />
 /// <reference path="../mixins/mixins.less" />
 
-//@siteWidth: 978px;
-//@gutter: 30px;
-//@nbrColumns: 12;
-        
-//The grid-vars is set in /UI/less/vars/vars.less
-
 .col,
 .row {
    box-sizing: border-box;
@@ -15,8 +9,8 @@
 }
 
 .col {
-    //margin-right: -100%;
     float: left;
+    border: solid @halfGutter @mainBodyBg;
 }
 
 .row {
@@ -31,33 +25,13 @@
     }
 }
 
-@halfGutter: unit(@gutter / 2, px);
-
-//@nbrGutters: (@nbrColumns - 1);
-//@totalGutterPixelWidth: @nbrGutters * @gutter;
-
-//@columnPixelWidth: (@siteWidth - @totalGutterPixelWidth) / @nbrColumns;
-
-
 .colSpan(@nbrCols: 1, @parentColSpan: @nbrColumns) {
-//.colSpan(@nbrCols: 1, @offsetLeft: 0, @parentColSpan: @nbrColumns) {
-    /*@currentNbrGutters: (@parentColSpan - 1);
-    @parentPixelWidth: (@columnPixelWidth * @parentColSpan) + (@currentNbrGutters * @gutter);
 
-    @gutterPercentWidth: unit((@gutter / (@parentPixelWidth - @currentNbrGutters)) * 100, %);
-    @columnPercentWidth: (100 / @parentColSpan) + (@gutterPercentWidth / @parentColSpan);
-        
-    @marginLeft: unit(@columnPercentWidth * @offsetLeft, %);
-    margin-left: @marginLeft;
-
-    @width: unit(((@columnPercentWidth * @nbrCols) - @gutterPercentWidth), %);
-    width: @width;*/
-
-    @singleColWidth: (100 / @nbrColumns);
+    @singleColWidth: (100 / @parentColSpan);
     @currentWidth: unit(@singleColWidth * @nbrCols, %);
 
     width: @currentWidth;
-    border: solid @halfGutter transparent;
+    //border: solid @halfGutter @mainBodyBg;
 }
 
 .section {
@@ -81,4 +55,46 @@
     aside {
         .colSpan(3);
     }
+}
+
+.colSpan1 {
+    .colSpan(1);
+}
+.colSpan2 {
+    .colSpan(2);
+}
+.colSpan3 {
+    .colSpan(3);
+}
+.colSpan4 {
+    .colSpan(4);
+}
+.colSpan5 {
+    .colSpan(5);
+}
+.colSpan6 {
+    .colSpan(6);
+}
+.colSpan7 {
+    .colSpan(7);
+}
+.colSpan8 {
+    .colSpan(8);
+}
+.colSpan9 {
+    .colSpan(9);
+
+    // how to make nested columns work
+    .colSpan3 {
+        .colSpan(3, 9);
+    }
+}
+.colSpan10 {
+    .colSpan(10);
+}
+.colSpan11 {
+    .colSpan(11);
+}
+.colSpan12 {
+    .colSpan(12);
 }
