@@ -13,24 +13,54 @@ var gulp = require("gulp"),
 
     util = {
         forEach: function (func, that, obj) {
-            var k;
-
-            for (k in obj) {
-                if (obj.hasOwnProperty(k)) {
-                    func.call(that, obj[k], k, obj);
-                }
-            }
+            Object.keys(obj).forEach(function (key) {
+                func.call(that, obj[key], key, obj);
+            });
         },
-        setGulpTask: function (type, name, funcArrayObj) {
-            if (funcArrayObj.beforetask && funcArrayObj.task) {
-                gulp[type](name, funcArrayObj.beforetask, funcArrayObj.task);
+        instanceOfArray: [{
+            name: "date",
+            instof: Date
+        }, {
+            name: "array",
+            instof: Array
+        }, {
+            name: "regexp",
+            instof: RegExp
+        }],
+        checkType: function (item, instofObj, objectType) {
+            if (item instanceof instofObj.instof) {
+                objectType = instofObj.name;
+            }
+
+            return objectType;
+        },
+        getObjectType: function (item) {
+            var instanceOfArray = util.instanceOfArray,
+                objectType;
+
+            instanceOfArray.forEach(function (instofObj) {
+                objectType = util.checkType(item, instofObj, objectType);
+            });
+
+            return objectType;
+        },
+        getTrueType: function (item) {
+            var objectType = util.getObjectType(item);
+
+            return objectType || typeof item;
+        },
+        setGulpTask: function (watchOrTask, name, funcArrayObj) {
+            var itemType = util.getTrueType(funcArrayObj);
+
+            if (itemType === "object") {
+                gulp[watchOrTask](name, funcArrayObj.beforetask, funcArrayObj.task);
             } else {
-                gulp[type](name, funcArrayObj);
+                gulp[watchOrTask](name, funcArrayObj);
             }
         },
         setGulp: function (type, obj) {
             util.forEach(function (funcArrayObj, name) {
-                // "funcArrayObj" === "function OR Array OR Object"
+                // "funcArrayObj" === "function OR Array Or Object"
                 util.setGulpTask(type, name, funcArrayObj);
             }, this, obj);
         }
@@ -143,11 +173,6 @@ var gulp = require("gulp"),
                     })
                     .pipe(gulp.dest(gulpSettings.iconFont.lessdest));
             },
-            "complexity": function () {
-                return gulp.src(["js/*.js", "gulpfile.js"])
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.complexity());
-            },
             "prettify": function () {
                 return gulp.src(["js/*.js"])
                     .pipe(plugins.plumber())
@@ -168,6 +193,19 @@ var gulp = require("gulp"),
                     }))
                     .pipe(gulp.dest("."));
             },
+
+            "complexity": function () {
+                return gulp.src(["js/*.js", "gulpfile.js"])
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.complexity());
+            },
+            "platoReport": function () {
+                return gulp.src(["js/*.js", "js/plugins/*", "gulpfile.js"])
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.plato("report"))
+                    .pipe(reload(gulpSettings.browserReload));
+            },
+
             "jslint": {
                 beforetask: ["prettify", "prettifyGulpFile"],
                 task: function () {

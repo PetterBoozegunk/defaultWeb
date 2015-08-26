@@ -49,4 +49,7 @@ Temporary Items
 /UI/node_modules/
 /UI/node_modules/*
 /UI/node_modules/**
+
+/UI/report
+
 *.mswwsettings
