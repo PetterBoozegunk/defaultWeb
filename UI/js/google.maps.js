@@ -24,6 +24,15 @@
                     htmlStr = (tagName && str) ? "<" + tagName + classStr + ">" + str + "</" + tagName + ">" : "";
 
                 return htmlStr;
+            },
+            loadScript: function (scriptUrl, callback) {
+                var script = util.createScriptElem(scriptUrl);
+
+                if (callback) {
+                    $(script).on("load", callback);
+                }
+
+                document.body.appendChild(script);
             }
         },
 
@@ -397,20 +406,11 @@
 
                 maps.setMaps();
             },
-            loadScript: function (scriptUrl, callback) {
-                var script = util.createScriptElem(scriptUrl);
-
-                if (callback) {
-                    $(script).on("load", callback);
-                }
-
-                document.body.appendChild(script);
-            },
             loadGoogelMapApi: function () {
-                maps.loadScript("https://maps.googleapis.com/maps/api/js?callback=initMaps");
+                util.loadScript("https://maps.googleapis.com/maps/api/js?callback=initMaps");
             },
             loadMarkerClusterer: function () {
-                maps.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
+                util.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
             },
             winInitMaps: function () {
                 maps.init();

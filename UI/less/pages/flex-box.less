@@ -1,7 +1,7 @@
 ﻿/// <reference path="../vars/vars.less" />
 
 .flex-box {
-    background: linear-gradient(hotpink, chocolate);
+    background-image: radial-gradient(circle at 50% 50%, red 0%, orange 15%, yellow 30%, lightgreen 45%, green 60%, darkgreen 75%, darkblue 90%);
 
     & > div {
         display: flex;
@@ -38,7 +38,7 @@
 
         .box {
             &:nth-child(1) {
-                background-image: linear-gradient(aqua, aquamarine);
+                background-image: linear-gradient(aqua, deeppink);
                 align-self: auto;
                 order: 3;
             }
@@ -93,21 +93,23 @@
             flex: 1 auto;
         }
 
+        @fade: 60%;
+
         header {
-            background: red;
+            background: fade(red, @fade);
         }
         nav {
-            background: green;
+            background: fade(green, @fade);
         }
         article {
-            background: hotpink;
+            background: fade(hotpink, @fade);
             flex: 2 0;
         }
         aside {
-            background: brown;
+            background: fade(brown, @fade);
         }
         footer {
-            background: purple;
+            background: fade(purple, @fade);
         }
     }
 }
