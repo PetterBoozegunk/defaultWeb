@@ -50,3 +50,5 @@ Temporary Items
 /UI/node_modules/*
 /UI/node_modules/**
 *.mswwsettings
+
+report/
