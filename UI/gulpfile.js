@@ -133,14 +133,16 @@ var gulp = require("gulp"),
                 util.setGulp("watch", gulpSettings.watch);
             },
             "file-watch": function () {
-                //setTimeout(browserSync.reload, 500);
-                console.log("file-watch");
+                setTimeout(browserSync.reload, 500);
+                //console.log("file-watch");
             },
             "browser-sync": function () {
-                //browserSync.init({
-                //    proxy: "http://defaultweb.local:666"
-                //});
-                console.log("browser-sync");
+                var browserSettings = require("../server/settings.json");
+
+                browserSync.init({
+                    proxy: browserSettings.hostname + ":" + browserSettings.port
+                });
+                //console.log("browser-sync");
             },
 
             "clean": function () {
