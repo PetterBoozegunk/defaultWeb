@@ -134,7 +134,6 @@ var gulp = require("gulp"),
             },
             "file-watch": function () {
                 setTimeout(browserSync.reload, 500);
-                //console.log("file-watch");
             },
             "browser-sync": function () {
                 var browserSettings = require("../server/settings.json");
@@ -142,7 +141,6 @@ var gulp = require("gulp"),
                 browserSync.init({
                     proxy: browserSettings.hostname + ":" + browserSettings.port
                 });
-                //console.log("browser-sync");
             },
 
             "clean": function () {
