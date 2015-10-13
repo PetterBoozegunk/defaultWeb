@@ -1,6 +1,8 @@
 ﻿/// <reference path="../vars/vars.less" />
 
 .flex-box {
+    background: linear-gradient(hotpink, chocolate);
+
     & > div {
         display: flex;
         margin: ~"0 -@{halfGutter} @{gutter}";
@@ -17,42 +19,95 @@
     }
 
     .flex-test-1 {
-        background: hotpink;
+        //background: hotpink;
 
         height: 300px;
         flex-direction: row;
 
         //flex-wrap: nowrap | wrap | wrap-reverse;
-        flex-wrap: wrap;
+        //flex-wrap: wrap;
 
         //justify-content: flex-start | flex-end | center | space-between | space-around;
-        justify-content: flex-end;
+        //justify-content: flex-end;
+
+        //align-items: flex-start | flex-end | center | baseline | stretch;
+        //align-items: stretch;
+
+        //align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+        //align-content: stretch;
 
         .box {
             &:nth-child(1) {
                 background-image: linear-gradient(aqua, aquamarine);
                 align-self: auto;
+                order: 3;
             }
             &:nth-child(2) {
                 background-image: linear-gradient(green, lightgreen);
                 align-self: flex-end;
+                order: 3;
             }
             &:nth-child(3) {
                 background-image: linear-gradient(blue, lightblue);
                 align-self: flex-start;
+                order: 3;
             }
             &:nth-child(4) {
                 background-image: linear-gradient(red, yellow);
                 align-self: center;
+                order: 3;
             }
             &:nth-child(5) {
                 background-image: linear-gradient(brown, purple);
                 align-self: baseline;
+                order: 3;
             }
             &:nth-child(6) {
                 background-image: linear-gradient(lighten(black, 50%), white);
                 align-self: stretch;
+                order: 3;
             }
+        }
+    }
+
+    .flex-test-2 {
+        flex-flow: row wrap;
+        margin: 0;
+
+        header, 
+        nav, 
+        article, 
+        aside, 
+        footer {
+          flex: 1 100%;
+          padding: @gutter;
+        }
+
+        header,
+        footer {
+            padding: @halfGutter @gutter;
+        }
+
+        nav,
+        aside {
+            flex: 1 auto;
+        }
+
+        header {
+            background: red;
+        }
+        nav {
+            background: green;
+        }
+        article {
+            background: hotpink;
+            flex: 6 0;
+        }
+        aside {
+            background: brown;
+        }
+        footer {
+            background: purple;
         }
     }
 }
