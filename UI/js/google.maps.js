@@ -6,6 +6,7 @@
         google,
         ua = window.navigator.userAgent,
         isOldIe = /MSIE\s[678]/.test(ua),
+
         util = {
             createScriptElem: function (scriptUrl) {
                 var script = document.createElement("script");
@@ -15,12 +16,17 @@
 
                 return script;
             },
+            getClassNameStr: function (className) {
+                return className ? " class=\"" + className + "\"" : "";
+            },
             getHtmlStr: function (tagName, str, className) {
-                var htmlStr = (tagName && str) ? "<" + tagName + (className ? " class=\"" + className + "\">" : ">") + str + "</" + tagName + ">" : "";
+                var classStr = util.getClassNameStr(className),
+                    htmlStr = (tagName && str) ? "<" + tagName + classStr + ">" + str + "</" + tagName + ">" : "";
 
                 return htmlStr;
             }
         },
+
         maps = {
             blocks: $(".googleMap"),
             "default": {
@@ -97,6 +103,13 @@
 
                 return mapMarker;
             },
+            addMarkerListener: function (mapMarker, url) {
+                if (url) {
+                    google.maps.event.addListener(mapMarker, "click", function () {
+                        document.location = url;
+                    });
+                }
+            },
             addMarker: function (marker, map) {
                 var latLng = maps.getLatLng(marker),
                     url = marker.url,
@@ -108,11 +121,7 @@
                     //},
                     mapMarker = maps.getMapMarker(latLng, map, marker);
 
-                if (url) {
-                    google.maps.event.addListener(mapMarker, "click", function () {
-                        document.location = url;
-                    });
-                }
+                maps.addMarkerListener(mapMarker, url);
 
                 return mapMarker;
             },
@@ -141,11 +150,10 @@
             },
             allMarkersHaveTheSamePosition: function (markers) {
                 var lastPosition = markers[0].getPosition().toString(),
-                    sharedPosition = 0,
-                    position;
+                    sharedPosition = 0;
 
                 markers.forEach(function (marker) {
-                    position = marker.getPosition().toString();
+                    var position = marker.getPosition().toString();
 
                     if (position === lastPosition) {
                         sharedPosition += 1;
@@ -207,45 +215,45 @@
 
                 jqMapDiv.next("ul.markersList").remove();
             },
-            showMarkerList: function (cluster, markers) {
-                var ul = $("<ul class=\"markersList\" />"),
-                    addressHtmlStr,
-                    li,
-                    i,
-                    l = markers.length,
-                    map = cluster.getMap(),
-                    jqMapDiv = $(map.getDiv()),
-                    ulCss = maps.getMarkerUlListStyle(jqMapDiv);
+            addLiToMarkerList: function (marker) {
+                var ul = this,
+                    addressHtmlStr = maps.getAddressHtmlStr(marker),
+                    li = $("<li><a href=\"" + marker.url + "\"><h2>" + marker.title + "</h2>" + addressHtmlStr + "</a></li>");
 
-                for (i = 0; i < l; i += 1) {
-                    addressHtmlStr = maps.getAddressHtmlStr(markers[i]);
-                    li = $("<li><a href=\"" + markers[i].url + "\"><h2>" + markers[i].title + "</h2>" + addressHtmlStr + "</a></li>");
-
-                    ul.append(li);
-                }
+                ul.append(li);
+            },
+            showMarkerList: function (ul, jqMapDiv) {
+                var ulCss = maps.getMarkerUlListStyle(jqMapDiv);
 
                 jqMapDiv.next("ul.markersList").remove();
 
                 ul.css(ulCss);
                 jqMapDiv.after(ul);
             },
+            setMarkerList: function (cluster, markers) {
+                var ul = $("<ul class=\"markersList\" />"),
+                    map = cluster.getMap(),
+                    jqMapDiv = $(map.getDiv());
+
+                markers.forEach(maps.addLiToMarkerList, ul);
+
+                maps.showMarkerList(ul, jqMapDiv);
+            },
             removeEvents: function (mapEventsObjArray) {
-                if (mapEventsObjArray) {
-                    while (mapEventsObjArray[0]) {
-                        google.maps.event.removeListener(mapEventsObjArray[0]);
-                        mapEventsObjArray.shift();
-                    }
+                var evtsObjArr = mapEventsObjArray || [];
+
+                while (evtsObjArr[0]) {
+                    google.maps.event.removeListener(evtsObjArr[0]);
+                    evtsObjArr.shift();
                 }
             },
             removeMultipleEvents: function (map, events) {
-                var evts = events.split(" "),
-                    i,
-                    l = evts.length,
+                var eventsArray = events.split(" "),
                     mapEventsObj = map.get("eventsObj") || {};
 
-                for (i = 0; i < l; i += 1) {
-                    maps.removeEvents(mapEventsObj[evts[i]]);
-                }
+                eventsArray.forEach(function (event) {
+                    maps.removeEvents(mapEventsObj[event]);
+                });
             },
             addEvent: function (map, mapEventsObj, evt, func) {
                 if (!mapEventsObj[evt]) {
@@ -264,19 +272,23 @@
 
                 map.set("eventsObj", mapEventsObj);
             },
+            handleSamePosition: function (map, markers, cluster) {
+                var events = "click drag center_changed zoom_changed";
+
+                maps.removeMultipleEvents(map, events);
+                maps.setMarkerList(cluster, markers);
+
+                setTimeout(function () {
+                    maps.addMultipleEvents(map, events, maps.removeMarkerList);
+                }, 100);
+            },
             checkCluster: function (cluster) {
                 var markers = cluster.getMarkers(),
                     map = cluster.getMap(),
-                    allMarkersHaveTheSamePosition = maps.allMarkersHaveTheSamePosition(markers),
-                    events = "click drag center_changed zoom_changed";
+                    allMarkersHaveTheSamePosition = maps.allMarkersHaveTheSamePosition(markers);
 
                 if (allMarkersHaveTheSamePosition) {
-                    maps.removeMultipleEvents(map, events);
-                    maps.showMarkerList(cluster, markers);
-
-                    setTimeout(function () {
-                        maps.addMultipleEvents(map, events, maps.removeMarkerList);
-                    }, 100);
+                    maps.handleSamePosition(map, markers, cluster);
                 }
             },
             getLatLngCenter: function (data) {
@@ -303,6 +315,7 @@
                 if (window.MarkerClusterer) {
                     var mapMarkers = maps.addMarkers(markers, map),
                         clusterer = maps.setClusterer(map, mapMarkers);
+
                     map.set("clusterer", clusterer);
 
                     google.maps.event.addListener(clusterer, "clusterclick", maps.checkCluster);
@@ -316,22 +329,28 @@
             getJsonData: function (data) {
                 return (typeof data === "string") ? $.parseJSON(data) : data;
             },
-            setMap: function (data) {
-                var mapBlock = this,
-                    jsonData = maps.getJsonData(data),
-
-                    markers = maps.getMarkers(jsonData),
-                    zoom = maps.getZoom(jsonData),
-
+            assembleMapOptions: function (markers, jsonData) {
+                var zoom = maps.getZoom(jsonData),
                     latLngCenter = maps.getLatLngCenter(jsonData),
+                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter);
 
-                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter),
-
-                    map = new google.maps.Map(mapBlock, mapOptions);
-
+                return mapOptions;
+            },
+            setMap: function (map, markers, jsonData) {
                 maps.setCenter(map, markers, jsonData);
                 maps.initClusterer(map, markers);
                 maps.offsetCenter(map, jsonData);
+            },
+            getMap: function (data) {
+                var mapBlock = this,
+                    jsonData = maps.getJsonData(data),
+                    markers = maps.getMarkers(jsonData),
+
+                    mapOptions = maps.assembleMapOptions(markers, jsonData),
+
+                    map = new google.maps.Map(mapBlock, mapOptions);
+
+                maps.setMap(map, markers, jsonData);
             },
             setSpinner: function (jqMapBlock) {
                 jqMapBlock.trigger("spinner:get");
@@ -342,37 +361,36 @@
                 $.ajax({
                     url: url,
                     context: mapBlock
-                }).done(maps.setMap);
+                }).done(maps.getMap);
             },
-            getJsonMap: function (mapBlock, mapObj, jqMapBlock) {
+            getJsonMap: function (mapObj, mapBlock, jqMapBlock) {
                 maps.setSpinner(jqMapBlock);
-                maps.setMap.call(mapBlock, mapObj);
+                maps.getMap.call(mapBlock, mapObj);
             },
             getMapObj: function (jqMapBlock) {
                 var dataMap = jqMapBlock.attr("data-map") || "",
-                    mapObj = dataMap ? $.parseJSON(dataMap) : null;
+                    mapObj = dataMap ? $.parseJSON(dataMap) : maps["default"];
 
                 return mapObj;
             },
             getMapData: function (mapBlock) {
                 var jqMapBlock = $(mapBlock),
-                    url = jqMapBlock.attr("data-map-url") || "",
-                    mapObj = maps.getMapObj(jqMapBlock);
+                    mapObj = maps.getMapObj(jqMapBlock),
+                    url = jqMapBlock.attr("data-map-url"),
+                    mapData = url || mapObj,
+                    getMap = url ? maps.getAjaxMap : maps.getJsonMap;
 
-                if (url) {
-                    maps.getAjaxMap(url, mapBlock, jqMapBlock);
-                } else if (mapObj) {
-                    maps.getJsonMap(mapBlock, mapObj, jqMapBlock);
-                }
+                getMap(mapData, mapBlock, jqMapBlock);
+            },
+            setSingleMap: function (key, mapBlocks) {
+                maps.getMapData(mapBlocks[key]);
             },
             setMaps: function () {
-                var mapBlocks = maps.blocks,
-                    i,
-                    l = mapBlocks.length;
-
-                for (i = 0; i < l; i += 1) {
-                    maps.getMapData(mapBlocks[i]);
-                }
+                Object.keys(maps.blocks).forEach(function (key) {
+                    if (maps.blocks[key].tagName) {
+                        maps.getMapData(maps.blocks[key]);
+                    }
+                });
             },
             init: function () {
                 google = window.google;
@@ -394,21 +412,25 @@
             loadMarkerClusterer: function () {
                 maps.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
             },
+            winInitMaps: function () {
+                maps.init();
+
+                try {
+                    delete window.initMaps;
+                } catch (e) {
+                    window.initMaps = null;
+                }
+            },
+            initMaps: function () {
+                if (maps.blocks.length) {
+                    window.initMaps = maps.winInitMaps;
+
+                    maps.loadMarkerClusterer();
+                }
+            },
             checkLoad: function () {
                 if (!isOldIe) {
-                    if (maps.blocks.length) {
-                        window.initMaps = function () {
-                            maps.init();
-
-                            try {
-                                delete window.initMaps;
-                            } catch (e) {
-                                window.initMaps = null;
-                            }
-                        };
-
-                        maps.loadMarkerClusterer();
-                    }
+                    maps.initMaps();
                 } else {
                     maps.blocks.remove();
                 }

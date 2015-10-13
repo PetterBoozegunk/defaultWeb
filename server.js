@@ -21,7 +21,9 @@
             gzip: function (rnrObject) {
                 var buffe = new Buffer(rnrObject.data, "utf-8");
 
-                rnrObject.headers.ETag = rnrObject.etag;
+                if (rnrObject.etag) {
+                    rnrObject.headers.ETag = rnrObject.etag;
+                }
 
                 rnrObject.contextCallback(rnrObject, zlib.gzip, [buffe, rnrObject.gzip]);
             },
@@ -81,8 +83,12 @@
     RnRObject.prototype = {
         gzip: function () {
             var rnrObject = this,
-                args = arguments,
-                result = args[1];
+                //args = arguments,
+                result = this.data; //args[1];
+
+            //if (rnrObject.headers["Content-Type"] === "text/html;charset=utf-8") {
+            //    console.log(rnrObject);
+            //}
 
             rnrObject.headers["Content-Length"] = result.length;
             rnrObject.response.writeHead(rnrObject.statusCode, rnrObject.headers);
@@ -221,11 +227,14 @@
                 date = now.getDate(),
 
                 headers = {
-                    "Content-Type": type,
-                    "Content-Encoding": "gzip",
+                    "Content-Type": type + ";charset=utf-8",
+                    "Accept-Charset" : "utf-8",
+                    //"Content-Encoding": "gzip",
                     "Cache-Control": "public, max-age=345600", // 4 days
                     "Date": now.toUTCString(),
-                    "Expires": new Date(parseInt(year + 1, 10), month, date).toUTCString()
+                    "Expires": new Date(parseInt(year + 1, 10), month, date).toUTCString(),
+
+                    "Host": settings.hostname + ":" + settings.port
                 };
 
             return headers;
