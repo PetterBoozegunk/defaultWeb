@@ -1,0 +1,58 @@
+﻿/// <reference path="../vars/vars.less" />
+
+.flex-box {
+    & > div {
+        display: flex;
+        margin: ~"0 -@{halfGutter} @{gutter}";
+    }
+
+    .box {
+        background: orange;
+        padding: 5px;
+        margin: 0 @halfGutter;
+
+        flex: 0 1 auto;
+
+        text-align: center;
+    }
+
+    .flex-test-1 {
+        background: hotpink;
+
+        height: 300px;
+        flex-direction: row;
+
+        //flex-wrap: nowrap | wrap | wrap-reverse;
+        flex-wrap: wrap;
+
+        //justify-content: flex-start | flex-end | center | space-between | space-around;
+        justify-content: flex-end;
+
+        .box {
+            &:nth-child(1) {
+                background-image: linear-gradient(aqua, aquamarine);
+                align-self: auto;
+            }
+            &:nth-child(2) {
+                background-image: linear-gradient(green, lightgreen);
+                align-self: flex-end;
+            }
+            &:nth-child(3) {
+                background-image: linear-gradient(blue, lightblue);
+                align-self: flex-start;
+            }
+            &:nth-child(4) {
+                background-image: linear-gradient(red, yellow);
+                align-self: center;
+            }
+            &:nth-child(5) {
+                background-image: linear-gradient(brown, purple);
+                align-self: baseline;
+            }
+            &:nth-child(6) {
+                background-image: linear-gradient(lighten(black, 50%), white);
+                align-self: stretch;
+            }
+        }
+    }
+}

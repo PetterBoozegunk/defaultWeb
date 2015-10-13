@@ -281,7 +281,7 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(gulpSettings.srcDest + gulpSettings.jsDest));
             },
 
-            "check-js": ["complexity", "jslint"],
+            "check-js": ["complexity", "jslint", "platoReport"],
             "sync-watch": ["browser-sync", "watch"],
 
             "dev": ["less:dev", "less:ie:dev", "scripts:dev", "scripts:ie:dev"],

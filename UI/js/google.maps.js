@@ -215,27 +215,29 @@
 
                 jqMapDiv.next("ul.markersList").remove();
             },
-            showMarkerList: function (cluster, markers) {
-                var ul = $("<ul class=\"markersList\" />"),
-                    addressHtmlStr,
-                    li,
-                    i,
-                    l = markers.length,
-                    map = cluster.getMap(),
-                    jqMapDiv = $(map.getDiv()),
-                    ulCss = maps.getMarkerUlListStyle(jqMapDiv);
+            addLiToMarkerList: function (marker) {
+                var ul = this,
+                    addressHtmlStr = maps.getAddressHtmlStr(marker),
+                    li = $("<li><a href=\"" + marker.url + "\"><h2>" + marker.title + "</h2>" + addressHtmlStr + "</a></li>");
 
-                for (i = 0; i < l; i += 1) {
-                    addressHtmlStr = maps.getAddressHtmlStr(markers[i]);
-                    li = $("<li><a href=\"" + markers[i].url + "\"><h2>" + markers[i].title + "</h2>" + addressHtmlStr + "</a></li>");
-
-                    ul.append(li);
-                }
+                ul.append(li);
+            },
+            showMarkerList: function (ul, jqMapDiv) {
+                var ulCss = maps.getMarkerUlListStyle(jqMapDiv);
 
                 jqMapDiv.next("ul.markersList").remove();
 
                 ul.css(ulCss);
                 jqMapDiv.after(ul);
+            },
+            setMarkerList: function (cluster, markers) {
+                var ul = $("<ul class=\"markersList\" />"),
+                    map = cluster.getMap(),
+                    jqMapDiv = $(map.getDiv());
+
+                markers.forEach(maps.addLiToMarkerList, ul);
+
+                maps.showMarkerList(ul, jqMapDiv);
             },
             removeEvents: function (mapEventsObjArray) {
                 var evtsObjArr = mapEventsObjArray || [];
@@ -270,19 +272,23 @@
 
                 map.set("eventsObj", mapEventsObj);
             },
+            handleSamePosition: function (map, markers, cluster) {
+                var events = "click drag center_changed zoom_changed";
+
+                maps.removeMultipleEvents(map, events);
+                maps.setMarkerList(cluster, markers);
+
+                setTimeout(function () {
+                    maps.addMultipleEvents(map, events, maps.removeMarkerList);
+                }, 100);
+            },
             checkCluster: function (cluster) {
                 var markers = cluster.getMarkers(),
                     map = cluster.getMap(),
-                    allMarkersHaveTheSamePosition = maps.allMarkersHaveTheSamePosition(markers),
-                    events = "click drag center_changed zoom_changed";
+                    allMarkersHaveTheSamePosition = maps.allMarkersHaveTheSamePosition(markers);
 
                 if (allMarkersHaveTheSamePosition) {
-                    maps.removeMultipleEvents(map, events);
-                    maps.showMarkerList(cluster, markers);
-
-                    setTimeout(function () {
-                        maps.addMultipleEvents(map, events, maps.removeMarkerList);
-                    }, 100);
+                    maps.handleSamePosition(map, markers, cluster);
                 }
             },
             getLatLngCenter: function (data) {
@@ -309,6 +315,7 @@
                 if (window.MarkerClusterer) {
                     var mapMarkers = maps.addMarkers(markers, map),
                         clusterer = maps.setClusterer(map, mapMarkers);
+
                     map.set("clusterer", clusterer);
 
                     google.maps.event.addListener(clusterer, "clusterclick", maps.checkCluster);
@@ -322,22 +329,28 @@
             getJsonData: function (data) {
                 return (typeof data === "string") ? $.parseJSON(data) : data;
             },
-            setMap: function (data) {
-                var mapBlock = this,
-                    jsonData = maps.getJsonData(data),
-
-                    markers = maps.getMarkers(jsonData),
-                    zoom = maps.getZoom(jsonData),
-
+            assembleMapOptions: function (markers, jsonData) {
+                var zoom = maps.getZoom(jsonData),
                     latLngCenter = maps.getLatLngCenter(jsonData),
+                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter);
 
-                    mapOptions = maps.getMapOptions(markers, zoom, latLngCenter),
-
-                    map = new google.maps.Map(mapBlock, mapOptions);
-
+                return mapOptions;
+            },
+            setMap: function (map, markers, jsonData) {
                 maps.setCenter(map, markers, jsonData);
                 maps.initClusterer(map, markers);
                 maps.offsetCenter(map, jsonData);
+            },
+            getMap: function (data) {
+                var mapBlock = this,
+                    jsonData = maps.getJsonData(data),
+                    markers = maps.getMarkers(jsonData),
+
+                    mapOptions = maps.assembleMapOptions(markers, jsonData),
+
+                    map = new google.maps.Map(mapBlock, mapOptions);
+
+                maps.setMap(map, markers, jsonData);
             },
             setSpinner: function (jqMapBlock) {
                 jqMapBlock.trigger("spinner:get");
@@ -348,28 +361,26 @@
                 $.ajax({
                     url: url,
                     context: mapBlock
-                }).done(maps.setMap);
+                }).done(maps.getMap);
             },
             getJsonMap: function (mapObj, mapBlock, jqMapBlock) {
                 maps.setSpinner(jqMapBlock);
-                maps.setMap.call(mapBlock, mapObj);
+                maps.getMap.call(mapBlock, mapObj);
             },
             getMapObj: function (jqMapBlock) {
                 var dataMap = jqMapBlock.attr("data-map") || "",
-                    mapObj = dataMap ? $.parseJSON(dataMap) : null;
+                    mapObj = dataMap ? $.parseJSON(dataMap) : maps["default"];
 
                 return mapObj;
             },
             getMapData: function (mapBlock) {
                 var jqMapBlock = $(mapBlock),
                     mapObj = maps.getMapObj(jqMapBlock),
-                    url = jqMapBlock.attr("data-map-url");
+                    url = jqMapBlock.attr("data-map-url"),
+                    mapData = url || mapObj,
+                    getMap = url ? maps.getAjaxMap : maps.getJsonMap;
 
-                if (url) {
-                    maps.getAjaxMap(url, mapBlock, jqMapBlock);
-                } else if (mapObj) {
-                    maps.getJsonMap(mapObj, mapBlock, jqMapBlock);
-                }
+                getMap(mapData, mapBlock, jqMapBlock);
             },
             setSingleMap: function (key, mapBlocks) {
                 maps.getMapData(mapBlocks[key]);
