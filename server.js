@@ -17,6 +17,15 @@
 
         // ReSharper disable once JoinDeclarationAndInitializerJs (This cannot be done here... But anyone is welcome to try.)
         server,
+
+        util = {
+            getCallback: function (argsArray) {
+                var callback = (argsArray instanceof Array && argsArray.length) ? argsArray[argsArray.length - 1] : null;
+
+                return callback;
+            }
+        },
+
         resp = {
             gzip: function (rnrObject) {
                 var buffe = new Buffer(rnrObject.data, "utf-8");
@@ -76,7 +85,7 @@
             this.fullPath = path.join(process.cwd(), that.pathName);
             this.headers = server.getHeaders(that.fullPath);
         },
-        createRnRObject = function (request, response) {// RnR = Request aNd Response
+        createRnRObject = function (request, response) { // RnR = Request aNd Response
             return new RnRObject(request, response);
         };
 
@@ -94,18 +103,23 @@
             rnrObject.response.writeHead(rnrObject.statusCode, rnrObject.headers);
             rnrObject.response.end(result);
         },
-        statCallback: function () {
-            var rnrObject = this,
-                args = arguments,
-                stat = args[1],
-                etag = stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
+        getEtag: function (stat, rnrObject) {
+            var etag = stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
 
             if (etag) {
                 rnrObject.headers["Last-Modified"] = stat.mtime;
                 rnrObject.etag = etag;
             }
 
-            if (rnrObject.request.headers["if-none-match"] === etag) {
+            return etag;
+        },
+        statCallback: function () {
+            var rnrObject = this,
+                args = arguments,
+                stat = args[1],
+                etag = rnrObject.getEtag(stat, rnrObject);
+
+            if (etag && rnrObject.request.headers["if-none-match"] === etag) {
                 rnrObject.response.statusCode = 304;
                 rnrObject.response.end();
             } else {
@@ -146,7 +160,7 @@
             server.getIncludes(rnrObject);
         },
         contextCallback: function (context, func, argsArray) {
-            var callback = (argsArray instanceof Array && argsArray.length) ? argsArray[argsArray.length - 1] : null;
+            var callback = util.getCallback(argsArray);
 
             if (typeof callback === "function") {
                 argsArray.pop();
@@ -228,7 +242,7 @@
 
                 headers = {
                     "Content-Type": type + ";charset=utf-8",
-                    "Accept-Charset" : "utf-8",
+                    "Accept-Charset": "utf-8",
                     //"Content-Encoding": "gzip",
                     "Cache-Control": "public, max-age=345600", // 4 days
                     "Date": now.toUTCString(),
