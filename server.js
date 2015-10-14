@@ -17,6 +17,15 @@
 
         // ReSharper disable once JoinDeclarationAndInitializerJs (This cannot be done here... But anyone is welcome to try.)
         server,
+
+        util = {
+            getCallback: function (argsArray) {
+                var callback = (argsArray instanceof Array && argsArray.length) ? argsArray[argsArray.length - 1] : null;
+
+                return callback;
+            }
+        },
+
         resp = {
             gzip: function (rnrObject) {
                 var buffe = new Buffer(rnrObject.data, "utf-8");
@@ -27,21 +36,27 @@
 
                 rnrObject.contextCallback(rnrObject, zlib.gzip, [buffe, rnrObject.gzip]);
             },
+            handlePhtmlTemplates: function (rnrObject) {
+                if (rnrObject.layout) {
+                    rnrObject.layout = rnrObject.layout.join();
+
+                    server.getLayout(rnrObject);
+                } else {
+                    server.getIncludes(rnrObject, 0);
+                }
+            },
+            getAction: function (rnrObject) {
+                return (rnrObject.layout || rnrObject.includes) ? resp.handlePhtmlTemplates : resp.gzip;
+            },
             handlePHtml: function (rnrObject) {
                 rnrObject.data = rnrObject.data.toString("utf-8");
 
                 rnrObject.layout = rnrObject.data.match(matchLayout);
                 rnrObject.includes = rnrObject.data.match(matchIncludes);
 
-                if (rnrObject.layout) {
-                    rnrObject.layout = rnrObject.layout.join();
+                var action = resp.getAction(rnrObject);
 
-                    server.getLayout(rnrObject);
-                } else if (rnrObject.includes) {
-                    server.getIncludes(rnrObject, 0);
-                } else {
-                    resp.gzip(rnrObject);
-                }
+                action(rnrObject);
             },
             "200": function (rnrObject) {
                 var isPHtml = /\.phtml$/.test(rnrObject.fullPath);
@@ -76,7 +91,7 @@
             this.fullPath = path.join(process.cwd(), that.pathName);
             this.headers = server.getHeaders(that.fullPath);
         },
-        createRnRObject = function (request, response) {// RnR = Request aNd Response
+        createRnRObject = function (request, response) { // RnR = Request aNd Response
             return new RnRObject(request, response);
         };
 
@@ -94,18 +109,26 @@
             rnrObject.response.writeHead(rnrObject.statusCode, rnrObject.headers);
             rnrObject.response.end(result);
         },
-        statCallback: function () {
-            var rnrObject = this,
-                args = arguments,
-                stat = args[1],
-                etag = stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
+        getEtag: function (stat) {
+            return stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
+        },
+        setEtag: function (stat, rnrObject) {
+            var etag = this.getEtag(stat);
 
             if (etag) {
                 rnrObject.headers["Last-Modified"] = stat.mtime;
                 rnrObject.etag = etag;
             }
 
-            if (rnrObject.request.headers["if-none-match"] === etag) {
+            return etag;
+        },
+        statCallback: function () {
+            var rnrObject = this,
+                args = arguments,
+                stat = args[1],
+                etag = rnrObject.setEtag(stat, rnrObject);
+
+            if (etag && rnrObject.request.headers["if-none-match"] === etag) {
                 rnrObject.response.statusCode = 304;
                 rnrObject.response.end();
             } else {
@@ -146,7 +169,7 @@
             server.getIncludes(rnrObject);
         },
         contextCallback: function (context, func, argsArray) {
-            var callback = (argsArray instanceof Array && argsArray.length) ? argsArray[argsArray.length - 1] : null;
+            var callback = util.getCallback(argsArray);
 
             if (typeof callback === "function") {
                 argsArray.pop();
@@ -228,7 +251,7 @@
 
                 headers = {
                     "Content-Type": type + ";charset=utf-8",
-                    "Accept-Charset" : "utf-8",
+                    "Accept-Charset": "utf-8",
                     //"Content-Encoding": "gzip",
                     "Cache-Control": "public, max-age=345600", // 4 days
                     "Date": now.toUTCString(),

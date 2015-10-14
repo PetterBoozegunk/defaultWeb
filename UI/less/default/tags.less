@@ -27,6 +27,11 @@ p {
 
 h1 {
     .remFont(@baseFontSize * 1.5);
+
+    &[class^=icon-]:before {
+        position: relative;
+        top: 0.3em;
+    }
 }
 
 h2 { 
