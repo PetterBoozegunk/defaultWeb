@@ -71,7 +71,7 @@ var gulp = require("gulp"),
                 dest: "fonts/svg"
             },
             images: {
-                src: ["images/**"],
+                src: ["images/*.svg"],
                 dest: "images"
             }
         },
@@ -224,12 +224,12 @@ var gulp = require("gulp"),
                 .pipe(plugins.clean());
         },
 
-        "svgFont": function () {
+        "svg-min:font": function () {
             return gulp.src(settings.svg.font.src)
                 .pipe(plugins.svgmin())
                 .pipe(gulp.dest(settings.svg.font.dest));
         },
-        "svgImage": function () {
+        "svg-min:image": function () {
             return gulp.src(settings.svg.images.src)
                 .pipe(plugins.svgmin())
                 .pipe(gulp.dest(settings.svg.images.dest));
@@ -243,7 +243,7 @@ var gulp = require("gulp"),
         },
 
         "iconFont": {
-            beforetask: ["svgFont"],
+            beforetask: ["svg-min:font"],
             task: function () {
                 gulp.src(settings.iconFont.src)
                     .pipe(plugins.plumber())
@@ -357,7 +357,6 @@ var gulp = require("gulp"),
                 .pipe(gulp.dest(settings.srcDest + settings.jsDest));
         },
 
-        "check-js": ["complexity", "jslint", "platoReport"],
         "sync-watch": ["browser-sync", "watch"],
 
         "dev": ["less:dev", "less:ie:dev", "js:dev", "js:ie:dev"],
@@ -368,8 +367,9 @@ var gulp = require("gulp"),
             }
         },
 
-        "image-min": ["images", "svgImage"],
+        "image-min": ["images", "svg-min:image"],
 
+        "check-js": ["complexity", "jslint", "platoReport"],
         "js:all": ["check-js", "js:dev", "js:ie:dev"],
 
         "default": ["dev"]
