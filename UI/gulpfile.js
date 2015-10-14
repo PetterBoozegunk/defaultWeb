@@ -65,8 +65,14 @@ var gulp = require("gulp"),
             }
         },
         svg: {
-            src: ["fonts/svg/*.svg"],
-            dest: "fonts/svg"
+            font: {
+                src: ["fonts/svg/*.svg"],
+                dest: "fonts/svg"
+            },
+            images: {
+                src: ["images/**"],
+                dest: "images"
+            }
         },
         images: {
             src: ["images/**"],
@@ -213,36 +219,46 @@ var gulp = require("gulp"),
                 .pipe(plugins.clean());
         },
 
-        "svg": function () {
-            return gulp.src(settings.svg.src)
+        "svgFont": function () {
+            return gulp.src(settings.svg.font.src)
                 .pipe(plugins.svgmin())
-                .pipe(gulp.dest(settings.svg.dest));
+                .pipe(gulp.dest(settings.svg.font.dest));
         },
+        "svgImage": function () {
+            return gulp.src(settings.svg.images.src)
+                .pipe(plugins.svgmin())
+                .pipe(gulp.dest(settings.svg.images.dest));
+        },
+
         "images": function () {
             return gulp.src(settings.images.src)
                 .pipe(plugins.plumber())
                 .pipe(plugins.imagemin())
                 .pipe(gulp.dest(settings.images.dest));
         },
-        "iconFont": function () {
-            gulp.src(settings.iconFont.src)
-                .pipe(plugins.plumber())
-                .pipe(plugins.iconfont({
-                    fontName: settings.iconFont.name,
-                    normalize: true
-                }))
-                .on("codepoints", function (codepoints) {
-                    gulp.src(settings.iconFont.lesstemplate)
-                        .pipe(plugins.plumber())
-                        .pipe(plugins.consolidate("lodash", {
-                            glyphs: codepoints,
-                            fontName: settings.iconFont.name,
-                            fontPath: settings.iconFont.dir,
-                            className: settings.iconFont.className
-                        }))
-                        .pipe(gulp.dest(settings.iconFont.fontdest));
-                })
-                .pipe(gulp.dest(settings.iconFont.lessdest));
+
+        "iconFont": {
+            beforetask: ["svgFont"],
+            task: function () {
+                gulp.src(settings.iconFont.src)
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.iconfont({
+                        fontName: settings.iconFont.name,
+                        normalize: true
+                    }))
+                    .on("codepoints", function (codepoints) {
+                        gulp.src(settings.iconFont.lesstemplate)
+                            .pipe(plugins.plumber())
+                            .pipe(plugins.consolidate("lodash", {
+                                glyphs: codepoints,
+                                fontName: settings.iconFont.name,
+                                fontPath: settings.iconFont.dir,
+                                className: settings.iconFont.className
+                            }))
+                            .pipe(gulp.dest(settings.iconFont.fontdest));
+                    })
+                    .pipe(gulp.dest(settings.iconFont.lessdest));
+            }
         },
 
         "prettify": function () {
@@ -351,6 +367,8 @@ var gulp = require("gulp"),
                 gulp.start("less:prod", "less:ie:prod", "js:prod", "js:ie:prod");
             }
         },
+
+        "image-min": ["images", "svgImage"],
 
         "js:all": ["check-js", "js:dev", "js:ie:dev"],
 
