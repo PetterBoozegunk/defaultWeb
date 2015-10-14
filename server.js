@@ -36,21 +36,27 @@
 
                 rnrObject.contextCallback(rnrObject, zlib.gzip, [buffe, rnrObject.gzip]);
             },
+            handlePhtmlTemplates: function (rnrObject) {
+                if (rnrObject.layout) {
+                    rnrObject.layout = rnrObject.layout.join();
+
+                    server.getLayout(rnrObject);
+                } else {
+                    server.getIncludes(rnrObject, 0);
+                }
+            },
+            getAction: function (rnrObject) {
+                return (rnrObject.layout || rnrObject.includes) ? resp.handlePhtmlTemplates : resp.gzip;
+            },
             handlePHtml: function (rnrObject) {
                 rnrObject.data = rnrObject.data.toString("utf-8");
 
                 rnrObject.layout = rnrObject.data.match(matchLayout);
                 rnrObject.includes = rnrObject.data.match(matchIncludes);
 
-                if (rnrObject.layout) {
-                    rnrObject.layout = rnrObject.layout.join();
+                var action = resp.getAction(rnrObject);
 
-                    server.getLayout(rnrObject);
-                } else if (rnrObject.includes) {
-                    server.getIncludes(rnrObject, 0);
-                } else {
-                    resp.gzip(rnrObject);
-                }
+                action(rnrObject);
             },
             "200": function (rnrObject) {
                 var isPHtml = /\.phtml$/.test(rnrObject.fullPath);
@@ -103,8 +109,11 @@
             rnrObject.response.writeHead(rnrObject.statusCode, rnrObject.headers);
             rnrObject.response.end(result);
         },
-        getEtag: function (stat, rnrObject) {
-            var etag = stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
+        getEtag: function (stat) {
+            return stat ? stat.size + "-" + Date.parse(stat.mtime) : "";
+        },
+        setEtag: function (stat, rnrObject) {
+            var etag = this.getEtag(stat);
 
             if (etag) {
                 rnrObject.headers["Last-Modified"] = stat.mtime;
@@ -117,7 +126,7 @@
             var rnrObject = this,
                 args = arguments,
                 stat = args[1],
-                etag = rnrObject.getEtag(stat, rnrObject);
+                etag = rnrObject.setEtag(stat, rnrObject);
 
             if (etag && rnrObject.request.headers["if-none-match"] === etag) {
                 rnrObject.response.statusCode = 304;
