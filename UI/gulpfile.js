@@ -22,7 +22,13 @@ var gulp = require("gulp"),
                 "plugins": [lessPluginGlob]
             },
             oldIeSrc: ["less/oldIe/*.less"],
-            oldIeFileName: "oldIe.less"
+            oldIeFileName: "oldIe.less",
+
+            watch: [{
+                "less:dev": ["less/**"]
+            }, {
+                "less:ie:dev": ["less/oldIe/**"]
+            }]
         },
         js: {
             fileName: "scripts.js",
@@ -36,7 +42,13 @@ var gulp = require("gulp"),
             },
 
             oldIeFileName: "oldIe.js",
-            oldIeSrc: ["js/oldIe/*.js"]
+            oldIeSrc: ["js/oldIe/*.js"],
+
+            watch: [{
+                "js:dev": ["js/lib/*.js", "js/*.js", "js/tests/*js"]
+            }, {
+                "js:ie:dev": ["js/oldIe/*.js"]
+            }]
         },
 
         comments: {
@@ -63,7 +75,9 @@ var gulp = require("gulp"),
             stream: true
         },
         fileWatch: {
-            src: ["dist/**/*.js", "dist/**/*.css"]
+            watch: [{
+                "file-watch": ["[srcDest]/**/*.js", "[srcDest]/**/*.css"]
+            }]
         }
     },
 
@@ -125,24 +139,36 @@ var gulp = require("gulp"),
                 .pipe(plugins.plumber())
                 .pipe(plugins.jsbeautifier(settings.js.jsLint))
                 .pipe(gulp.dest(dest));
+        },
+        getWatch : function () {
+            var watchObj = {};
+
+            Object.keys(settings).forEach(function (name) {
+                var currentSettingsObj = settings[name],
+                    watchArray = currentSettingsObj.watch;
+
+                if (watchArray) {
+                    watchArray.forEach(function (currentWatchObj) {
+                        Object.keys(currentWatchObj).forEach(function (currentWatchObjName) {
+                            var watchSrcArray = currentWatchObj[currentWatchObjName];
+
+                            watchSrcArray.forEach(function (currentSrcName) {
+                                this[currentSrcName.replace(/\[srcDest\]/, settings.srcDest)] = [currentWatchObjName];
+                            }, watchObj);
+                        });
+                    }, watchObj);
+                }
+            }, watchObj);
+
+            return watchObj;
         }
-    },
-
-    watch = {
-        "js/lib/**.js": ["js:dev"],
-        "js/**.js": ["js:dev"],
-        "js/oldIe/**.js": ["js:ie:dev"],
-
-        "less/**": ["less:dev"],
-        "less/oldIe/**": ["less:ie:dev"],
-
-        "dist/**/*.js": ["file-watch"],
-        "dist/**/*.css": ["file-watch"]
     },
 
     tasks = {
         "watch": function () {
-            util.setGulp("watch", watch);
+            var watchObj = util.getWatch();
+
+            util.setGulp("watch", watchObj);
         },
         "file-watch": function () {
             setTimeout(browserSync.reload, 500);
