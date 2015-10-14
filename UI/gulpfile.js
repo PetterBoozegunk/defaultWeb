@@ -64,6 +64,14 @@ var gulp = require("gulp"),
                 "oldIE": true
             }
         },
+        svg: {
+            src: ["fonts/svg/*.svg"],
+            dest: "fonts/svg"
+        },
+        images: {
+            src: ["images/**"],
+            dest: "images"
+        },
         iconFont: {
             name: "icon",
             src: ["fonts/svg/*.svg"],
@@ -71,7 +79,10 @@ var gulp = require("gulp"),
             lessdest: "fonts/",
             fontdest: "less/fonts/",
             dir: "/UI/fonts/",
-            className: "icon"
+            className: "icon",
+            watch: [{
+                "iconFont": ["fonts/svg/*.svg"]
+            }]
         },
         browserReload: {
             stream: true
@@ -202,17 +213,23 @@ var gulp = require("gulp"),
                 .pipe(plugins.clean());
         },
 
+        "svg": function () {
+            return gulp.src(settings.svg.src)
+                .pipe(plugins.svgmin())
+                .pipe(gulp.dest(settings.svg.dest));
+        },
         "images": function () {
-            return gulp.src("images/**")
+            return gulp.src(settings.images.src)
                 .pipe(plugins.plumber())
                 .pipe(plugins.imagemin())
-                .pipe(gulp.dest("images/"));
+                .pipe(gulp.dest(settings.images.dest));
         },
         "iconFont": function () {
             gulp.src(settings.iconFont.src)
                 .pipe(plugins.plumber())
                 .pipe(plugins.iconfont({
-                    fontName: settings.iconFont.name
+                    fontName: settings.iconFont.name,
+                    normalize: true
                 }))
                 .on("codepoints", function (codepoints) {
                     gulp.src(settings.iconFont.lesstemplate)
