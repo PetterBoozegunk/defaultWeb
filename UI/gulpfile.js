@@ -16,6 +16,8 @@ var gulp = require("gulp"),
         cssDest: "/css",
         jsDest: "/js",
 
+        localServer: require("../server/settings.json"),
+
         less: {
             src: ["less/styles.less"],
             options: {
@@ -140,25 +142,41 @@ var gulp = require("gulp"),
                 .pipe(plugins.jsbeautifier(settings.js.jsLint))
                 .pipe(gulp.dest(dest));
         },
-        getWatch : function () {
+        setCurrentWatchTask: function (currentSrcName) {
+            var forEachThis = this;
+
+            forEachThis.watchObj[currentSrcName.replace(/\[srcDest\]/, settings.srcDest)] = [forEachThis.currentWatchObjName];
+        },
+        setCurrentWatchArray: function (currentWatchObjName) {
+            var forEachThis = this,
+                watchSrcArray = forEachThis.currentWatchObj[currentWatchObjName];
+
+            forEachThis.currentWatchObjName = currentWatchObjName;
+
+            watchSrcArray.forEach(util.setCurrentWatchTask, forEachThis);
+        },
+        getCurrentWatchArray: function (currentWatchObj) {
+            var watchObj = this,
+                forEachThis = {
+                    "watchObj": watchObj,
+                    "currentWatchObj": currentWatchObj
+                };
+
+            Object.keys(currentWatchObj).forEach(util.setCurrentWatchArray, forEachThis);
+        },
+        checkWatchArray: function (name) {
+            var watchObj = this,
+                currentSettingsObj = settings[name],
+                watchArray = currentSettingsObj.watch;
+
+            if (watchArray) {
+                watchArray.forEach(util.getCurrentWatchArray, watchObj);
+            }
+        },
+        getWatch: function () {
             var watchObj = {};
 
-            Object.keys(settings).forEach(function (name) {
-                var currentSettingsObj = settings[name],
-                    watchArray = currentSettingsObj.watch;
-
-                if (watchArray) {
-                    watchArray.forEach(function (currentWatchObj) {
-                        Object.keys(currentWatchObj).forEach(function (currentWatchObjName) {
-                            var watchSrcArray = currentWatchObj[currentWatchObjName];
-
-                            watchSrcArray.forEach(function (currentSrcName) {
-                                this[currentSrcName.replace(/\[srcDest\]/, settings.srcDest)] = [currentWatchObjName];
-                            }, watchObj);
-                        });
-                    }, watchObj);
-                }
-            }, watchObj);
+            Object.keys(settings).forEach(util.checkWatchArray, watchObj);
 
             return watchObj;
         }
@@ -174,10 +192,8 @@ var gulp = require("gulp"),
             setTimeout(browserSync.reload, 500);
         },
         "browser-sync": function () {
-            var browserSettings = require("../server/settings.json");
-
             browserSync.init({
-                proxy: browserSettings.hostname + ":" + browserSettings.port
+                proxy: settings.localServer.hostname + ":" + settings.localServer.port
             });
         },
 
