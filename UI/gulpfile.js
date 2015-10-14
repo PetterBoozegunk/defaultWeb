@@ -26,6 +26,7 @@ var gulp = require("gulp"),
             oldIeSrc: ["less/oldIe/*.less"],
             oldIeFileName: "oldIe.less",
 
+            // watch object {"taskName": ["srcArray"]}
             watch: [{
                 "less:dev": ["less/**"]
             }, {
@@ -94,6 +95,7 @@ var gulp = require("gulp"),
             stream: true
         },
         fileWatch: {
+            delay: 500,
             watch: [{
                 "file-watch": ["[srcDest]/**/*.js", "[srcDest]/**/*.css"]
             }]
@@ -206,7 +208,7 @@ var gulp = require("gulp"),
             util.setGulp("watch", watchObj);
         },
         "file-watch": function () {
-            setTimeout(browserSync.reload, 500);
+            setTimeout(browserSync.reload, settings.fileWatch.delay);
         },
         "browser-sync": function () {
             browserSync.init({
