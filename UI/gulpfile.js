@@ -227,6 +227,7 @@ var gulp = require("gulp"),
                 })
                 .pipe(gulp.dest(settings.iconFont.lessdest));
         },
+
         "prettify": function () {
             return util.prettify(["js/*js"], "js");
         },
@@ -336,7 +337,7 @@ var gulp = require("gulp"),
 
         "js:all": ["check-js", "js:dev", "js:ie:dev"],
 
-        "default": ["prettify", "check-js", "dev"]
+        "default": ["check-js", "dev"]
     };
 
 util.setGulp("task", tasks);
