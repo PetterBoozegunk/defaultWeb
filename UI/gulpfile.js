@@ -13,12 +13,11 @@ var gulp = require("gulp"),
 
     settings = {
         srcDest: "dist",
-        cssDest: "/css",
-        jsDest: "/js",
 
         localServer: require("../server/settings.json"),
 
         less: {
+            dest: "/css",
             src: ["less/styles.less"],
             options: {
                 "plugins": [lessPluginGlob]
@@ -34,10 +33,12 @@ var gulp = require("gulp"),
             }]
         },
         js: {
+            dest: "/js",
             fileName: "scripts.js",
-            src: ["js/lib/*.js", "js/*.js", "js/tests/*js"],
 
-            checkSrc: ["js/*js", "js/tests/*.js", "gulpfile.js", "../server.js"],
+            src: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
+            checkSrc: ["js/*.js", "js/tests/*.js", "gulpfile.js", "../server.js"],
+
             jsLint: {
                 js: {
                     jslintHappy: true
@@ -48,7 +49,7 @@ var gulp = require("gulp"),
             oldIeSrc: ["js/oldIe/*.js"],
 
             watch: [{
-                "js:dev": ["js/lib/*.js", "js/*.js", "js/tests/*js"]
+                "js:dev": ["js/lib/*.js", "js/*.js", "js/tests/*.js"]
             }, {
                 "js:ie:dev": ["js/oldIe/*.js"]
             }]
@@ -267,7 +268,7 @@ var gulp = require("gulp"),
         },
 
         "prettify": function () {
-            return util.prettify(["js/*js"], "js");
+            return util.prettify(["js/*.js"], "js");
         },
         "prettifyGulp": function () {
             return util.prettify(["gulpfile.js", "package.json"], ".");
@@ -301,7 +302,7 @@ var gulp = require("gulp"),
                 .pipe(plugins.pleeease(settings.please))
                 .pipe(plugins.minifyCss())
                 .pipe(plugins.stripCssComments(settings.comments))
-                .pipe(gulp.dest(settings.srcDest + settings.cssDest));
+                .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
         "less:dev": function () {
             return gulp.src(settings.less.src)
@@ -311,7 +312,7 @@ var gulp = require("gulp"),
                 .pipe(plugins.pleeease(settings.please))
                 .pipe(plugins.stripCssComments(settings.comments))
                 .pipe(plugins.sourcemaps.write("."))
-                .pipe(gulp.dest(settings.srcDest + settings.cssDest));
+                .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
         "less:ie:prod": function () {
             return gulp.src(settings.less.oldIeSrc)
@@ -320,7 +321,7 @@ var gulp = require("gulp"),
                 .pipe(plugins.pleeease(settings.please))
                 .pipe(plugins.minifyCss())
                 .pipe(plugins.stripCssComments(settings.comments))
-                .pipe(gulp.dest(settings.srcDest + settings.cssDest));
+                .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
         "less:ie:dev": function () {
             return gulp.src(settings.less.oldIeSrc)
@@ -328,14 +329,14 @@ var gulp = require("gulp"),
                 .pipe(plugins.concat(settings.less.oldIeFileName))
                 .pipe(plugins.less(settings.less.options))
                 .pipe(plugins.pleeease(settings.please))
-                .pipe(gulp.dest(settings.srcDest + settings.cssDest));
+                .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
 
         "js:prod": function () {
             return gulp.src(settings.js.src)
                 .pipe(plugins.concat(settings.js.fileName))
                 .pipe(plugins.uglify())
-                .pipe(gulp.dest(settings.srcDest + settings.jsDest));
+                .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:dev": function () {
             return gulp.src(settings.js.src)
@@ -343,18 +344,18 @@ var gulp = require("gulp"),
                 .pipe(plugins.sourcemaps.init())
                 .pipe(plugins.concat(settings.js.fileName))
                 .pipe(plugins.sourcemaps.write("."))
-                .pipe(gulp.dest(settings.srcDest + settings.jsDest));
+                .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:ie:dev": function () {
             return gulp.src(settings.js.oldIeSrc)
                 .pipe(plugins.plumber())
                 .pipe(plugins.concat(settings.js.oldIeFileName))
-                .pipe(gulp.dest(settings.srcDest + settings.jsDest));
+                .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:ie:prod": function () {
             return gulp.src(settings.js.oldIeSrc)
                 .pipe(plugins.concat(settings.js.oldIeFileName))
-                .pipe(gulp.dest(settings.srcDest + settings.jsDest));
+                .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
 
         "sync-watch": ["browser-sync", "watch"],
