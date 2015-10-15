@@ -98,7 +98,7 @@ var gulp = require("gulp"),
         fileWatch: {
             delay: 2000,
             watch: [{
-                "file-watch": ["[srcDest]/**/*.js", "[srcDest]/**/*.css"]
+                "file-watch": ["[srcDest]/**", "../blocks/**", "../pages/**"]
             }]
         }
     },
