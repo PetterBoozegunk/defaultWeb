@@ -96,7 +96,7 @@ var gulp = require("gulp"),
             stream: true
         },
         fileWatch: {
-            delay: 2000,
+            delay: 500,
             watch: [{
                 "file-watch": ["[srcDest]/**", "../blocks/**", "../pages/**"]
             }]
@@ -202,9 +202,12 @@ var gulp = require("gulp"),
         }
     },
 
+    fileWatchTimeout = null,
     tasks = {
         "file-watch": function () {
-            setTimeout(browserSync.reload, settings.fileWatch.delay);
+            clearTimeout(fileWatchTimeout);
+
+            fileWatchTimeout = setTimeout(browserSync.reload, settings.fileWatch.delay);
         },
         "browser-sync": function () {
             browserSync.init({
