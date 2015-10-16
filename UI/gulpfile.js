@@ -211,7 +211,8 @@ var gulp = require("gulp"),
         },
         "browser-sync": function () {
             browserSync.init({
-                proxy: settings.localServer.hostname + ":" + settings.localServer.port
+                proxy: settings.localServer.hostname + ":" + settings.localServer.port,
+                browser: "firefox"
             });
         },
 
