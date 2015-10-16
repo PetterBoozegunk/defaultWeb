@@ -36,7 +36,7 @@ var gulp = require("gulp"),
             dest: "/js",
             fileName: "scripts.js",
 
-            src: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
+            concatSrc: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
             checkSrc: ["js/*.js", "js/tests/*.js", "gulpfile.js", "../server.js"],
 
             jsLint: {
@@ -96,9 +96,9 @@ var gulp = require("gulp"),
             stream: true
         },
         fileWatch: {
-            delay: 2000,
+            delay: 500,
             watch: [{
-                "file-watch": ["[srcDest]/**/*.js", "[srcDest]/**/*.css"]
+                "file-watch": ["[srcDest]/**", "../blocks/**", "../pages/**"]
             }]
         }
     },
@@ -202,9 +202,12 @@ var gulp = require("gulp"),
         }
     },
 
+    fileWatchTimeout = null,
     tasks = {
         "file-watch": function () {
-            setTimeout(browserSync.reload, settings.fileWatch.delay);
+            clearTimeout(fileWatchTimeout);
+
+            fileWatchTimeout = setTimeout(browserSync.reload, settings.fileWatch.delay);
         },
         "browser-sync": function () {
             browserSync.init({
@@ -333,13 +336,13 @@ var gulp = require("gulp"),
         },
 
         "js:prod": function () {
-            return gulp.src(settings.js.src)
+            return gulp.src(settings.js.concatSrc)
                 .pipe(plugins.concat(settings.js.fileName))
                 .pipe(plugins.uglify())
                 .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:dev": function () {
-            return gulp.src(settings.js.src)
+            return gulp.src(settings.js.concatSrc)
                 .pipe(plugins.plumber())
                 .pipe(plugins.sourcemaps.init())
                 .pipe(plugins.concat(settings.js.fileName))

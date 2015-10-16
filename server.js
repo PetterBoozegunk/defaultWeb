@@ -250,7 +250,7 @@
                 date = now.getDate(),
 
                 headers = {
-                    "Content-Type": type + ";charset=utf-8",
+                    "Content-Type": type,
                     "Accept-Charset": "utf-8",
                     //"Content-Encoding": "gzip",
                     "Cache-Control": "public, max-age=345600", // 4 days
