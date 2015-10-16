@@ -3,7 +3,10 @@
 "use strict";
 
 var plato = require("plato"),
-    colors = require("colors"),
+    chalk = require("chalk"),
+
+    gulp = require("gulp"),
+    gutil = require("gulp-util"),
 
     files = ["*.js", "js/*.js", "js/tests/*.js", "../*.js"],
     outputDir = "./report",
@@ -14,14 +17,7 @@ var plato = require("plato"),
         return (digit.toString().length < 2) ? "0" + digit : digit;
     },
     callback = function () {
-        var now = new Date(),
-            h = twoDigits(now.getHours()),
-            m = twoDigits(now.getMinutes()),
-            s = twoDigits(now.getSeconds()),
-
-            time = (h + ":" + m + ":" + s).grey;
-
-        console.log("[" + time + "] Plato report done");
+        gutil.log("Plato report done");
     };
 
 plato.inspect(files, outputDir, options, callback);
