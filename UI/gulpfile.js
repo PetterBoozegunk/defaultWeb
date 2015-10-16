@@ -7,20 +7,16 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
 
     browserSync = require("browser-sync").create(),
-    reload = browserSync.reload,
-
     lessPluginGlob = require("less-plugin-glob"),
 
     settings = {
         srcDest: "dist",
 
-        localServer: require("../server/settings.json"),
-
         less: {
             dest: "/css",
             src: ["less/styles.less"],
             options: {
-                "plugins": [lessPluginGlob]
+                plugins: [lessPluginGlob]
             },
             oldIeSrc: ["less/oldIe/*.less"],
             oldIeFileName: "oldIe.less",
@@ -37,7 +33,7 @@ var gulp = require("gulp"),
             fileName: "scripts.js",
 
             concatSrc: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
-            checkSrc: ["js/*.js", "js/tests/*.js", "gulpfile.js", "../server.js"],
+            checkSrc: ["js/*.js", "js/tests/*.js", "*.js", "../server.js"],
 
             jsLint: {
                 js: {
@@ -59,11 +55,11 @@ var gulp = require("gulp"),
             all: true
         },
         please: {
-            "browsers": ["last 4 versions"],
-            "minifier": false,
-            "pseudoElements": true,
-            "filters": {
-                "oldIE": true
+            browsers: ["last 4 versions"],
+            minifier: false,
+            pseudoElements: true,
+            filters: {
+                oldIE: true
             }
         },
         svg: {
@@ -89,8 +85,15 @@ var gulp = require("gulp"),
             dir: "/UI/fonts/",
             className: "icon",
             watch: [{
-                "iconFont": ["fonts/svg/*.svg"]
+                iconFont: ["fonts/svg/*.svg"]
             }]
+        },
+        "browser-sync": {
+            options: {
+                // proxy should be set to the current local developer server.
+                proxy: require("../server/settings.json").hostname + ":" + require("../server/settings.json").port,
+                browser: "firefox"
+            }
         },
         browserReload: {
             stream: true
@@ -210,10 +213,7 @@ var gulp = require("gulp"),
             fileWatchTimeout = setTimeout(browserSync.reload, settings.fileWatch.delay);
         },
         "browser-sync": function () {
-            browserSync.init({
-                proxy: settings.localServer.hostname + ":" + settings.localServer.port,
-                browser: "firefox"
-            });
+            browserSync.init(settings["browser-sync"].options);
         },
 
         "watch": function () {
@@ -275,7 +275,7 @@ var gulp = require("gulp"),
             return util.prettify(["js/*.js"], "js");
         },
         "prettifyGulp": function () {
-            return util.prettify(["gulpfile.js", "package.json"], ".");
+            return util.prettify(["*.js", "package.json"], ".");
         },
         "prettifyServer": function () {
             return util.prettify(["../server.js"], "..");
@@ -287,9 +287,9 @@ var gulp = require("gulp"),
                 .pipe(plugins.complexity());
         },
         "platoReport": function () {
-            return gulp.src(settings.js.checkSrc)
-                .pipe(plugins.plumber())
-                .pipe(plugins.plato("report"));
+            gulp.start(plugins.shell.task([
+                "node plato.js"
+            ]));
         },
         "jslint": {
             beforetask: ["prettify", "prettifyGulp", "prettifyServer"],

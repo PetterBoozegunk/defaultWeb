@@ -33,6 +33,15 @@
                 }
 
                 document.body.appendChild(script);
+            },
+            trim: function (str) {
+                return (typeof str === "string") ? str.replace(/(^\s+|\s+$)/, "") : "";
+            },
+            getNumber: function (num) {
+                return (num && typeof num === "number") ? num : 0;
+            },
+            getArray: function (arr) {
+                return (arr instanceof Array) ? arr : [];
             }
         },
 
@@ -89,9 +98,9 @@
             },
             getAddressObject: function (marker) {
                 var newAddressObject = {
-                    "address": $.trim(marker.address || ""),
-                    "postalCode": $.trim(marker.postalCode || ""),
-                    "city": $.trim(marker.city || "")
+                    "address": util.trim(marker.address),
+                    "postalCode": util.trim(marker.postalCode),
+                    "city": util.trim(marker.city)
                 };
 
                 return newAddressObject;
@@ -249,7 +258,7 @@
                 maps.showMarkerList(ul, jqMapDiv);
             },
             removeEvents: function (mapEventsObjArray) {
-                var evtsObjArr = mapEventsObjArray || [];
+                var evtsObjArr = util.getArray(mapEventsObjArray);
 
                 while (evtsObjArr[0]) {
                     google.maps.event.removeListener(evtsObjArr[0]);
@@ -332,7 +341,10 @@
             },
             offsetCenter: function (map, jsonData) {
                 if (jsonData.offsetCenter) {
-                    map.panBy(jsonData.offsetCenter.x || 0, jsonData.offsetCenter.y || 0);
+                    var x = util.getNumber(jsonData.offsetCenter.x),
+                        y = util.getNumber(jsonData.offsetCenter.y);
+
+                    map.panBy(x, y);
                 }
             },
             getJsonData: function (data) {
