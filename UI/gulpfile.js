@@ -73,7 +73,7 @@ var gulp = require("gulp"),
             }
         },
         images: {
-            src: ["images/**"],
+            src: ["images/**", "!images/*.svg"],
             dest: "images"
         },
         iconFont: {
@@ -226,7 +226,7 @@ var gulp = require("gulp"),
 
         "clean": function () {
             return gulp.src(settings.srcDest)
-                .pipe(plugins.clean());
+                .pipe(plugins.rimraf());
         },
 
         "svg-min:font": function () {
@@ -239,12 +239,16 @@ var gulp = require("gulp"),
                 .pipe(plugins.svgmin())
                 .pipe(gulp.dest(settings.svg.images.dest));
         },
-
-        "images": function () {
-            return gulp.src(settings.images.src)
-                .pipe(plugins.plumber())
-                .pipe(plugins.imagemin())
-                .pipe(gulp.dest(settings.images.dest));
+        "images": {
+            beforetask: ["svg-min:image"],
+            task: function () {
+                return gulp.src(settings.images.src)
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.smushit({
+                        verbose: true
+                    }))
+                    .pipe(gulp.dest(settings.images.dest));
+            }
         },
 
         "iconFont": {
@@ -281,15 +285,12 @@ var gulp = require("gulp"),
             return util.prettify(["../server.js"], "..");
         },
 
-        "complexity": function () {
-            return gulp.src(settings.js.checkSrc)
-                .pipe(plugins.plumber())
-                .pipe(plugins.complexity());
-        },
         "platoReport": function () {
             gulp.start(plugins.shell.task([
                 "node plato.js"
-            ]));
+            ], {
+                verbose: true
+            }));
         },
         "jslint": {
             beforetask: ["prettify", "prettifyGulp", "prettifyServer"],
@@ -374,7 +375,7 @@ var gulp = require("gulp"),
 
         "image-min": ["images", "svg-min:image"],
 
-        "check-js": ["complexity", "jslint", "platoReport"],
+        "check-js": ["jslint", "platoReport"],
         "js:all": ["check-js", "js:dev", "js:ie:dev"],
 
         "default": ["dev"]
