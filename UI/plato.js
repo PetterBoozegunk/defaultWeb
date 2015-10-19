@@ -28,6 +28,9 @@ var plato = require("plato"),
         return color;
     },
     callback = function (report) {
+        console.log(" ");
+        gutil.log(gutil.colors.magenta("node plato..."));
+
         Object.keys(report).forEach(function (item) {
             var itemObj = report[item],
                 color = getColor(itemObj.complexity),
