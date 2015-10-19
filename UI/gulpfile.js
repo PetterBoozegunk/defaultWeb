@@ -32,7 +32,7 @@ var gulp = require("gulp"),
             dest: "/js",
             fileName: "scripts.js",
 
-            concatSrc: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
+            concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
             checkSrc: ["js/*.js", "js/tests/*.js", "*.js", "../server.js"],
 
             jsLint: {
