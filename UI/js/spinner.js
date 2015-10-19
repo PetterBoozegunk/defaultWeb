@@ -4,9 +4,9 @@
 
     var $ = window.jQuery,
         util = {
-            returnObject : function (obj) {
+            returnObject: function (obj) {
                 return (!obj) ? {} : obj;
-            }  
+            }
         },
         spinner = {
             copy: function (k, spinOpts, spinnerOpts) {

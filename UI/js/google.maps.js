@@ -35,7 +35,7 @@
                 document.body.appendChild(script);
             },
             trim: function (str) {
-                return (typeof str === "string") ? str.replace(/(^\s+|\s+$)/, "") : "";
+                return (typeof str === "string") ? str.replace(/(^\s+|\s+$)/g, "") : "";
             },
             getNumber: function (num) {
                 return (num && typeof num === "number") ? num : 0;

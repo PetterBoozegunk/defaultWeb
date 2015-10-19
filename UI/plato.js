@@ -31,7 +31,7 @@ var plato = require("plato"),
         Object.keys(report).forEach(function (item) {
             var itemObj = report[item],
                 color = getColor(itemObj.complexity),
-                reportStr = "maintainability: " + Math.round(itemObj.complexity.maintainability) + ", loc: " + Math.round(itemObj.complexity.loc);
+                reportStr = "maintainability: " + itemObj.complexity.maintainability.toFixed(2) + ", loc: " + itemObj.complexity.loc.toFixed(2);
 
             gutil.log(gutil.colors[color](itemObj.info.file), gutil.colors.grey(reportStr));
         });
