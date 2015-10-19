@@ -21,23 +21,19 @@ var plato = require("plato"),
         return (digit.toString().length < 2) ? "0" + digit : digit;
     },
     getColor = function (complexity) {
-        var color = "green",
-            maintainability = complexity.maintainability,
-            loc = complexity.loc;
-
-        if (maintainability < config["maintanability-min"] || loc > config["loc-max"]) {
-            color = "red";
-        }
-
+        var maintainability = complexity.maintainability,
+            loc = complexity.loc,
+            color = (maintainability < config["maintanability-min"] || loc > config["loc-max"]) ? "red" : "green";
 
         return color;
     },
     callback = function (report) {
         Object.keys(report).forEach(function (item) {
             var itemObj = report[item],
-                color = getColor(itemObj.complexity);
+                color = getColor(itemObj.complexity),
+                reportStr = "maintainability: " + Math.round(itemObj.complexity.maintainability) + ", loc: " + Math.round(itemObj.complexity.loc);
 
-            gutil.log(gutil.colors[color](itemObj.info.file));
+            gutil.log(gutil.colors[color](itemObj.info.file), gutil.colors.grey(reportStr));
         });
     };
 

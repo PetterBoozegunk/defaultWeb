@@ -42,6 +42,9 @@
             },
             getArray: function (arr) {
                 return (arr instanceof Array) ? arr : [];
+            },
+            returnNullIfFalsy: function (nullCheck) {
+                return (!nullCheck) ? null : nullCheck;
             }
         },
 
@@ -110,9 +113,9 @@
                     position: latLng,
                     map: map,
                     //icon: markerIcon,
-                    title: marker.title || "",
+                    title: util.trim(marker.title),
                     address: maps.getAddressObject(marker),
-                    url: marker.url || ""
+                    url: util.trim(marker.url)
                 };
             },
             getMapMarker: function (latLng, map, marker) {
@@ -184,7 +187,7 @@
             },
             getAddressHtmlStr: function (marker) {
                 var address = marker.address,
-                    addressP = util.getHtmlStr("p", address.address) + util.getHtmlStr("p", $.trim((address.postalCode || "") + " " + (address.city || ""))),
+                    addressP = util.getHtmlStr("p", address.address) + util.getHtmlStr("p", util.trim(address.postalCode) + " " + util.trim(address.city)),
                     addressDiv = util.getHtmlStr("div", addressP, "address");
 
                 return addressDiv;
@@ -310,7 +313,7 @@
                 }
             },
             getLatLngCenter: function (data) {
-                var center = data.center || null,
+                var center = util.returnNullIfFalsy(data.center),
                     latLngCenter = center ? new google.maps.LatLng(center.lat, center.lng) : null;
 
                 return latLngCenter;
@@ -389,19 +392,29 @@
                 maps.getMap.call(mapBlock, mapObj);
             },
             getMapObj: function (jqMapBlock) {
-                var dataMap = jqMapBlock.attr("data-map") || "",
+                var dataMap = util.trim(jqMapBlock.attr("data-map")),
                     mapObj = dataMap ? $.parseJSON(dataMap) : maps["default"];
 
                 return mapObj;
             },
+            getMapDataSrc: function (jqMapBlock) {
+                var mapObj = maps.getMapObj(jqMapBlock),
+                    url = jqMapBlock.attr("data-map-url"),
+                    mapData = url || mapObj;
+
+                return mapData;
+            },
+            getMapFunc: function (mapData) {
+                var mapFunc = (typeof mapData === "string") ? maps.getAjaxMap : maps.getJsonMap;
+
+                return mapFunc;
+            },
             getMapData: function (mapBlock) {
                 var jqMapBlock = $(mapBlock),
-                    mapObj = maps.getMapObj(jqMapBlock),
-                    url = jqMapBlock.attr("data-map-url"),
-                    mapData = url || mapObj,
-                    getMap = url ? maps.getAjaxMap : maps.getJsonMap;
+                    mapData = maps.getMapDataSrc(jqMapBlock),
+                    getMapFunc = maps.getMapFunc(mapData);
 
-                getMap(mapData, mapBlock, jqMapBlock);
+                getMapFunc(mapData, mapBlock, jqMapBlock);
             },
             setSingleMap: function (key, mapBlocks) {
                 maps.getMapData(mapBlocks[key]);
