@@ -33,7 +33,7 @@ var gulp = require("gulp"),
             fileName: "scripts.js",
 
             concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
-            checkSrc: ["js/*.js", "js/tests/*.js", "*.js", "../server.js"],
+            checkSrc: ["js/*.js", "js/plugins/*.js", "js/tests/*.js", "*.js", "../server.js"],
 
             jsLint: {
                 js: {
@@ -45,7 +45,7 @@ var gulp = require("gulp"),
             oldIeSrc: ["js/oldIe/*.js"],
 
             watch: [{
-                "js:dev": ["js/lib/*.js", "js/*.js", "js/tests/*.js"]
+                "js:dev": ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"]
             }, {
                 "js:ie:dev": ["js/oldIe/*.js"]
             }]
@@ -278,6 +278,9 @@ var gulp = require("gulp"),
         "prettify": function () {
             return util.prettify(["js/*.js"], "js");
         },
+        "prettifyPlugins": function () {
+            return util.prettify(["js/plugins/*.js"], "js/plugins");
+        },
         "prettifyGulp": function () {
             return util.prettify(["*.js", "package.json"], ".");
         },
@@ -293,7 +296,7 @@ var gulp = require("gulp"),
             }));
         },
         "jslint": {
-            beforetask: ["prettify", "prettifyGulp", "prettifyServer"],
+            beforetask: ["prettify", "prettifyPlugins", "prettifyGulp", "prettifyServer"],
             task: function () {
                 return gulp.src(settings.js.checkSrc)
                     .pipe(plugins.plumber())

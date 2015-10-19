@@ -7,7 +7,7 @@ var plato = require("plato"),
     gulp = require("gulp"),
     gutil = require("gulp-util"),
 
-    files = ["*.js", "js/*.js", "js/tests/*.js", "../*.js"],
+    files = ["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
     outputDir = "./report",
     // null options for this example
     options = {},

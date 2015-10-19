@@ -7,7 +7,7 @@
             trim: function (str) {
                 return str.toString().replace(/(^\s+|\s+$)/g, "").replace(/^\[object\sobject\]$/i, "");
             },
-            isIe10Or11 : function () {
+            isIe10Or11: function () {
                 return (window.docModeIE && window.docModeIE >= 10);
             }
         },
