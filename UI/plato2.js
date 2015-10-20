@@ -2,8 +2,10 @@
 /*global require, Buffer */
 "use strict";
 
+
 var plato = require("plato"),
     path = require("path"),
+    //fs = require("fs"),
 
     gutil = require("gulp-util"),
 
@@ -12,7 +14,7 @@ var plato = require("plato"),
     filePath = args[argsLength - 1].replace(/\%20/g, " "),
 
     p = {
-        files: filePath, //["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
+        files: [filePath],
         outputDir: "./report",
         // null options for this example
         options: {},
@@ -79,7 +81,7 @@ var plato = require("plato"),
             var checkArray = p.getCheckArray([]);
 
             checkArray.forEach(function (name) {
-                logArray.push("\n\t\t" + name + ":");
+                logArray.push("\n\t\t" + gutil.colors.grey(name) + ":");
                 logArray.push(p.setDigitColor(name, itemObj));
             });
 
@@ -99,7 +101,7 @@ var plato = require("plato"),
             p.logReport(report);
         },
         init: function () {
-            plato.inspect(p.files, p.outputDir, p.options, p.callback);
+            return plato.inspect(p.files, p.outputDir, p.options, p.logReport);
         }
     };
 
