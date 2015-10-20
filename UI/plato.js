@@ -3,16 +3,16 @@
 "use strict";
 
 var plato = require("plato"),
-    path = require("path"),
 
+    path = require("path"),
     gutil = require("gulp-util"),
 
     args = process.argv,
     argsLength = args.length,
-    filePath = args[argsLength - 1].replace(/\%20/g, " "),
+    fileArray = args[argsLength - 1].replace(/\%20/g, " "),
 
     p = {
-        files: filePath, //["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
+        files: fileArray, //["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
         outputDir: "./report",
         // null options for this example
         options: {},
@@ -85,21 +85,33 @@ var plato = require("plato"),
 
             return logArray;
         },
+        getDir: function (fullPathObj) {
+            var rootDir = process.env.INIT_CWD.toString(),
+                orgDir = fullPathObj.dir.toString(),
+                dir = orgDir.replace(/\//g, "\\").replace(rootDir, ""),
+                printDir = dir ? dir.replace(/\\/g, "/").replace(/^\//, "") + "/" : "";
+
+            return printDir;
+        },
+        getRelativePath: function (filePath) {
+            var fullPathObj = path.parse(filePath),
+                dir = p.getDir(fullPathObj),
+                fileName = fullPathObj.base;
+
+            return dir + fileName;
+        },
         logReport: function (report) {
             Object.keys(report).forEach(function (item) {
                 var logArray = p.getLogArray(report[item], []),
                     color = p.getColor(p.pass[report[item].info.file]);
 
-                logArray.splice(0, 0, gutil.colors[color](path.parse(report[item].info.file).base));
+                logArray.splice(0, 0, gutil.colors[color](p.getRelativePath(report[item].info.file)));
 
                 gutil.log.apply(undefined, logArray);
             });
         },
-        callback: function (report) {
-            p.logReport(report);
-        },
         init: function () {
-            plato.inspect(p.files, p.outputDir, p.options, p.callback);
+            return plato.inspect(p.files, p.outputDir, p.options, p.logReport);
         }
     };
 
