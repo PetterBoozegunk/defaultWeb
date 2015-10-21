@@ -84,18 +84,17 @@ var gulp = require("gulp"),
             }
         },
 
+        "platoReport": function () {
+            gulp.start(plugins.shell.task(["node gulpStuff/plato.js"], {
+                verbose: true
+            }));
+        },
         "prettify": function () {
             var prettifyArray = settings.js.prettify;
 
             prettifyArray.forEach(function (prettifyObj) {
                 return util.prettify(prettifyObj.files, prettifyObj.dest);
             });
-        },
-
-        "platoReport": function () {
-            gulp.start(plugins.shell.task(["node gulpStuff/plato.js"], {
-                verbose: true
-            }));
         },
         "jslint": {
             beforetask: ["prettify"],
