@@ -4,15 +4,12 @@
 
 var plato = require("plato"),
 
-    path = require("path"),
     gutil = require("gulp-util"),
 
-    //args = process.argv,
-    //argsLength = args.length,
-    //fileArray = args[argsLength - 1].replace(/\%20/g, " "),
+    settings = require("./settings.js"),
 
     p = {
-        files: ["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
+        files: settings.js.checkSrc,
         outputDir: "./report",
         // null options for this example
         options: {},
