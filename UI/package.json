@@ -25,6 +25,7 @@
         "gulp-smushit": "^1.1.0",
         "gulp-sourcemaps": "^1.5.2",
         "gulp-strip-css-comments": "^1.1.0",
+        "gulp-strip-debug": "^1.0.2",
         "gulp-svgmin": "^1.2.0",
         "gulp-uglify": "^1.1.0",
         "gulp-util": "^3.0.6",

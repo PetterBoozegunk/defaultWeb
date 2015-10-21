@@ -10,7 +10,6 @@ var gulp = require("gulp"),
     lessPluginGlob = require("less-plugin-glob"),
 
     settings = require("./gulpStuff/settings.js"),
-
     util = require("./gulpStuff/util.js"),
 
     fileWatchTimeout = null,
@@ -19,7 +18,7 @@ var gulp = require("gulp"),
         "file-watch": function () {
             clearTimeout(fileWatchTimeout);
 
-            fileWatchTimeout = setTimeout(browserSync.reload, settings.fileWatch.delay);
+            fileWatchTimeout = setTimeout(browserSync.reload, settings["browser-sync"].delay);
         },
         "browser-sync": function () {
             browserSync.init(settings["browser-sync"].options);
@@ -30,7 +29,7 @@ var gulp = require("gulp"),
 
             setTimeout(function () {
                 util.setGulp("watch", watchObj);
-            }, settings.fileWatch.delay);
+            }, settings["browser-sync"].delay);
         },
 
         "clean": function () {
@@ -108,9 +107,9 @@ var gulp = require("gulp"),
         "less:prod": function () {
             return gulp.src(settings.less.src)
                 .pipe(plugins.less(settings.less.options))
-                .pipe(plugins.pleeease(settings.please))
+                .pipe(plugins.pleeease(settings.pleeease))
                 .pipe(plugins.minifyCss())
-                .pipe(plugins.stripCssComments(settings.comments))
+                .pipe(plugins.stripCssComments(settings.less.comments))
                 .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
         "less:dev": function () {
@@ -118,7 +117,7 @@ var gulp = require("gulp"),
                 .pipe(plugins.plumber())
                 .pipe(plugins.sourcemaps.init())
                 .pipe(plugins.less(settings.less.options))
-                .pipe(plugins.pleeease(settings.please))
+                .pipe(plugins.pleeease(settings.pleeease))
                 .pipe(plugins.stripCssComments(settings.comments))
                 .pipe(plugins.sourcemaps.write("."))
                 .pipe(gulp.dest(settings.srcDest + settings.less.dest));
@@ -127,9 +126,9 @@ var gulp = require("gulp"),
             return gulp.src(settings.less.oldIeSrc)
                 .pipe(plugins.concat(settings.less.oldIeFileName))
                 .pipe(plugins.less(settings.less.options))
-                .pipe(plugins.pleeease(settings.please))
+                .pipe(plugins.pleeease(settings.pleeease))
                 .pipe(plugins.minifyCss())
-                .pipe(plugins.stripCssComments(settings.comments))
+                .pipe(plugins.stripCssComments(settings.less.comments))
                 .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
         "less:ie:dev": function () {
@@ -137,14 +136,14 @@ var gulp = require("gulp"),
                 .pipe(plugins.plumber())
                 .pipe(plugins.concat(settings.less.oldIeFileName))
                 .pipe(plugins.less(settings.less.options))
-                .pipe(plugins.pleeease(settings.please))
+                .pipe(plugins.pleeease(settings.pleeease))
                 .pipe(gulp.dest(settings.srcDest + settings.less.dest));
         },
 
         "js:prod": function () {
             return gulp.src(settings.js.concatSrc)
                 .pipe(plugins.concat(settings.js.fileName))
-                .pipe(plugins.uglify())
+                .pipe(plugins.uglify(settings.js.uglify))
                 .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:dev": function () {
