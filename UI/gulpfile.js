@@ -14,6 +14,7 @@ var gulp = require("gulp"),
     util = require("./gulpStuff/util.js"),
 
     fileWatchTimeout = null,
+
     tasks = {
         "file-watch": function () {
             clearTimeout(fileWatchTimeout);
@@ -84,19 +85,11 @@ var gulp = require("gulp"),
         },
 
         "prettify": function () {
-            return util.prettify(["js/*.js"], "js");
-        },
-        "prettifyPlugins": function () {
-            return util.prettify(["js/plugins/*.js"], "js/plugins");
-        },
-        "prettifyGulp": function () {
-            return util.prettify(["*.js", "package.json"], ".");
-        },
-        "prettifyGulpStuff": function () {
-            return util.prettify(["gulpStuff/*.js"], "gulpStuff");
-        },
-        "prettifyServer": function () {
-            return util.prettify(["../server.js"], "..");
+            var prettifyArray = settings.js.prettify;
+
+            prettifyArray.forEach(function (prettifyObj) {
+                return util.prettify(prettifyObj.files, prettifyObj.dest);
+            });
         },
 
         "platoReport": function () {
@@ -105,7 +98,7 @@ var gulp = require("gulp"),
             }));
         },
         "jslint": {
-            beforetask: ["prettify", "prettifyPlugins", "prettifyGulpStuff", "prettifyGulp", "prettifyServer"],
+            beforetask: ["prettify"],
             task: function () {
                 return gulp.src(settings.js.checkSrc)
                     .pipe(plugins.plumber())

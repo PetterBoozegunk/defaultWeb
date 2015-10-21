@@ -30,6 +30,29 @@ var lessPluginGlob = require("less-plugin-glob"),
             concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
             checkSrc: ["js/*.js", "js/plugins/*.js", "js/tests/*.js", "*.js", "gulpStuff/*.js", "../../server.js"],
 
+            prettify: [{
+                files: ["js/*.js"],
+                dest: "js"
+            }, {
+                files: ["js/polyfills/*.js"],
+                dest: "js/polyfills"
+            }, {
+                files: ["js/plugins/*.js"],
+                dest: "js/plugins"
+            }, {
+                files: ["js/tests/*.js"],
+                dest: "js/tests"
+            }, {
+                files: ["gulpStuff/*.js"],
+                dest: "gulpStuff"
+            }, {
+                files: ["*.js", "package.json"],
+                dest: "."
+            }, {
+                files: ["../server.js"],
+                dest: ".."
+            }],
+
             jsLint: {
                 js: {
                     jslintHappy: true
