@@ -1,4 +1,4 @@
-﻿/*global require */
+/*global require */
 /*jslint node: true */
 "use strict";
 
