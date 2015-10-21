@@ -7,202 +7,14 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
 
     browserSync = require("browser-sync").create(),
-    reload = browserSync.reload,
-
     lessPluginGlob = require("less-plugin-glob"),
 
-    settings = {
-        srcDest: "dist",
+    settings = require("./gulpStuff/settings.js"),
 
-        localServer: require("../server/settings.json"),
-
-        less: {
-            dest: "/css",
-            src: ["less/styles.less"],
-            options: {
-                "plugins": [lessPluginGlob]
-            },
-            oldIeSrc: ["less/oldIe/*.less"],
-            oldIeFileName: "oldIe.less",
-
-            // watch object {"taskName": ["srcArray"]}
-            watch: [{
-                "less:dev": ["less/**"]
-            }, {
-                "less:ie:dev": ["less/oldIe/**"]
-            }]
-        },
-        js: {
-            dest: "/js",
-            fileName: "scripts.js",
-
-            concatSrc: ["js/lib/*.js", "js/*.js", "js/tests/*.js"],
-            checkSrc: ["js/*.js", "js/tests/*.js", "gulpfile.js", "../server.js"],
-
-            jsLint: {
-                js: {
-                    jslintHappy: true
-                }
-            },
-
-            oldIeFileName: "oldIe.js",
-            oldIeSrc: ["js/oldIe/*.js"],
-
-            watch: [{
-                "js:dev": ["js/lib/*.js", "js/*.js", "js/tests/*.js"]
-            }, {
-                "js:ie:dev": ["js/oldIe/*.js"]
-            }]
-        },
-
-        comments: {
-            all: true
-        },
-        please: {
-            "browsers": ["last 4 versions"],
-            "minifier": false,
-            "pseudoElements": true,
-            "filters": {
-                "oldIE": true
-            }
-        },
-        svg: {
-            font: {
-                src: ["fonts/svg/*.svg"],
-                dest: "fonts/svg"
-            },
-            images: {
-                src: ["images/*.svg"],
-                dest: "images"
-            }
-        },
-        images: {
-            src: ["images/**"],
-            dest: "images"
-        },
-        iconFont: {
-            name: "icon",
-            src: ["fonts/svg/*.svg"],
-            lesstemplate: "fonts/templates/icon.less",
-            lessdest: "fonts/",
-            fontdest: "less/fonts/",
-            dir: "/UI/fonts/",
-            className: "icon",
-            watch: [{
-                "iconFont": ["fonts/svg/*.svg"]
-            }]
-        },
-        browserReload: {
-            stream: true
-        },
-        fileWatch: {
-            delay: 500,
-            watch: [{
-                "file-watch": ["[srcDest]/**", "../blocks/**", "../pages/**"]
-            }]
-        }
-    },
-
-    util = {
-        forEach: function (func, that, obj) {
-            Object.keys(obj).forEach(function (key) {
-                func.call(that, obj[key], key, obj);
-            });
-        },
-        instanceOfArray: [{
-            name: "date",
-            instof: Date
-        }, {
-            name: "array",
-            instof: Array
-        }, {
-            name: "regexp",
-            instof: RegExp
-        }],
-        checkType: function (item, instofObj, objectType) {
-            if (item instanceof instofObj.instof) {
-                objectType = instofObj.name;
-            }
-
-            return objectType;
-        },
-        getObjectType: function (item) {
-            var instanceOfArray = util.instanceOfArray,
-                objectType;
-
-            instanceOfArray.forEach(function (instofObj) {
-                objectType = util.checkType(item, instofObj, objectType);
-            });
-
-            return objectType;
-        },
-        getTrueType: function (item) {
-            var objectType = util.getObjectType(item);
-
-            return objectType || typeof item;
-        },
-        setGulpTask: function (watchOrTask, name, funcArrayObj) {
-            var itemType = util.getTrueType(funcArrayObj);
-
-            if (itemType === "object") {
-                gulp[watchOrTask](name, funcArrayObj.beforetask, funcArrayObj.task);
-            } else {
-                gulp[watchOrTask](name, funcArrayObj);
-            }
-        },
-        setGulp: function (type, obj) {
-            util.forEach(function (funcArrayObj, name) {
-                // "funcArrayObj" === "function OR Array Or Object"
-                util.setGulpTask(type, name, funcArrayObj);
-            }, this, obj);
-        },
-        prettify: function (src, dest) {
-            return gulp.src(src)
-                .pipe(plugins.plumber())
-                .pipe(plugins.jsbeautifier(settings.js.jsLint))
-                .pipe(gulp.dest(dest));
-        },
-        setCurrentWatchTask: function (currentSrcName) {
-            var forEachThis = this;
-
-            forEachThis.watchObj[currentSrcName.replace(/\[srcDest\]/, settings.srcDest)] = [forEachThis.currentWatchObjName];
-        },
-        setCurrentWatchArray: function (currentWatchObjName) {
-            var forEachThis = this,
-                watchSrcArray = forEachThis.currentWatchObj[currentWatchObjName];
-
-            forEachThis.currentWatchObjName = currentWatchObjName;
-
-            watchSrcArray.forEach(util.setCurrentWatchTask, forEachThis);
-        },
-        getCurrentWatchArray: function (currentWatchObj) {
-            var watchObj = this,
-                forEachThis = {
-                    "watchObj": watchObj,
-                    "currentWatchObj": currentWatchObj
-                };
-
-            Object.keys(currentWatchObj).forEach(util.setCurrentWatchArray, forEachThis);
-        },
-        checkWatchArray: function (name) {
-            var watchObj = this,
-                currentSettingsObj = settings[name],
-                watchArray = currentSettingsObj.watch;
-
-            if (watchArray) {
-                watchArray.forEach(util.getCurrentWatchArray, watchObj);
-            }
-        },
-        getWatch: function () {
-            var watchObj = {};
-
-            Object.keys(settings).forEach(util.checkWatchArray, watchObj);
-
-            return watchObj;
-        }
-    },
+    util = require("./gulpStuff/util.js"),
 
     fileWatchTimeout = null,
+
     tasks = {
         "file-watch": function () {
             clearTimeout(fileWatchTimeout);
@@ -210,10 +22,7 @@ var gulp = require("gulp"),
             fileWatchTimeout = setTimeout(browserSync.reload, settings.fileWatch.delay);
         },
         "browser-sync": function () {
-            browserSync.init({
-                proxy: settings.localServer.hostname + ":" + settings.localServer.port,
-                browser: "firefox"
-            });
+            browserSync.init(settings["browser-sync"].options);
         },
 
         "watch": function () {
@@ -226,7 +35,7 @@ var gulp = require("gulp"),
 
         "clean": function () {
             return gulp.src(settings.srcDest)
-                .pipe(plugins.clean());
+                .pipe(plugins.rimraf());
         },
 
         "svg-min:font": function () {
@@ -239,12 +48,16 @@ var gulp = require("gulp"),
                 .pipe(plugins.svgmin())
                 .pipe(gulp.dest(settings.svg.images.dest));
         },
-
-        "images": function () {
-            return gulp.src(settings.images.src)
-                .pipe(plugins.plumber())
-                .pipe(plugins.imagemin())
-                .pipe(gulp.dest(settings.images.dest));
+        "images": {
+            beforetask: ["svg-min:image"],
+            task: function () {
+                return gulp.src(settings.images.src)
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.smushit({
+                        verbose: true
+                    }))
+                    .pipe(gulp.dest(settings.images.dest));
+            }
         },
 
         "iconFont": {
@@ -271,28 +84,20 @@ var gulp = require("gulp"),
             }
         },
 
-        "prettify": function () {
-            return util.prettify(["js/*.js"], "js");
-        },
-        "prettifyGulp": function () {
-            return util.prettify(["gulpfile.js", "package.json"], ".");
-        },
-        "prettifyServer": function () {
-            return util.prettify(["../server.js"], "..");
-        },
-
-        "complexity": function () {
-            return gulp.src(settings.js.checkSrc)
-                .pipe(plugins.plumber())
-                .pipe(plugins.complexity());
-        },
         "platoReport": function () {
-            return gulp.src(settings.js.checkSrc)
-                .pipe(plugins.plumber())
-                .pipe(plugins.plato("report"));
+            gulp.start(plugins.shell.task(["node gulpStuff/plato.js"], {
+                verbose: true
+            }));
+        },
+        "prettify": function () {
+            var prettifyArray = settings.js.prettify;
+
+            prettifyArray.forEach(function (prettifyObj) {
+                return util.prettify(prettifyObj.files, prettifyObj.dest);
+            });
         },
         "jslint": {
-            beforetask: ["prettify", "prettifyGulp", "prettifyServer"],
+            beforetask: ["prettify"],
             task: function () {
                 return gulp.src(settings.js.checkSrc)
                     .pipe(plugins.plumber())
@@ -374,7 +179,7 @@ var gulp = require("gulp"),
 
         "image-min": ["images", "svg-min:image"],
 
-        "check-js": ["complexity", "jslint", "platoReport"],
+        "check-js": ["jslint", "platoReport"],
         "js:all": ["check-js", "js:dev", "js:ie:dev"],
 
         "default": ["dev"]

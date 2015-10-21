@@ -3,18 +3,21 @@
     "use strict";
 
     var $ = window.jQuery,
+        util = {
+            returnObject: function (obj) {
+                return (!obj) ? {} : obj;
+            }
+        },
         spinner = {
             copy: function (k, spinOpts, spinnerOpts) {
                 spinOpts[k] = spinnerOpts[k];
             },
             addSpinnerOpts: function (spinOpts, spinnerOpts) {
-                var k;
+                spinnerOpts = util.returnObject(spinnerOpts);
 
-                for (k in spinnerOpts) {
-                    if (spinnerOpts.hasOwnProperty(k)) {
-                        spinner.copy(k, spinOpts, spinnerOpts);
-                    }
-                }
+                Object.keys(spinnerOpts).forEach(function (name) {
+                    spinOpts[name] = spinnerOpts[name];
+                });
 
                 return spinOpts;
             },
@@ -51,7 +54,7 @@
             get: function (e, spinnerOpts) {
                 var t = $(e.target);
 
-                spinner.add(t, spinnerOpts || {});
+                spinner.add(t, spinnerOpts);
             },
             bindEvent: function () {
                 $("body").on("spinner:get", spinner.get);
