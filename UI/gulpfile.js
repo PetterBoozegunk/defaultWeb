@@ -144,7 +144,7 @@ var gulp = require("gulp"),
         "js:prod": function () {
             return gulp.src(settings.js.concatSrc)
                 .pipe(plugins.concat(settings.js.fileName))
-                .pipe(plugins.uglify())
+                .pipe(plugins.uglify(settings.js.uglify))
                 .pipe(gulp.dest(settings.srcDest + settings.js.dest));
         },
         "js:dev": function () {

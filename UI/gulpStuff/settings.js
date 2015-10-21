@@ -27,7 +27,7 @@ var lessPluginGlob = require("less-plugin-glob"),
             dest: "/js",
             fileName: "scripts.js",
 
-            concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
+            concatSrc: require("./concatJsFiles.js"),
             checkSrc: ["js/*.js", "js/plugins/*.js", "js/tests/*.js", "*.js", "gulpStuff/*.js", "../../server.js"],
 
             prettify: [{
@@ -58,12 +58,18 @@ var lessPluginGlob = require("less-plugin-glob"),
                     jslintHappy: true
                 }
             },
+            uglify: {
+                compress: {
+                    drop_debugger: true,
+                    drop_console: true
+                }
+            },
 
             oldIeFileName: "oldIe.js",
             oldIeSrc: ["js/oldIe/*.js"],
 
             watch: [{
-                "js:dev": ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"]
+                "js:dev": require("./concatJsFiles.js")
             }, {
                 "js:ie:dev": ["js/oldIe/*.js"]
             }]
