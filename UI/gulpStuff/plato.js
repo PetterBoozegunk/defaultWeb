@@ -7,12 +7,12 @@ var plato = require("plato"),
     path = require("path"),
     gutil = require("gulp-util"),
 
-    args = process.argv,
-    argsLength = args.length,
-    fileArray = args[argsLength - 1].replace(/\%20/g, " "),
+    //args = process.argv,
+    //argsLength = args.length,
+    //fileArray = args[argsLength - 1].replace(/\%20/g, " "),
 
     p = {
-        files: fileArray, //["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
+        files: ["*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js", "../*.js"],
         outputDir: "./report",
         // null options for this example
         options: {},
@@ -85,33 +85,18 @@ var plato = require("plato"),
 
             return logArray;
         },
-        getDir: function (fullPathObj) {
-            var rootDir = process.env.INIT_CWD.toString(),
-                orgDir = fullPathObj.dir.toString(),
-                dir = orgDir.replace(/\//g, "\\").replace(rootDir, ""),
-                printDir = dir ? dir.replace(/\\/g, "/").replace(/^\//, "") + "/" : "";
-
-            return printDir;
-        },
-        getRelativePath: function (filePath) {
-            var fullPathObj = path.parse(filePath),
-                dir = p.getDir(fullPathObj),
-                fileName = fullPathObj.base;
-
-            return dir + fileName;
-        },
         logReport: function (report) {
             Object.keys(report).forEach(function (item) {
                 var logArray = p.getLogArray(report[item], []),
                     color = p.getColor(p.pass[report[item].info.file]);
 
-                logArray.splice(0, 0, gutil.colors[color](p.getRelativePath(report[item].info.file)));
+                logArray.splice(0, 0, gutil.colors[color](report[item].info.file));
 
                 gutil.log.apply(undefined, logArray);
             });
         },
         init: function () {
-            return plato.inspect(p.files, p.outputDir, p.options, p.logReport);
+            plato.inspect(p.files, p.outputDir, p.options, p.logReport);
         }
     };
 

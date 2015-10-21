@@ -289,12 +289,9 @@ var gulp = require("gulp"),
         },
 
         "platoReport": function () {
-            return gulp.src(settings.js.checkSrc)
-                .pipe(plugins.plumber())
-                .pipe(plugins.shell(["node plato.js <%= file.path.replace(/\\s/g, '%20') %>"], {
-                    verbose: true,
-                    interactive: true
-                }));
+            gulp.start(plugins.shell.task(["node gulpStuff/plato.js"], {
+                verbose: true
+            }));
         },
         "jslint": {
             beforetask: ["prettify", "prettifyPlugins", "prettifyGulp", "prettifyServer"],
