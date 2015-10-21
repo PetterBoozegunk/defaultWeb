@@ -82,15 +82,18 @@ var plato = require("plato"),
 
             return logArray;
         },
-        logReport: function (report) {
-            Object.keys(report).forEach(function (item) {
-                var logArray = p.getLogArray(report[item], []),
-                    color = p.getColor(p.pass[report[item].info.file]);
+        //logReport: function (report) {
+        logReport: function () {
+            gutil.log("PlatoReport done");
 
-                logArray.splice(0, 0, gutil.colors[color](report[item].info.file));
+            //    Object.keys(report).forEach(function (item) {
+            //        var logArray = p.getLogArray(report[item], []),
+            //            color = p.getColor(p.pass[report[item].info.file]);
 
-                gutil.log.apply(undefined, logArray);
-            });
+            //        logArray.splice(0, 0, gutil.colors[color](report[item].info.file));
+
+            //        gutil.log.apply(undefined, logArray);
+            //    });
         },
         init: function () {
             plato.inspect(p.files, p.outputDir, p.options, p.logReport);
