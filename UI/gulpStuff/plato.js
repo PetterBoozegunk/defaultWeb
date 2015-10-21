@@ -6,6 +6,10 @@ var plato = require("plato"),
 
     gutil = require("gulp-util"),
 
+    args = process.argv,
+    argsLength = args.length,
+    displayMode = (argsLength > 2) ? args[argsLength - 1].replace(/\%20/g, " ") : "advanced",
+
     settings = require("./settings.js"),
 
     p = {
@@ -82,18 +86,22 @@ var plato = require("plato"),
 
             return logArray;
         },
-        //logReport: function (report) {
-        logReport: function () {
+        simpleReport: function () {
             gutil.log("PlatoReport done");
+        },
+        advancedReport: function (report) {
+            Object.keys(report).forEach(function (item) {
+                var logArray = p.getLogArray(report[item], []),
+                    color = p.getColor(p.pass[report[item].info.file]);
 
-            //    Object.keys(report).forEach(function (item) {
-            //        var logArray = p.getLogArray(report[item], []),
-            //            color = p.getColor(p.pass[report[item].info.file]);
+                logArray.splice(0, 0, gutil.colors[color](report[item].info.file));
 
-            //        logArray.splice(0, 0, gutil.colors[color](report[item].info.file));
-
-            //        gutil.log.apply(undefined, logArray);
-            //    });
+                gutil.log.apply(undefined, logArray);
+            });
+        },
+        logReport: function (report) {
+            // displayMode will be "simple" or "advanced"
+            p[displayMode + "Report"](report);
         },
         init: function () {
             plato.inspect(p.files, p.outputDir, p.options, p.logReport);

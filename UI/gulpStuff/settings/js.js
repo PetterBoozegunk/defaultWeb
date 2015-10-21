@@ -25,9 +25,9 @@ var js = {
         files: ["gulpStuff/**"],
         dest: "gulpStuff"
     }, {
-        files: ["*.js", "package.json"],
-        dest: "."
-    }, {
+        files: ["../server/**"],
+        dest: "../server"
+    }, , {
         files: ["../server.js"],
         dest: ".."
     }],

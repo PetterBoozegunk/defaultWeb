@@ -84,7 +84,7 @@ var gulp = require("gulp"),
         },
 
         "platoReport": function () {
-            gulp.start(plugins.shell.task(["node gulpStuff/plato.js"], {
+            gulp.start(plugins.shell.task(["node gulpStuff/plato.js simple"], {
                 verbose: true
             }));
         },
