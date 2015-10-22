@@ -10,10 +10,10 @@ var plato = require("plato"),
     argsLength = args.length,
     displayMode = (argsLength > 2) ? args[argsLength - 1].replace(/\%20/g, " ") : "advanced",
 
-    settings = require("./settings.js"),
+    js = require("./tasks/js.js"),
 
     p = {
-        files: settings.js.checkSrc,
+        files: js.checkSrc,
         outputDir: "./report",
         // null options for this example
         options: {},
