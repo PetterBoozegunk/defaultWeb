@@ -7,7 +7,6 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
 
     browserSync = require("browser-sync").create(),
-    lessPluginGlob = require("less-plugin-glob"),
 
     settings = require("./gulpStuff/settings.js"),
     util = require("./gulpStuff/util.js"),
