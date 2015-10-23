@@ -110,18 +110,6 @@ var gulp = require("gulp"),
 
             util.addWatch(config.watch);
             util.setGulp("task", config.tasks);
-
-            //// dummie stuff
-            //gulp.task("test", function () {
-            //    console.log("test: util =", util);
-            //});
-
-            //gulp.task("default", ["less:dev"]);
-
-            //gulp.task("watch", function () {
-            //    // Watch .js files
-            //    gulp.watch("*.js", ["test"]);
-            //});
         }
     };
 

@@ -13,40 +13,38 @@ var gulp = require("gulp"),
         lessdest: "fonts/",
         fontdest: "less/fonts/",
         dir: "/UI/fonts/",
-        className: "icon",
-
-
-        tasks: {
-            cpoints: function (codepoints) {
-                gulp.src(settings.lesstemplate)
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.consolidate("lodash", {
-                        glyphs: codepoints,
-                        fontName: settings.name,
-                        fontPath: settings.dir,
-                        className: settings.className
-                    }))
-                    .pipe(gulp.dest(settings.fontdest));
-            },
-            mainTask: function () {
-                gulp.src(settings.src)
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.iconfont({
-                        fontName: settings.name,
-                        normalize: true
-                    }))
-                    .on("codepoints", settings.cpoints)
-                    .pipe(gulp.dest(settings.lessdest));
-            }
-        }
+        className: "icon"
+    },
+    cpoints = function (codepoints) {
+        gulp.src(settings.lesstemplate)
+            .pipe(plugins.plumber())
+            .pipe(plugins.consolidate("lodash", {
+                glyphs: codepoints,
+                fontName: settings.name,
+                fontPath: settings.dir,
+                className: settings.className
+            }))
+            .pipe(gulp.dest(settings.fontdest));
+    },
+    mainTask = function () {
+        gulp.src(settings.src)
+            .pipe(plugins.plumber())
+            .pipe(plugins.iconfont({
+                fontName: settings.name,
+                normalize: true
+            }))
+            .on("codepoints", cpoints)
+            .pipe(gulp.dest(settings.lessdest));
     },
     iconFont = {
-
         tasks: {
-            "iconFont": {
-                beforetask: ["svg-min:font"],
-                task: settings.mainTask
-            }
+            // This totally unnecessary anonymous function is here because plato.js thinks that it's more maintainable that way. Who am I to disagree...
+            "iconFont": (function () {
+                return {
+                    beforetask: ["svg-min:font"],
+                    task: mainTask
+                };
+            }())
         },
 
         // watch object {"taskName": ["srcArray"]}
