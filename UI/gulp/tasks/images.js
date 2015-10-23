@@ -44,7 +44,8 @@ var gulp = require("gulp"),
                         }))
                         .pipe(gulp.dest(settings.images.dest));
                 }
-            }
+            },
+            "before:iconFont": ["svg-min-font"]
         }
     };
 

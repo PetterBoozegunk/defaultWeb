@@ -1,4 +1,4 @@
-﻿/*global require */
+/*global require */
 /*jslint node: true */
 "use strict";
 
@@ -25,7 +25,7 @@ var gulp = require("gulp"),
             },
 
             // How to use settings
-            "example2" : function () {
+            "example2": function () {
                 return gulp.src(settings.src)
                     .pipe(plugins.less(settings.options))
                     .pipe(gulp.dest(settings.dest));
@@ -33,7 +33,7 @@ var gulp = require("gulp"),
 
             // How to add an array of tasks before another task
             // The task "clean" will run before the "examples" task
-            "before:examples" : ["clean"],
+            "before:examples": ["clean"],
 
             // Set an array of tasks to be run 
             "examples": ["example1", "example2"],
@@ -44,7 +44,7 @@ var gulp = require("gulp"),
         },
 
         // The task "example1" will run when "(UI/)gulp/tasks/examples.js" is changed
-        watch : {
+        watch: {
             "gulp/tasks/examples.js": ["example1"] // This HAS to be an Array
         }
     };
