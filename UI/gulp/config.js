@@ -12,14 +12,9 @@ var gulp = require("gulp"),
         // This is used in /UI/gulp/tasks/preloadBrowser.js
         developerRoot: "http://defaultweb.local:666/",
 
-        // This totally unnecessary init function is here because plato.js thinks that it's more maintainable that way. Who am I to disagree...
-        init: function () {
-            config.beforetasks = {};
-            config.tasks = {};
-            config.watch = {};
-        }
+        beforetasks: {},
+        tasks: {},
+        watch: {}
     };
-
-config.init();
 
 module.exports = config;
