@@ -65,9 +65,7 @@ var gulp = require("gulp"),
         },
         tasks: {
             "platoReport": function () {
-                gulp.start(plugins.shell.task(["node gulp/plato.js simple"], {
-                    verbose: true
-                }));
+                gulp.start(plugins.shell.task(["node gulp/plato.js simple"]));
             },
             "prettify": function () {
                 var prettifyArray = settings.prettify;
@@ -116,7 +114,8 @@ var gulp = require("gulp"),
             // All "default" tasks will be added to the main default task
             "default": ["js:dev:all"]
         },
-        // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
+
+        // watch object {"watch-this-(dir|glob|file)": "do-this-task (Array)"}
         watch: {
             "js/**": ["js:dev:all"]
         }
