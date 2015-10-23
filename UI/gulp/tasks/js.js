@@ -74,13 +74,11 @@ var gulp = require("gulp"),
                     js.prettify(prettifyObj.files, prettifyObj.dest);
                 });
             },
-            "jslint": {
-                beforetask: ["prettify"],
-                task: function () {
-                    return gulp.src(settings.checkSrc)
-                        .pipe(plugins.plumber())
-                        .pipe(plugins.jslint());
-                }
+            "before:jslint": ["prettify"],
+            "jslint": function () {
+                return gulp.src(settings.checkSrc)
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.jslint());
             },
             "js:prod": function () {
                 return gulp.src(settings.concatSrc)
