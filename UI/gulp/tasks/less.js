@@ -73,7 +73,7 @@ var gulp = require("gulp"),
             "default": ["less:dev:all"]
         },
 
-        // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
+        // watch object {"watch-this-(dir|glob|file)": "do-this-task (Array)"}
         watch: {
             "less/**": ["less:dev"],
             "less/oldIe/**": ["less:ie:dev"]
