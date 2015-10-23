@@ -41,6 +41,11 @@ var gulp = require("gulp"),
             // Add tasks to the default task.
             // This will be run when running "gulp" 
             "default": ["example1"]
+        },
+
+        // The task "example1" will run when "(UI/)gulp/tasks/examples.js" is changed
+        watch : {
+            "gulp/tasks/examples.js": ["example1"] // This HAS to be an Array
         }
     };
 
