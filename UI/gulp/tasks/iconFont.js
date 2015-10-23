@@ -36,15 +36,10 @@ var gulp = require("gulp"),
             .on("codepoints", cpoints)
             .pipe(gulp.dest(settings.lessdest));
     },
+
     iconFont = {
         tasks: {
-            // This totally unnecessary anonymous function is here because plato.js thinks that it's more maintainable that way. Who am I to disagree...
-            "iconFont": (function () {
-                return {
-                    beforetask: ["svg-min-font"],
-                    task: mainTask
-                };
-            }())
+            "iconFont": mainTask
         },
 
         // watch object {"watch-this-(dir|glob|file)": "do-this-task (Array)"}

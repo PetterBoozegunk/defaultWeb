@@ -12,7 +12,7 @@ var gulp = require("gulp"),
     settings = {
         delay: 500,
         options: {
-            proxy: "http://defaultweb.local:666/",
+            proxy: config.developerRoot,
             browser: "firefox"
         }
     },

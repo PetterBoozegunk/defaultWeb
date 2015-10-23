@@ -6,15 +6,15 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
 
     config = {
+        // Sets where the js av css files will end up
         compileToFolder: "dist",
 
-        init: function () {
-            config.beforetasks = {};
-            config.tasks = {};
-            config.watch = {};
-        }
-    };
+        // This is used in /UI/gulp/tasks/preloadBrowser.js
+        developerRoot: "http://defaultweb.local:666/",
 
-config.init();
+        beforetasks: {},    
+        tasks: {},
+        watch: {}
+    };
 
 module.exports = config;

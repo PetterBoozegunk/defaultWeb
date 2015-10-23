@@ -12,7 +12,10 @@ var gulp = require("gulp"),
                 return gulp.src(config.compileToFolder)
                     .pipe(plugins.rimraf());
             },
-            "before:prod": ["clean"]
+
+            "before:prod": ["clean"],
+            "before:dev": ["clean"],
+            "before:default": ["clean"]
         }
     };
 

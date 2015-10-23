@@ -34,17 +34,18 @@ var gulp = require("gulp"),
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.images.dest));
             },
-            "image-min": {
-                beforetask: ["svg-min-image"],
-                task: function () {
-                    return gulp.src(settings.images.src)
-                        .pipe(plugins.plumber())
-                        .pipe(plugins.smushit({
-                            verbose: true
-                        }))
-                        .pipe(gulp.dest(settings.images.dest));
-                }
-            }
+
+            "before:image-min": ["svg-min-image"],
+            "image-min": function () {
+                return gulp.src(settings.images.src)
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.smushit({
+                        verbose: true
+                    }))
+                    .pipe(gulp.dest(settings.images.dest));
+
+            },
+            "before:iconFont": ["svg-min-font"]
         }
     };
 
