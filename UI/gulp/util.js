@@ -103,12 +103,48 @@ var gulp = require("gulp"),
             };
         },
 
+        addToNamedArray: function (taskName) {
+            // tasks that end with ":all" will not be added.
+            var isCollectionTask = /(\:all)$/.test(taskName),
+                // tasks without ":" in the name will not be added.
+                addToNamedArray = /\:/.test(taskName);
+
+            return (!isCollectionTask && addToNamedArray);
+        },
+        getCollectionArray: function (taskCollectionName) {
+            var collectionArray = util.returnArray(config.tasks[taskCollectionName]);
+
+            if (!config.tasks[taskCollectionName]) {
+                config.tasks[taskCollectionName] = collectionArray;
+            }
+
+            return collectionArray;
+        },
+        setNamedTaskArray: function (taskName) {
+            var splitTaskName = taskName.split(":"),
+                taskCollectionName = splitTaskName[splitTaskName.length - 1],
+                collectionArray = util.getCollectionArray(taskCollectionName);
+
+            collectionArray.push(taskName);
+        },
+        getNamedTaskArrays: function () {
+            var tasks = config.tasks;
+
+            Object.keys(tasks).forEach(function (taskName) {
+                if (util.addToNamedArray(taskName)) {
+                    util.setNamedTaskArray(taskName);
+                }
+            });
+        },
+
         init: function () {
             var files = fs.readdirSync("./gulp/tasks");
 
             util.addToConfig(files);
+            util.getNamedTaskArrays();
 
             util.addWatch(config.watch);
+
             util.setGulp("task", config.tasks);
         }
     };

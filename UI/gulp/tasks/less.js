@@ -68,6 +68,8 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(settings.dest));
             },
             "less:dev:all": ["less:dev", "less:ie:dev"],
+
+            // All "default" tasks will be added to the main default task
             "default": ["less:dev:all"]
         },
 

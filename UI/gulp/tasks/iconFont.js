@@ -47,7 +47,7 @@ var gulp = require("gulp"),
             }())
         },
 
-        // watch object {"taskName": ["srcArray"]}
+        // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
         watch: {
             "fonts/svg/*.svg": ["iconFont"]
         }

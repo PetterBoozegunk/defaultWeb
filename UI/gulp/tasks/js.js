@@ -113,6 +113,7 @@ var gulp = require("gulp"),
 
             "js:all": ["jslint", "platoReport", "js:dev:all"],
 
+            // All "default" tasks will be added to the main default task
             "default": ["js:dev:all"]
         },
         // watch object {"watch-this-(dir|glob|file)": "do-this-task"}

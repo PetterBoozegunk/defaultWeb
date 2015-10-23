@@ -34,7 +34,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.images.dest));
             },
-            "images": {
+            "image-min": {
                 beforetask: ["svg-min:image"],
                 task: function () {
                     return gulp.src(settings.images.src)
