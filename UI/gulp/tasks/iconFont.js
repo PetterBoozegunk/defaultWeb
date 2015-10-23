@@ -41,7 +41,7 @@ var gulp = require("gulp"),
             // This totally unnecessary anonymous function is here because plato.js thinks that it's more maintainable that way. Who am I to disagree...
             "iconFont": (function () {
                 return {
-                    beforetask: ["svg-min:font"],
+                    beforetask: ["svg-min-font"],
                     task: mainTask
                 };
             }())

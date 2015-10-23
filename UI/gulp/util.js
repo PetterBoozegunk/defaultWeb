@@ -85,6 +85,30 @@ var gulp = require("gulp"),
                 }
             });
         },
+
+        setConfigBeforeTask: function (tasksObj, eqTaskName, taskName) {
+            if (!config.beforetasks[eqTaskName]) {
+                config.beforetasks[eqTaskName] = [];
+            }
+
+            config.beforetasks[eqTaskName] = config.beforetasks[eqTaskName].concat(tasksObj[taskName]);
+
+            delete tasksObj[taskName];
+        },
+        checkBeforetask: function (taskName) {
+            var tasksObj = this,
+                isBeforeTask = /^before\:/.test(taskName),
+                eqTaskName = taskName.replace(/^before\:/, "");
+
+            if (isBeforeTask) {
+                util.setConfigBeforeTask(tasksObj, eqTaskName, taskName);
+            }
+        },
+        addBeforeTasksToConfig: function (fileName) {
+            var tasksObj = require("./tasks/" + fileName).tasks || {};
+
+            Object.keys(tasksObj).forEach(util.checkBeforetask, tasksObj);
+        },
         addTasksToConfig: function (fileName) {
             util.addTaskType("tasks", fileName);
             util.addDefaultTask(fileName);
@@ -93,6 +117,7 @@ var gulp = require("gulp"),
             util.addTaskType("watch", fileName);
         },
         addToConfig: function (files) {
+            files.forEach(util.addBeforeTasksToConfig);
             files.forEach(util.addTasksToConfig);
             files.forEach(util.addWatchToConfig);
         },
@@ -102,7 +127,6 @@ var gulp = require("gulp"),
                 util.setGulp("watch", watchObj);
             };
         },
-
         addToNamedArray: function (taskName) {
             // tasks that end with ":all" will not be added.
             var isCollectionTask = /(\:all)$/.test(taskName),
@@ -137,13 +161,36 @@ var gulp = require("gulp"),
             });
         },
 
+        setBeforeTaskType: function (task) {
+            return (task instanceof Array) ? function () {
+                gulp.start(task);
+            } : task;
+        },
+        setBeforeTask: function (taskName, beforetasksArray, task) {
+            config.tasks[taskName] = {
+                beforetask: beforetasksArray,
+                task: util.setBeforeTaskType(task)
+            };
+        },
+        setBeforeTasks: function () {
+            Object.keys(config.beforetasks).forEach(function (taskName) {
+                var beforeTasksArray = config.beforetasks[taskName],
+                    task = config.tasks[taskName];
+
+                util.setBeforeTask(taskName, beforeTasksArray, task);
+            });
+        },
+
         init: function () {
             var files = fs.readdirSync("./gulp/tasks");
 
             util.addToConfig(files);
             util.getNamedTaskArrays();
+            util.setBeforeTasks();
 
             util.addWatch(config.watch);
+
+            //console.log(config);
 
             util.setGulp("task", config.tasks);
         }

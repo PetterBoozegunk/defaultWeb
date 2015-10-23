@@ -8,14 +8,9 @@ var gulp = require("gulp"),
     config = {
         compileToFolder: "dist",
 
-        // All tasks (both 'task' and 'watch' tasks) are found in the files in /UI/gulp/tasks/*.js
-        tasks: {
-            "clean": function () {
-                return gulp.src(config.compileToFolder)
-                    .pipe(plugins.rimraf());
-            }
-        },
         init: function () {
+            config.beforetasks = {};
+            config.tasks = {};
             config.watch = {};
         }
     };

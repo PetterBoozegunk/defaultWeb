@@ -24,18 +24,18 @@ var gulp = require("gulp"),
     },
     images = {
         tasks: {
-            "svg-min:font": function () {
+            "svg-min-font": function () {
                 return gulp.src(settings.svg.font.src)
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.font.dest));
             },
-            "svg-min:image": function () {
+            "svg-min-image": function () {
                 return gulp.src(settings.svg.images.src)
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.images.dest));
             },
             "image-min": {
-                beforetask: ["svg-min:image"],
+                beforetask: ["svg-min-image"],
                 task: function () {
                     return gulp.src(settings.images.src)
                         .pipe(plugins.plumber())
