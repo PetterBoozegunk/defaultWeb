@@ -22,6 +22,7 @@ var gulp = require("gulp"),
         },
         browsersync: require("browser-sync").create()
     },
+
     reloadBrowser = {
         browsersync: settings.browsersync,
 
@@ -36,12 +37,12 @@ var gulp = require("gulp"),
 
             "sync-watch": ["browser-sync", "watch"]
         },
+
         // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
-        watch: {
-            "dist/**": ["file-watch"],
-            "pages/**": ["file-watch"],
-            "blocks/**": ["file-watch"]
-        }
+        watch: {}
     };
+
+// To add more than one "watch-this-(dir|glob|file)" to do a task use a comma separated string.
+reloadBrowser.watch[config.compileToFolder + "/**, pages/**, blocks/**"] = ["file-watch"];
 
 module.exports = reloadBrowser;
