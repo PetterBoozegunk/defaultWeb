@@ -123,9 +123,11 @@ var gulp = require("gulp"),
         },
 
         addWatch: function (watchObj) {
-            config.tasks.watch = function () {
-                util.setGulp("watch", watchObj);
-            };
+            if (!config.tasks.watch) {
+                config.tasks.watch = function () {
+                    util.setGulp("watch", watchObj);
+                };
+            }
         },
         addToNamedArray: function (taskName) {
             // tasks that end with ":all" will not be added.

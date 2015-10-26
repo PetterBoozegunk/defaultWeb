@@ -6,35 +6,35 @@ var gulp = require("gulp"),
     config = require("../config.js"),
     plugins = require("gulp-load-plugins")(),
 
-    browsersync = require("browser-sync").create(),
-    reload = browsersync.reload,
+    reloadTimeout = null,
 
     settings = {
         delay: 500,
         options: {
             proxy: config.developerRoot,
-            browser: "firefox"
+            browser: "firefox",
+            injectChanges: true
         },
         devServer: {
             options: {
                 cwd: ".."
             }
-        }
+        },
+        browsersync: require("browser-sync").create()
     },
     reloadBrowser = {
+        browsersync: settings.browsersync,
+
         tasks: {
-            "devServer:start": function () {
-                gulp.start(plugins.shell.task(["start node server.js"], settings.devServer.options));
-            },
-
             "file-watch": function () {
-                setTimeout(browsersync.reload, settings.delay);
+                clearTimeout(reloadTimeout);
+                reloadTimeout = setTimeout(settings.browsersync.reload, settings.delay);
             },
-            "browser-sync:start": function () {
-                browsersync.init(settings.options);
+            "browser-sync": function () {
+                settings.browsersync.init(settings.options);
             },
 
-            "before:browser-sync:start": ["watch"]
+            "sync-watch": ["browser-sync", "watch"]
         },
         // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
         watch: {

@@ -40,12 +40,12 @@ var gulp = require("gulp"),
 
             // To add a task to a list of tasks just end the name with :listName
             // In this example "devExample:dev" will run when "gulp dev" is run.
-            "devExample:dev": function () {
-                console.log("devExample:dev");
+            "example:dev": function () {
+                console.log("example:dev");
             },
             // This is the same as the example abowe but it will run when "gulp prod" is run.
-            "devExample:prod": function () {
-                console.log("devExample:prod");
+            "example:prod": function () {
+                console.log("example:prod");
             },
 
             // Add tasks to the default task.
