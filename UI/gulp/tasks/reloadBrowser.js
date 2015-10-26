@@ -14,18 +14,27 @@ var gulp = require("gulp"),
         options: {
             proxy: config.developerRoot,
             browser: "firefox"
+        },
+        devServer: {
+            options: {
+                cwd: ".."
+            }
         }
     },
-
     reloadBrowser = {
         tasks: {
+            "devServer:start": function () {
+                gulp.start(plugins.shell.task(["start node server.js"], settings.devServer.options));
+            },
+
             "file-watch": function () {
                 setTimeout(browsersync.reload, settings.delay);
             },
-            "browser-sync": function () {
+            "browser-sync:start": function () {
                 browsersync.init(settings.options);
             },
-            "sync-watch": ["browser-sync", "watch"]
+
+            "before:browser-sync:start": ["watch"]
         },
         // watch object {"watch-this-(dir|glob|file)": "do-this-task"}
         watch: {
