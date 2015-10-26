@@ -38,6 +38,16 @@ var gulp = require("gulp"),
             // Set an array of tasks to be run 
             "examples": ["example1", "example2"],
 
+            // To add a task to a list of tasks just end the name with :listName
+            // In this example "devExample:dev" will run when "gulp dev" is run.
+            "example:dev": function () {
+                console.log("example:dev");
+            },
+            // This is the same as the example abowe but it will run when "gulp prod" is run.
+            "example:prod": function () {
+                console.log("example:prod");
+            },
+
             // Add tasks to the default task.
             // This will run when running "gulp" 
             "default": ["example1"] // This HAS to be an Array

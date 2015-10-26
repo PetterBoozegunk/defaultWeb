@@ -75,13 +75,22 @@ var gulp = require("gulp"),
 
             config.tasks["default"] = defaultTask;
         },
-        addTaskType: function (type, fileName) {
+        
+        addTaskType: function (type, name, typeObj) {
+            var nameList = name.replace(/\s/g, "").split(",");
+
+            nameList.forEach(function (item) {
+                config[type][item] = typeObj[name];
+            });
+        },
+        addTaskTypes: function (type, fileName) {
             // type is 'tasks' or 'watch'
             var typeObj = require("./tasks/" + fileName)[type] || {};
 
             Object.keys(typeObj).forEach(function (name) {
                 if (name !== "default") {
-                    config[type][name] = typeObj[name];
+                    util.addTaskType(type, name, typeObj);
+                    //config[type][name] = typeObj[name];
                 }
             });
         },
@@ -110,11 +119,11 @@ var gulp = require("gulp"),
             Object.keys(tasksObj).forEach(util.checkBeforetask, tasksObj);
         },
         addTasksToConfig: function (fileName) {
-            util.addTaskType("tasks", fileName);
+            util.addTaskTypes("tasks", fileName);
             util.addDefaultTask(fileName);
         },
         addWatchToConfig: function (fileName) {
-            util.addTaskType("watch", fileName);
+            util.addTaskTypes("watch", fileName);
         },
         addToConfig: function (files) {
             files.forEach(util.addBeforeTasksToConfig);
@@ -123,9 +132,11 @@ var gulp = require("gulp"),
         },
 
         addWatch: function (watchObj) {
-            config.tasks.watch = function () {
-                util.setGulp("watch", watchObj);
-            };
+            if (!config.tasks.watch) {
+                config.tasks.watch = function () {
+                    util.setGulp("watch", watchObj);
+                };
+            }
         },
         addToNamedArray: function (taskName) {
             // tasks that end with ":all" will not be added.

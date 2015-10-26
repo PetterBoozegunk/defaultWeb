@@ -6,13 +6,10 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
 
     config = {
-        // Sets where the js av css files will end up
         compileToFolder: "dist",
+        developerRoot: "http://localhost/",
 
-        // This is used in /UI/gulp/tasks/preloadBrowser.js
-        developerRoot: "http://defaultweb.local:666/",
-
-        beforetasks: {},    
+        beforetasks: {},
         tasks: {},
         watch: {}
     };

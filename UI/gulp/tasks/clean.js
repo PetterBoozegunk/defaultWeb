@@ -11,11 +11,13 @@ var gulp = require("gulp"),
             "clean": function () {
                 return gulp.src(config.compileToFolder)
                     .pipe(plugins.rimraf());
-            },
+            }
 
-            "before:prod": ["clean"],
-            "before:dev": ["clean"],
-            "before:default": ["clean"]
+            //,
+
+            //"before:prod": ["clean"],
+            //"before:dev": ["clean"],
+            //"before:default": ["clean"]
         }
     };
 

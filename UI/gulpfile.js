@@ -2,12 +2,17 @@
 /*jslint node: true */
 "use strict";
 
-var util = require("./gulp/util.js");
+var config = require("./gulp/config.js"),
+    util = require("./gulp/util.js");
+
+// Sets where the js av css files will end up
+config.compileToFolder = "dist";
+
+// This is used in /UI/gulp/tasks/preloadBrowser.js
+config.developerRoot = "http://defaultweb.local:666/";
 
 util.init();
 
 /*
     Checkout /UI/gulp/tasks/examples.js for instructions how to gulp with an almost empty glupfile.
-
-    Some settings are made in /UI/gulp/config.js
 */
