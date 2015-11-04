@@ -46,7 +46,7 @@ var readline = require("readline"),
             });
         },
         assemble: function (fileName) {
-            var currentDir = path.resolve("\."),
+            var currentDir = path.resolve("."),
                 fileStr = "C: " + os.EOL + os.EOL + "cd " + currentDir + bat.getFileStr(),
                 fullFileName = bat.setFileName(fileName) + settings.suffix + ".bat";
 
