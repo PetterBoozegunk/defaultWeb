@@ -75,7 +75,7 @@ var gulp = require("gulp"),
 
             config.tasks["default"] = defaultTask;
         },
-        
+
         addTaskType: function (type, name, typeObj) {
             var nameList = name.replace(/\s/g, "").split(",");
 
