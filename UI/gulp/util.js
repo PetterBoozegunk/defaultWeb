@@ -90,7 +90,6 @@ var gulp = require("gulp"),
             Object.keys(typeObj).forEach(function (name) {
                 if (name !== "default") {
                     util.addTaskType(type, name, typeObj);
-                    //config[type][name] = typeObj[name];
                 }
             });
         },
