@@ -75,7 +75,7 @@ var gulp = require("gulp"),
 
             config.tasks["default"] = defaultTask;
         },
-        
+
         addTaskType: function (type, name, typeObj) {
             var nameList = name.replace(/\s/g, "").split(",");
 
@@ -90,7 +90,6 @@ var gulp = require("gulp"),
             Object.keys(typeObj).forEach(function (name) {
                 if (name !== "default") {
                     util.addTaskType(type, name, typeObj);
-                    //config[type][name] = typeObj[name];
                 }
             });
         },

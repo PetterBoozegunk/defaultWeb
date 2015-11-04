@@ -37,6 +37,9 @@ var gulp = require("gulp"),
         }, {
             files: ["../server.js"],
             dest: ".."
+        }, {
+            files: ["./*.js", "./*.json"],
+            dest: "."
         }],
 
         jsLint: {
