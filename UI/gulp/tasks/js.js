@@ -11,7 +11,7 @@ var gulp = require("gulp"),
         fileName: "scripts.js",
 
         concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
-        checkSrc: ["js/*.js", "js/plugins/*.js", "js/tests/*.js", "*.js", "gulp/**", "../../server.js"],
+        checkSrc: ["*.js", "js/*.js", "js/plugins/*.js", "js/tests/*.js", "gulp/**", "../../server.js"],
 
         prettify: [{
             files: ["js/*.js"],
