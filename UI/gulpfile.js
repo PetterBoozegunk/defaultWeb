@@ -5,10 +5,10 @@
 var config = require("./gulp/config.js"),
     util = require("./gulp/util.js");
 
-// Sets where the js av css files will end up
-config.compileToFolder = "dist";
+// Sets where the js av css files will end up (default is "dist")
+//config.compileToFolder = "assets";
 
-// This is used in /UI/gulp/tasks/preloadBrowser.js
+// This is used in /UI/gulp/tasks/preloadBrowser.js (default is "http://localhost/")
 config.developerRoot = "http://defaultweb.local:666/";
 
 util.init();

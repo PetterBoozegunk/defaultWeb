@@ -2,16 +2,13 @@
 /*jslint node: true */
 "use strict";
 
-var gulp = require("gulp"),
-    plugins = require("gulp-load-plugins")(),
+var config = {
+    compileToFolder: "dist",
+    developerRoot: "http://localhost/",
 
-    config = {
-        compileToFolder: "dist",
-        developerRoot: "http://localhost/",
-
-        beforetasks: {},
-        tasks: {},
-        watch: {}
-    };
+    beforetasks: {},
+    tasks: {},
+    watch: {}
+};
 
 module.exports = config;
