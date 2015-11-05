@@ -9,15 +9,12 @@ var gulp = require("gulp"),
     clean = {
         tasks: {
             "clean": function () {
-                return gulp.src(config.compileToFolder)
+                return gulp.src(config.compileToFolder + "/**")
                     .pipe(plugins.rimraf());
-            }
+            },
 
-            //,
-
-            //"before:prod": ["clean"],
-            //"before:dev": ["clean"],
-            //"before:default": ["clean"]
+            // This will make file-watch crash, just so you know :)
+            "before:prod": ["clean"]
         }
     };
 
