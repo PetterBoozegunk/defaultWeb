@@ -12,9 +12,19 @@ var readline = require("readline"),
     os = require("os"),
 
     settings = {
+
+        // Where do you want the bat file to be created
         drive: "u:/",
-        suffix: ".gulp",
-        tasks: [
+
+        // If you dont want the bat file in the drive root add a folder path here.
+        folder: "",
+
+        // This will be added to the filename before ".bat". 
+        // ex: If you type "myProject" in the cmd and set suffix to ".gulp" the file will be called "myProject.gulp.bat"
+        suffix: "",
+
+        // This array will be the rows of text in the bat file.
+        commandLines: [
             "cd ..",
             "start node server.js",
             "cd ui",
@@ -27,7 +37,7 @@ var readline = require("readline"),
         getFileStr: function () {
             var fileStr = "";
 
-            settings.tasks.forEach(function (task) {
+            settings.commandLines.forEach(function (task) {
                 fileStr += os.EOL + os.EOL + task;
             });
 
@@ -42,7 +52,7 @@ var readline = require("readline"),
                     throw error;
                 }
 
-                console.log(settings.drive + fullFileName + " has been created");
+                console.log(settings.drive + settings.folder + fullFileName + " has been created");
             });
         },
         assemble: function (fileName) {
@@ -50,7 +60,7 @@ var readline = require("readline"),
                 fileStr = "C: " + os.EOL + os.EOL + "cd " + currentDir + bat.getFileStr(),
                 fullFileName = bat.setFileName(fileName) + settings.suffix + ".bat";
 
-            process.chdir(settings.drive);
+            process.chdir(settings.drive + settings.folder);
             bat.writeFile(fullFileName, fileStr);
 
             rl.close();
