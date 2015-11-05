@@ -11,7 +11,12 @@ var gulp = require("gulp"),
     settings = {
         delay: 500,
         options: {
-            proxy: config.developerRoot,
+            proxy: {
+                target: config.developerRoot,
+                proxyRes: [function (res) {
+                    res.headers["content-encoding"] = "gzip";
+                }]
+            },
             browser: "firefox",
             injectChanges: true
         },
