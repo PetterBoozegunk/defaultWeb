@@ -7,8 +7,6 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
     lessPluginGlob = require("less-plugin-glob"),
 
-    reloadBrowser = require("./reloadBrowser.js"),
-
     settings = {
         dest: config.compileToFolder + "/css",
         src: ["less/styles.less"],

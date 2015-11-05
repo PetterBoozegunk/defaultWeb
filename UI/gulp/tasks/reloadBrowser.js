@@ -17,7 +17,7 @@ var gulp = require("gulp"),
                     res.headers["content-encoding"] = "gzip";
                 }]
             },
-            browser: "firefox",
+            browser: ["firefox"],
             injectChanges: true
         },
         devServer: {
