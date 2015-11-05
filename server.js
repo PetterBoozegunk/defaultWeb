@@ -98,12 +98,12 @@
     RnRObject.prototype = {
         gzip: function () {
             var rnrObject = this,
-                //args = arguments,
-                result = this.data; //args[1];
+                args = arguments,
+                result = args[1];
 
-            //if (rnrObject.headers["Content-Type"] === "text/html;charset=utf-8") {
-            //    console.log(rnrObject);
-            //}
+            if (rnrObject.headers["Content-Type"] === "text/html;charset=utf-8") {
+                console.log(rnrObject);
+            }
 
             rnrObject.headers["Content-Length"] = result.length;
             rnrObject.response.writeHead(rnrObject.statusCode, rnrObject.headers);
@@ -252,7 +252,7 @@
                 headers = {
                     "Content-Type": type,
                     "Accept-Charset": "utf-8",
-                    //"Content-Encoding": "gzip",
+                    "Content-Encoding": "gzip",
                     "Cache-Control": "public, max-age=345600", // 4 days
                     "Date": now.toUTCString(),
                     "Expires": new Date(parseInt(year + 1, 10), month, date).toUTCString(),
