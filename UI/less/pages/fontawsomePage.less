@@ -9,20 +9,12 @@
 
     margin: ~"0 -@{quarterGutter}";
 
-    /*<div class="faBox">
-      
-      <i class="fa"></i><!--
-      fa-adn
-      
-      --><span>[&amp;#xf170;]</span>
-    </div>*/
-
     .faBox {
         float: left;
         width: unit(100 / @nbrCols, %);
 
         box-sizing: border-box;
-        border: solid @halfGutter @mainBodyBg;
+        border: solid @halfGutter rgba(0, 0, 0, .000000001);
         border-width: 0 @quarterGutter @halfGutter;
 
         background: rgba(255, 105, 180, 0.5);
