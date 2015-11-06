@@ -6,6 +6,7 @@
 
 .fontawsome {
     @nbrCols: 3;
+    @border: solid 1px @fontColor;
 
     margin: ~"0 -@{quarterGutter}";
 
@@ -14,10 +15,22 @@
         width: unit(100 / @nbrCols, %);
 
         box-sizing: border-box;
-        border: solid @halfGutter rgba(0, 0, 0, .000000001);
-        border-width: 0 @quarterGutter @halfGutter;
+        border: @border;
+        border-width: 0 1px 1px 0;
+        background-image: linear-gradient(#fff 10%, navajowhite 90%);
 
-        background: rgba(255, 105, 180, 0.5);
+        &:hover {
+            text-shadow: 0 0 10px red;
+            cursor: wait;
+        }
+
+        &:nth-child(@{nbrCols}n+1) {
+            border-left-width: 1px;
+        }
+
+        &:nth-child(-n+@{nbrCols}){
+            border-top: @border;
+        }
 
         display: flex;
         padding: 10px;
