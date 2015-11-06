@@ -20,8 +20,6 @@ var gulp = require("gulp"),
                 }]
             },
             browser: ["firefox"],
-            logConnections: true,
-            reloadOnRestart: false,
             reloadDelay: 500
         }
     },
