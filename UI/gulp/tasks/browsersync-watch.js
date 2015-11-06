@@ -14,14 +14,12 @@ var gulp = require("gulp"),
     settings = {
         options: {
             proxy: {
-                target: config.developerRoot,
-                proxyRes: [function (res) {
-                    res.headers["content-encoding"] = "gzip";
-                }]
+                target: config.developerRoot //,
+                //proxyRes: [function (res) {
+                //    res.headers["content-encoding"] = "gzip";
+                //}]
             },
             browser: ["firefox"],
-            logConnections: true,
-            reloadOnRestart: false,
             reloadDelay: 500
         }
     },
