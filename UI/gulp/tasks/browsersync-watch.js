@@ -8,8 +8,10 @@ var gulp = require("gulp"),
 
     reloadTimeout = null,
 
+    bs = require("browser-sync").create(),
+    reload = bs.reload,
+
     settings = {
-        delay: 500,
         options: {
             proxy: {
                 target: config.developerRoot,
@@ -18,26 +20,19 @@ var gulp = require("gulp"),
                 }]
             },
             browser: ["firefox"],
-            injectChanges: true
-        },
-        devServer: {
-            options: {
-                cwd: ".."
-            }
-        },
-        browsersync: require("browser-sync").create()
+            logConnections: true,
+            reloadOnRestart: false,
+            reloadDelay: 500
+        }
     },
 
-    reloadBrowser = {
-        browsersync: settings.browsersync,
-
+    browsersyncWatch = {
         tasks: {
             "file-watch": function () {
-                clearTimeout(reloadTimeout);
-                reloadTimeout = setTimeout(settings.browsersync.reload, settings.delay);
+                reload();
             },
             "browser-sync": function () {
-                settings.browsersync.init(settings.options);
+                bs.init(settings.options);
             },
 
             "sync-watch": ["browser-sync", "watch"]
@@ -48,6 +43,6 @@ var gulp = require("gulp"),
     };
 
 // To add more than one "watch-this-(dir|glob|file)" to do a task use a comma separated string.
-reloadBrowser.watch[config.compileToFolder + "/**, pages/**, blocks/**"] = ["file-watch"];
+browsersyncWatch.watch[config.compileToFolder + "/**, pages/**, blocks/**"] = ["file-watch"];
 
-module.exports = reloadBrowser;
+module.exports = browsersyncWatch;

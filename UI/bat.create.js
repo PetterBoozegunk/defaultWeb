@@ -13,11 +13,8 @@ var readline = require("readline"),
 
     settings = {
 
-        // Where do you want the bat file to be created
-        drive: "u:/",
-
-        // If you dont want the bat file in the drive root add a folder path here.
-        folder: "",
+        // A string or an array of strings that sets where the created .bat file(s) should end up.
+        path: ["u:/", "c:/Users/petter.ahlberg/"],
 
         // This will be added to the filename before ".bat". 
         // ex: If you type "myProject" in the cmd and set suffix to ".gulp" the file will be called "myProject.gulp.bat"
@@ -34,6 +31,17 @@ var readline = require("readline"),
     },
 
     bat = {
+        getPaths: function () {
+            var paths = settings.path;
+
+            if (!(paths instanceof Array)) {
+                paths = [paths];
+            }
+
+            settings.path = paths;
+
+            return settings.path;
+        },
         getFileStr: function () {
             var fileStr = "";
 
@@ -46,27 +54,48 @@ var readline = require("readline"),
         setFileName: function (fileName) {
             return fileName.trim().replace(/\s+/g, ".");
         },
-        writeFile: function (fullFileName, fileStr) {
-            fs.writeFile(fullFileName, fileStr, function (error) {
-                if (error) {
-                    throw error;
-                }
+        handleError: function (error) {
+            if (error) {
+                throw error;
+            }
+        },
+        checkPaths: function () {
+            var paths = bat.getPaths();
 
-                console.log(settings.drive + settings.folder + fullFileName + " has been created");
+            if (paths.length) {
+                bat.writeFiles(bat.fileName);
+            } else {
+                rl.close();
+            }
+        },
+        writeFile: function (fullFileName, fileStr, dirPath) {
+            fs.writeFile(fullFileName, fileStr, function (error) {
+                bat.handleError(error);
+
+                bat.checkPaths();
+                console.log(dirPath + fullFileName + " has been created");
             });
         },
-        assemble: function (fileName) {
-            var currentDir = path.resolve("."),
+        assemble: function (dirPath) {
+            var currentDir = bat.destDir || path.resolve("."),
                 fileStr = "C: " + os.EOL + os.EOL + "cd " + currentDir + bat.getFileStr(),
-                fullFileName = bat.setFileName(fileName) + settings.suffix + ".bat";
+                fullFileName = bat.setFileName(bat.fileName) + settings.suffix + ".bat";
 
-            process.chdir(settings.drive + settings.folder);
-            bat.writeFile(fullFileName, fileStr);
+            bat.destDir = currentDir;
 
-            rl.close();
+            process.chdir(dirPath);
+            bat.writeFile(fullFileName, fileStr, dirPath);
+        },
+        writeFiles: function (fileName) {
+            var paths = bat.getPaths(),
+                firstpath = paths.shift(0);
+
+            bat.fileName = fileName;
+
+            bat.assemble(firstpath);
         },
         init: function () {
-            rl.question("Name your bat-file: ", bat.assemble);
+            rl.question("Name your bat-file: ", bat.writeFiles);
         }
     };
 
