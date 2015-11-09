@@ -1,0 +1,11 @@
+{
+    "path": ["u:/", "c:/Users/petter.ahlberg/"],
+    "suffix": "",
+    "commandLines": [
+        "cd ..",
+        "start node server.js",
+        "cd ui",
+        "start gulp sync-watch",
+        "gulp"
+    ]
+}

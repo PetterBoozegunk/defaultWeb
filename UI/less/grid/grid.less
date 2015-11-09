@@ -4,13 +4,14 @@
 
 .col,
 .row {
-   box-sizing: border-box;
+    box-sizing: border-box;
     min-height: 1px;
 }
 
 .col {
     float: left;
-    border: solid @halfGutter @mainBodyBg;
+    //@mainBodyBg
+    border: solid @halfGutter rgba(255, 255, 255, .000000001);
 }
 
 .row {

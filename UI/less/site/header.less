@@ -1,11 +1,14 @@
 /// <reference path="../vars/vars.less" />
 
 header { 
+    @bgColor: @headerBg;
+
     padding: @mainSectionPadding;
-    background-color: @headerBg;
+    background-color: @bgColor;
 
     .icon-logo {
         text-decoration: none;
+        text-shadow: 0 0 5px darken(@bgColor, 50%);
 
         &:before {
             font-size: 2em;
@@ -17,7 +20,6 @@ header {
     }
 
     a {
-        //color: @fontColor;
         color: #fff;
     }
 }
