@@ -24,6 +24,7 @@ var gulp = require("gulp"),
             browsers: ["last 4 versions"],
             minifier: false,
             pseudoElements: true,
+            cascade: false,
             filters: {
                 oldIE: true
             }
@@ -36,6 +37,7 @@ var gulp = require("gulp"),
                 return gulp.src(settings.src)
                     .pipe(plugins.less(settings.options))
                     .pipe(plugins.pleeease(settings.pleeease))
+                    .pipe(plugins.shorthand())
                     .pipe(plugins.minifyCss())
                     .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(gulp.dest(settings.dest));
@@ -46,6 +48,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.sourcemaps.init())
                     .pipe(plugins.less(settings.options))
                     .pipe(plugins.pleeease(settings.pleeease))
+                    .pipe(plugins.shorthand())
                     .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(settings.dest));
@@ -55,6 +58,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.concat(settings.oldIeFileName))
                     .pipe(plugins.less(settings.options))
                     .pipe(plugins.pleeease(settings.pleeease))
+                    .pipe(plugins.shorthand())
                     .pipe(plugins.minifyCss())
                     .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(gulp.dest(settings.dest));
@@ -65,6 +69,7 @@ var gulp = require("gulp"),
                     .pipe(plugins.concat(settings.oldIeFileName))
                     .pipe(plugins.less(settings.options))
                     .pipe(plugins.pleeease(settings.pleeease))
+                    .pipe(plugins.shorthand())
                     .pipe(gulp.dest(settings.dest));
             },
             "less:dev:all": ["less:dev", "less:ie:dev"],
