@@ -26,8 +26,11 @@ var readline = require("readline"),
         ]
     },
 
+    readFileOptions = {
+        encoding: "utf-8"
+    },
     settings = (function () {
-        fs.readFile("./bat.settings.json", { encoding : "utf-8"}, function (error, data) {
+        fs.readFile("./bat.settings.json", readFileOptions, function (error, data) {
             var settingsObj = error ? defaultSettings : JSON.parse(data);
 
             settings = settingsObj;
