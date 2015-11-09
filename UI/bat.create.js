@@ -11,24 +11,28 @@ var readline = require("readline"),
     fs = require("fs"),
     os = require("os"),
 
-    settings = {
-
+    defaultSettings = {
         // A string or an array of strings that sets where the created .bat file(s) should end up.
-        path: ["u:/", "c:/Users/petter.ahlberg/"],
+        path: ["c:/"],
 
         // This will be added to the filename before ".bat". 
         // ex: If you type "myProject" in the cmd and set suffix to ".gulp" the file will be called "myProject.gulp.bat"
-        suffix: "",
+        suffix: ".gulp",
 
         // This array will be the rows of text in the bat file.
         commandLines: [
-            "cd ..",
-            "start node server.js",
-            "cd ui",
-            "start gulp sync-watch",
+            "start gulp watch",
             "gulp"
         ]
     },
+
+    settings = (function () {
+        fs.readFile("./bat.settings.json", { encoding : "utf-8"}, function (error, data) {
+            var settingsObj = error ? defaultSettings : JSON.parse(data);
+
+            settings = settingsObj;
+        });
+    }()),
 
     bat = {
         getPaths: function () {
