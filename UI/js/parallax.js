@@ -61,23 +61,39 @@
 
                 return $(elemsInViewPort);
             },
+            getDims: function (elemDims) {
+                var start = elemDims.top,
+                    end = parseFloat(elemDims.bottom + viewPort.height);
+
+                return {
+                    yPos: Math.abs(start - end),
+                    areaHeight: (viewPort.bottom - elemDims.top)
+                };
+            },
+            calcPercentPos: function (parallaxDims, percentBase) {
+                return (parallaxDims.yPos / parallaxDims.areaHeight) * percentBase;
+            },
+            calcNegativePercent: function (percentBase, percentPos) {
+                return parseFloat((percentBase - (percentBase * 2)) + percentPos);
+            },
+            getTranslateYPercent: function (parallaxDims) {
+                var percentBase = 50,
+
+                    percentPos = parallax.calcPercentPos(parallaxDims, percentBase),
+                    translateYPercent = parallax.calcNegativePercent(percentBase, percentPos);
+
+                return translateYPercent;
+            },
             translateY: function () {
                 var elem = $(this),
-                    parallaxElem = elem.find("> div"),
-
                     elemDims = util.getElemDims(elem),
 
-                    start = elemDims.top,
-                    end = parseFloat(elemDims.bottom + viewPort.height),
+                    parallaxDims = parallax.getDims(elemDims),
+                    translatePercent = parallax.getTranslateYPercent(parallaxDims),
 
-                    areaHeight = Math.abs(start - end),
-                    yPos = (viewPort.bottom - elemDims.top),
+                    parallaxElem = elem.find("> div");
 
-                    percentBase = 50,
-                    percentPos = (yPos / areaHeight) * percentBase,
-                    negativePercent = parseFloat((percentBase - (percentBase * 2)) + percentPos);
-
-                parallaxElem.css("transform", "translateY(" + negativePercent + "%)");
+                parallaxElem.css("transform", "translateY(" + translatePercent + "%)");
             },
             scroll: function () {
                 var elemsInViewPort = parallax.getElemsInViewPort();
