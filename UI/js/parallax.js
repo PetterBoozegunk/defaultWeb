@@ -1,4 +1,4 @@
-﻿
+﻿/*jslint browser: true */
 (function (window) {
     "use strict";
 
@@ -20,7 +20,7 @@
 
                 return viewPort;
             },
-            getElemDims : function (elem) {
+            getElemDims: function (elem) {
                 var jqElem = $(elem);
 
                 return {
@@ -28,6 +28,11 @@
                     height: jqElem.height(),
                     bottom: parseFloat(jqElem.offset().top + jqElem.height())
                 };
+            },
+            isInViewPort: function (parallaxElems) {
+                var elemDims = util.getElemDims(parallaxElems);
+
+                return (elemDims.top < viewPort.bottom && elemDims.bottom > viewPort.top);
             }
         },
 
@@ -36,12 +41,8 @@
 
             filterElem: function (item, index) {
                 // This works because it can only be true if both "item" and "index" is a number
-                if (parseInt(item, 10) === index) {
-                    var elemDims = util.getElemDims(parallax.elems[item]);
-
-                    if (elemDims.top < viewPort.bottom && elemDims.bottom > viewPort.top) {
-                        this.elemsInViewPort.push(parallax.elems[item]);
-                    }
+                if (parseInt(item, 10) === index && util.isInViewPort(parallax.elems[item])) {
+                    this.elemsInViewPort.push(parallax.elems[item]);
                 }
             },
             filterElems: function () {
@@ -60,16 +61,16 @@
 
                 return $(elemsInViewPort);
             },
-            translateY : function () {
+            translateY: function () {
                 var elem = $(this),
-                    elemDims = util.getElemDims(elem),
                     parallaxElem = elem.find("> div"),
+
+                    elemDims = util.getElemDims(elem),
 
                     start = elemDims.top,
                     end = parseFloat(elemDims.bottom + viewPort.height),
 
                     areaHeight = Math.abs(start - end),
-
                     yPos = (viewPort.bottom - elemDims.top),
 
                     percentBase = 50,
@@ -78,26 +79,16 @@
 
                 parallaxElem.css("transform", "translateY(" + negativePercent + "%)");
             },
-            scroll : function () {
+            scroll: function () {
                 var elemsInViewPort = parallax.getElemsInViewPort();
 
                 elemsInViewPort.each(parallax.translateY);
             },
-            //setSmoothScroll: function () {
-            //    $.srSmoothscroll({
-            //        step: 70,
-            //        speed: 250,
-            //        ease: "swing",
-            //        target: $("body"),
-            //        container: $(window)
-            //    });
-            //},
-            bindEvents : function () {
+            bindEvents: function () {
                 $(window).on("scroll resize", parallax.scroll);
             },
             init: function () {
                 if (parallax.elems.length) {
-                    //parallax.setSmoothScroll();
                     parallax.scroll();
 
                     setTimeout(parallax.bindEvents, 0);
