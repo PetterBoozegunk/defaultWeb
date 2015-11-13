@@ -26,13 +26,13 @@ var gulp = require("gulp"),
             files: ["js/tests/*.js"],
             dest: "js/tests"
         }, {
-            files: ["gulp/**"],
+            files: ["gulp/*.js"],
             dest: "gulp"
         }, {
-            files: ["gulp/tasks/**"],
+            files: ["gulp/tasks/*.js"],
             dest: "gulp/tasks"
         }, {
-            files: ["../server/**"],
+            files: ["../server/*.js", "../server/*.json"],
             dest: "../server"
         }, {
             files: ["../server.js"],
