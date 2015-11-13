@@ -44,7 +44,8 @@ var gulp = require("gulp"),
 
         jsLint: {
             js: {
-                jslintHappy: true
+                jslintHappy: true,
+                end_with_newline: false
             }
         },
         uglify: {
