@@ -65,7 +65,14 @@
     }
 
     .fa {
-        font-family: @iconFont;
-        font-style: normal;
+        &,
+        &::before {
+            font-family: @iconFont;
+            font-style: normal;
+        }
+
+        &::before {
+            content: attr(title);
+        }
     }
 }
