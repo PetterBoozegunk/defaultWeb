@@ -27,6 +27,13 @@
     }
 }
 
+.colPush(@nbrCols: 1, @parentColSpan: @nbrColumns) {
+    @singleColWidth: (100 / @parentColSpan);
+    @currentWidth: unit(@singleColWidth * @nbrCols, %);
+
+    margin-left: @currentWidth;
+}
+
 .colSpan(@nbrCols: 1, @parentColSpan: @nbrColumns) {
 
     @singleColWidth: (100 / @parentColSpan);
