@@ -20,13 +20,13 @@ var gulp = require("gulp"),
                     //}]
             },
             browser: ["firefox", "google chrome", "opera", "iexplore"],
-            reloadDelay: 500
+            reloadDelay: 100
         },
         watchFiles: [
             config.compileToFolder + "/css/*.css",
             config.compileToFolder + "/js/*.js",
-            "pages/**",
-            "blocks/**"
+            "../pages/**",
+            "../blocks/**"
         ]
     },
 
