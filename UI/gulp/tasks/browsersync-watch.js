@@ -19,7 +19,7 @@ var gulp = require("gulp"),
                     //    res.headers["content-encoding"] = "gzip";
                     //}]
             },
-            browser: ["firefox"],
+            browser: ["firefox", "google chrome", "opera", "iexplore"],
             reloadDelay: 500
         },
         watchFiles: [
