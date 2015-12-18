@@ -11,7 +11,7 @@
 .col {
     float: left;
     //@mainBodyBg
-    border: solid @halfGutter rgba(255, 255, 255, .000000001);
+    border: solid @halfGutter rgba(255, 255, 255, 0.001);
     border-width: 0 @halfGutter;
 }
 
@@ -25,6 +25,13 @@
         display: table;
         clear: both;
     }
+}
+
+.colPush(@nbrCols: 1, @parentColSpan: @nbrColumns) {
+    @singleColWidth: (100 / @parentColSpan);
+    @currentWidth: unit(@singleColWidth * @nbrCols, %);
+
+    margin-left: @currentWidth;
 }
 
 .colSpan(@nbrCols: 1, @parentColSpan: @nbrColumns) {

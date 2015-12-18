@@ -10,6 +10,9 @@
             bottom: 0
         },
 
+        areaHeightsCache = {},
+        translateYPercentCache = {},
+
         util = {
             getViewPort: function () {
                 viewPort = {
@@ -63,20 +66,37 @@
 
                 return $(elemsInViewPort);
             },
-            getAreaHeight: function (elemDims) {
-                var start = elemDims.top,
-                    end = parseFloat(elemDims.bottom + viewPort.height),
+            calcAreaHeight: function (etop, eBottom, vpHeight) {
+                var start = etop,
+                    end = parseFloat(eBottom + vpHeight),
+                    areaHeight = Math.abs(start - end),
 
-                    areaHeight = Math.abs(start - end);
+                    cacheName = etop + ":" + eBottom + ":" + vpHeight;
+
+                areaHeightsCache[cacheName] = areaHeight;
 
                 return areaHeight;
             },
-            getTranslateYPercent: function (elemDims, areaHeight) {
-                var yPos = (viewPort.bottom - elemDims.top),
+            getAreaHeight: function (etop, eBottom, vpHeight) {
+                var cacheName = etop + ":" + eBottom + ":" + vpHeight,
+                    areaHeight = areaHeightsCache[cacheName] || parallax.calcAreaHeight(etop, eBottom, vpHeight);
+
+                return areaHeight;
+            },
+            calcTranslateYPercent: function (vpBottom, eTop, aHeight) {
+                var yPos = (vpBottom - eTop),
 
                     percentBase = 50,
-                    percentPos = (yPos / areaHeight) * percentBase,
+                    percentPos = (yPos / aHeight) * percentBase,
                     translateYPercent = parseFloat((percentBase - (percentBase * 2)) + percentPos);
+
+                translateYPercentCache[vpBottom + ":" + eTop + ":" + aHeight] = translateYPercent;
+
+                return translateYPercent;
+            },
+            getTranslateYPercent: function (vpBottom, eTop, aHeight) {
+                var cacheName = vpBottom + ":" + eTop + ":" + aHeight,
+                    translateYPercent = translateYPercentCache[cacheName] || parallax.calcTranslateYPercent(vpBottom, eTop, aHeight);
 
                 return translateYPercent;
             },
@@ -85,9 +105,9 @@
                     elemDims = util.getElemDims(elem),
                     parallaxElem = elem.find("> div"),
 
-                    areaHeight = parallax.getAreaHeight(elemDims),
+                    areaHeight = parallax.getAreaHeight(elemDims.top, elemDims.bottom, viewPort.height),
 
-                    translateYPercent = parallax.getTranslateYPercent(elemDims, areaHeight);
+                    translateYPercent = parallax.getTranslateYPercent(viewPort.bottom, elemDims.top, areaHeight);
 
                 parallaxElem.css("transform", "translateY(" + translateYPercent + "%)");
             },
@@ -101,6 +121,10 @@
             },
             init: function () {
                 if (parallax.elems.length) {
+
+                    //window.console.log("areaHeightsCache = ", areaHeightsCache);
+                    //window.console.log("translateYPercentCache = ", translateYPercentCache);
+
                     parallax.scroll();
 
                     setTimeout(parallax.bindEvents, 0);

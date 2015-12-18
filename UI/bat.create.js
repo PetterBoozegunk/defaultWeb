@@ -1,108 +1,186 @@
-/*jslint node: true */
+/*jslint node: true, stupid: true */
 "use strict";
 
-var readline = require("readline"),
-    rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    }),
-
-    path = require("path"),
+var path = require("path"),
     fs = require("fs"),
     os = require("os"),
 
-    defaultSettings = {
-        // A string or an array of strings that sets where the created .bat file(s) should end up.
-        path: ["c:/"],
-
-        // This will be added to the filename before ".bat". 
-        // ex: If you type "myProject" in the cmd and set suffix to ".gulp" the file will be called "myProject.gulp.bat"
-        suffix: ".gulp",
-
-        // This array will be the rows of text in the bat file.
-        commandLines: [
-            "start gulp watch",
-            "gulp"
-        ]
-    },
+    userName = process.env.USERPROFILE.split(path.sep)[2],
 
     readFileOptions = {
         encoding: "utf-8"
     },
-    settings = (function () {
-        fs.readFile("./bat.settings.json", readFileOptions, function (error, data) {
-            var settingsObj = error ? defaultSettings : JSON.parse(data);
+    settings = require("./bat.settings.js"),
 
-            settings = settingsObj;
-        });
-    }()),
+    util = {
+        getParentDir: function (dir) {
+            var dirArray = dir.split("\\"),
+                parentDir = [];
 
-    bat = {
-        getPaths: function () {
-            var paths = settings.path;
+            dirArray.pop();
 
-            if (!(paths instanceof Array)) {
-                paths = [paths];
+            parentDir = dirArray.join("\\");
+
+            return parentDir;
+        },
+        getFileArray: function (dir) {
+            return dir ? fs.readdirSync(dir) : [];
+        },
+        checkForFileType: function (fileArray, fileType) {
+            var re = new RegExp("\\." + fileType + "(,|$)", "ig");
+
+            return fileArray.length ? fileArray.join().match(re) : null;
+        },
+        checkParentDir: function (dir, parentDir, fileType, containsFileType) {
+            return containsFileType ? dir : util.dirContainsFileOfType(parentDir, fileType);
+        },
+        checkHasFile: function (dir, parentDir, fileType, containsFileType) {
+            return dir ? util.checkParentDir(dir, parentDir, fileType, containsFileType) : "";
+        },
+        dirContainsFileOfType: function (dir, fileType) {
+            var fileArray = util.getFileArray(dir),
+                containsFileType = util.checkForFileType(fileArray, fileType),
+
+                parentDir = util.getParentDir(dir),
+
+                slnDir = util.checkHasFile(dir, parentDir, fileType, containsFileType);
+
+            return slnDir;
+        },
+        getSlnDir: function (dir) {
+            var slnDir = util.dirContainsFileOfType(dir, "sln");
+
+            return slnDir;
+        },
+        isSlnFile: function (fileName) {
+            var slnFile = "";
+
+            if (/\.sln$/i.test(fileName)) {
+                slnFile = fileName;
             }
 
-            settings.path = paths;
-
-            return settings.path;
+            return slnFile;
         },
-        getFileStr: function () {
+        getSlnFileName: function (dir) {
+            var fileArray = dir ? fs.readdirSync(dir) : [],
+                slnFileName = "";
+
+            fileArray.forEach(function (fileName) {
+                slnFileName = (!slnFileName) ? util.isSlnFile(fileName) : slnFileName;
+            });
+
+            return slnFileName;
+        }
+    },
+
+    currentDir = path.resolve("."),
+    userDir = "C:\\Users\\" + userName,
+    slnDir = util.getSlnDir(currentDir),
+    slnFileName = util.getSlnFileName(slnDir),
+
+    bat = {
+        setDir: function () {
+            settings.cmdFiles.forEach(function (item) {
+                item.cd = currentDir;
+            });
+        },
+        getBrowserCmdLine: function (browserName, openUrls) {
+            return "start " + browserName + " " + openUrls;
+        },
+        getBrowserCmdStr: function (browserName, openUrls, ieOpenUrl) {
+            return (browserName === "iexplore.exe") ? bat.getBrowserCmdLine(browserName, ieOpenUrl) : bat.getBrowserCmdLine(browserName, openUrls);
+        },
+        getBrowserCmd: function (browserName) {
+            var openUrls = settings.openUrls.join(" "),
+                ieOpenUrl = settings.openUrls[settings.openUrlInIE || 0],
+                cmdStr = bat.getBrowserCmdStr(browserName, openUrls, ieOpenUrl);
+
+            return cmdStr;
+        },
+        addBrowserCmd: function (browsersCmd) {
+            settings.cmdFiles.push({
+                "fileName": "startBrowsers",
+                "commandLines": browsersCmd
+            });
+        },
+        addBrowsersCmd: function () {
+            var browsersCmd = [];
+
+            settings.startBrowsers.forEach(function (browserName) {
+                browsersCmd.push(bat.getBrowserCmd(browserName));
+            });
+
+            browsersCmd.push("exit");
+            bat.addBrowserCmd(browsersCmd);
+        },
+        addStartSlnCmd: function () {
+            if (slnDir && slnFileName) {
+                settings.cmdFiles.push({
+                    "fileName": "startSln",
+                    "commandLines": [
+                        "start " + slnDir + "\\" + slnFileName, "exit"
+                    ]
+                });
+            }
+        },
+        getAllCmds: function () {
+            var allCmds = [];
+
+            settings.cmdFiles.forEach(function (item) {
+                allCmds.push("start " + settings.projectName + "." + item.fileName + ".bat");
+            });
+
+            allCmds.push("exit");
+
+            return allCmds;
+        },
+        addAllCmd: function () {
+            var allCmds = bat.getAllCmds();
+
+            settings.cmdFiles.push({
+                "fileName": "all",
+                "commandLines": allCmds
+            });
+        },
+        getFileStr: function (item) {
             var fileStr = "";
 
-            settings.commandLines.forEach(function (task) {
+            item.commandLines.forEach(function (task) {
                 fileStr += os.EOL + os.EOL + task;
             });
 
             return fileStr;
-        },
-        setFileName: function (fileName) {
-            return fileName.trim().replace(/\s+/g, ".");
         },
         handleError: function (error) {
             if (error) {
                 throw error;
             }
         },
-        checkPaths: function () {
-            var paths = bat.getPaths();
-
-            if (paths.length) {
-                bat.writeFiles(bat.fileName);
-            } else {
-                rl.close();
-            }
-        },
         writeFile: function (fullFileName, fileStr, dirPath) {
             fs.writeFile(fullFileName, fileStr, function (error) {
                 bat.handleError(error);
 
-                bat.checkPaths();
-                console.log(dirPath + fullFileName + " has been created");
+                console.log(dirPath + "\\" + fullFileName + " has been created");
             });
         },
-        assemble: function (dirPath) {
-            var currentDir = bat.destDir || path.resolve("."),
-                fileStr = "C: " + os.EOL + os.EOL + "cd " + currentDir + bat.getFileStr(),
-                fullFileName = bat.setFileName(bat.fileName) + settings.suffix + ".bat";
+        createFile: function (item) {
+            var fileStr = item.cd ? "C: " + os.EOL + os.EOL + "cd " + item.cd + bat.getFileStr(item) : bat.getFileStr(item),
+                fullFileName = settings.projectName + "." + item.fileName + ".bat";
 
-            bat.destDir = currentDir;
-
-            process.chdir(dirPath);
-            bat.writeFile(fullFileName, fileStr, dirPath);
+            process.chdir(userDir);
+            bat.writeFile(fullFileName, fileStr, userDir);
         },
-        writeFiles: function (fileName) {
-            var paths = bat.getPaths(),
-                firstpath = paths.shift(0);
-
-            bat.fileName = fileName;
-
-            bat.assemble(firstpath);
+        createFiles: function () {
+            settings.cmdFiles.forEach(bat.createFile);
         },
         init: function () {
-            rl.question("Name your bat-file: ", bat.writeFiles);
+            bat.setDir();
+
+            bat.addBrowsersCmd();
+            bat.addStartSlnCmd();
+            bat.addAllCmd();
+
+            bat.createFiles();
         }
     };
 
