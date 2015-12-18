@@ -88,7 +88,7 @@ var path = require("path"),
             return "start " + browserName + " " + openUrls;
         },
         getBrowserCmdStr: function (browserName, openUrls, ieOpenUrl) {
-            return (browserName === "iexplore.exe") ? bat.getBrowserCmdLine(browserName, openUrls) : bat.getBrowserCmdLine(browserName, ieOpenUrl);
+            return (browserName === "iexplore.exe") ? bat.getBrowserCmdLine(browserName, ieOpenUrl) : bat.getBrowserCmdLine(browserName, openUrls);
         },
         getBrowserCmd: function (browserName) {
             var openUrls = settings.openUrls.join(" "),
