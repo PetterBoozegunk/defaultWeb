@@ -5,12 +5,19 @@ var path = require("path"),
     fs = require("fs"),
     os = require("os"),
 
+    readline = require("readline"),
+
+    rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    }),
+
     userName = process.env.USERPROFILE.split(path.sep)[2],
 
     readFileOptions = {
         encoding: "utf-8"
     },
-    settings = require("./bat.settings.js"),
+    settings = require("./bat.settings.json"),
 
     util = {
         getParentDir: function (dir) {
@@ -164,23 +171,52 @@ var path = require("path"),
             });
         },
         createFile: function (item) {
-            var fileStr = item.cd ? "C: " + os.EOL + os.EOL + "cd " + item.cd + bat.getFileStr(item) : bat.getFileStr(item),
+            var fileStr = item.cd ? "cd " + item.cd + bat.getFileStr(item) : bat.getFileStr(item),
                 fullFileName = settings.projectName + "." + item.fileName + ".bat";
 
             process.chdir(userDir);
-            bat.writeFile(fullFileName, fileStr, userDir);
+            bat.writeFile(fullFileName, fileStr.trim(), userDir);
         },
         createFiles: function () {
             settings.cmdFiles.forEach(bat.createFile);
         },
-        init: function () {
-            bat.setDir();
-
+        writeFiles: function () {
             bat.addBrowsersCmd();
             bat.addStartSlnCmd();
             bat.addAllCmd();
 
             bat.createFiles();
+
+            rl.close();
+        },
+        getProjectNameFromUser : function () {
+            rl.question("Enter the projects name (the bat files name will start with this): ", function (answer) {
+                settings.projectName = answer;
+
+                bat.writeFiles();
+
+                console.log(" \nThe project name is:", answer, "\n ");
+            });
+        },
+        getProjectNameFromProject: function (projectName) {
+            settings.projectName = projectName.toString().toLowerCase().replace(/\.sln$/, "");
+            bat.writeFiles();
+        },
+        checkProjectName: function () {
+            return slnFileName || settings.projectName;
+        },
+        setProjectName: function () {
+            var projectName = bat.checkProjectName();
+
+            if (!projectName) {
+                bat.getProjectNameFromUser();
+            } else {
+                bat.getProjectNameFromProject(projectName);
+            }
+        },
+        init: function () {
+            bat.setDir();
+            bat.setProjectName();
         }
     };
 
