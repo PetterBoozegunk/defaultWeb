@@ -7,6 +7,8 @@ var gulp = require("gulp"),
     plugins = require("gulp-load-plugins")(),
     lessPluginGlob = require("less-plugin-glob"),
 
+    lazypipe = require("lazypipe"),
+
     settings = {
         dest: config.compileToFolder + "/css",
         src: ["less/styles.less"],
@@ -31,34 +33,32 @@ var gulp = require("gulp"),
         }
     },
 
+    mainLessPipe = lazypipe()
+    .pipe(plugins.less, settings.options)
+    .pipe(plugins.pleeease, settings.pleeease)
+    .pipe(plugins.shorthand)
+    .pipe(plugins.stripCssComments, settings.comments),
+
     less = {
         tasks: {
             "less:prod": function () {
                 return gulp.src(settings.src)
-                    .pipe(plugins.less(settings.options))
-                    .pipe(plugins.pleeease(settings.pleeease))
-                    .pipe(plugins.shorthand())
+                    .pipe(mainLessPipe())
                     .pipe(plugins.minifyCss())
-                    .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(gulp.dest(settings.dest));
             },
             "less:dev": function () {
                 return gulp.src(settings.src)
                     .pipe(plugins.plumber())
                     .pipe(plugins.sourcemaps.init())
-                    .pipe(plugins.less(settings.options))
-                    .pipe(plugins.pleeease(settings.pleeease))
-                    .pipe(plugins.shorthand())
-                    .pipe(plugins.stripCssComments(settings.comments))
+                    .pipe(mainLessPipe())
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(settings.dest));
             },
             "less:ie:prod": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(plugins.less(settings.options))
-                    .pipe(plugins.pleeease(settings.pleeease))
-                    .pipe(plugins.shorthand())
+                    .pipe(mainLessPipe())
                     .pipe(plugins.minifyCss())
                     .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(gulp.dest(settings.dest));
@@ -67,9 +67,7 @@ var gulp = require("gulp"),
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(plugins.less(settings.options))
-                    .pipe(plugins.pleeease(settings.pleeease))
-                    .pipe(plugins.shorthand())
+                    .pipe(mainLessPipe())
                     .pipe(gulp.dest(settings.dest));
             },
             "less:dev:all": ["less:dev", "less:ie:dev"],

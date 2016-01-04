@@ -19,14 +19,14 @@ var gulp = require("gulp"),
                     //    res.headers["content-encoding"] = "gzip";
                     //}]
             },
-            browser: ["firefox"],
-            reloadDelay: 500
+            browser: ["firefox", "google chrome", "opera", "iexplore"],
+            reloadDelay: 100
         },
         watchFiles: [
             config.compileToFolder + "/css/*.css",
             config.compileToFolder + "/js/*.js",
-            "pages/**",
-            "blocks/**"
+            "../pages/**",
+            "../blocks/**"
         ]
     },
 

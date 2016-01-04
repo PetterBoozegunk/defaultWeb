@@ -121,10 +121,6 @@
             },
             init: function () {
                 if (parallax.elems.length) {
-
-                    //window.console.log("areaHeightsCache = ", areaHeightsCache);
-                    //window.console.log("translateYPercentCache = ", translateYPercentCache);
-
                     parallax.scroll();
 
                     setTimeout(parallax.bindEvents, 0);
