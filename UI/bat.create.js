@@ -189,7 +189,7 @@ var path = require("path"),
 
             rl.close();
         },
-        getProjectNameFromUser : function () {
+        getProjectNameFromUser: function () {
             rl.question("Enter the projects name (the bat files name will start with this): ", function (answer) {
                 settings.projectName = answer;
 
