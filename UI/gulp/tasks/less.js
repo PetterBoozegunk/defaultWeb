@@ -33,11 +33,8 @@ var gulp = require("gulp"),
         }
     },
 
-    mainLessPipe = lazypipe()
-    .pipe(plugins.less, settings.options)
-    .pipe(plugins.pleeease, settings.pleeease)
-    .pipe(plugins.shorthand)
-    .pipe(plugins.stripCssComments, settings.comments),
+    // There just must be a better way to get jsbeautifier + jslint to handle this better... 
+    mainLessPipe = lazypipe().pipe(plugins.less, settings.options).pipe(plugins.pleeease, settings.pleeease).pipe(plugins.shorthand).pipe(plugins.stripCssComments, settings.comments),
 
     less = {
         tasks: {
