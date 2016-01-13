@@ -1,0 +1,71 @@
+﻿/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/font.mixins.less" />
+/// <reference path="../mixins/static.mixins.less" />
+/// <reference path="../mixins/mixins.less" />
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinnersCss {
+
+    .spinner {
+        position: relative;
+
+        &:after {
+            @size: 36px;
+            @half: (@size / 2);
+
+            position: absolute;
+            top: 50%;
+            //right: @halfGutter;
+
+            margin: ~"-@{half} 0 0 10px";
+
+            .iconFont("\f021");
+
+            width: @size;
+            height: @size;
+
+            font-size: @size;
+            line-height: @size;
+
+            text-align: center;
+
+            animation: 1.5s infinite spinner linear;
+        }
+    }
+
+}
+
+.spinnersCss {
+    li {
+        overflow: visible !important;
+    }
+
+    li:nth-of-type(2) {
+        color: darkgoldenrod;
+    }
+
+    li:nth-of-type(3) {
+        color: salmon;
+
+        .spinner {
+            .remFont(40px);
+
+            &::after {
+                .iconFont("\f013");
+            }
+        }
+    }
+
+    li:nth-of-type(4) {
+        .spinner {
+            &::after {
+                .iconFont("\f110");
+            }
+        }
+    }
+}
