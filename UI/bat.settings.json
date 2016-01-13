@@ -1,6 +1,4 @@
 {
-
-
     "openUrls": [
         "http://defaultweb.local:666"
     ],
@@ -10,7 +8,6 @@
         "iexplore.exe",
         "opera.exe"
     ],
-    "openUrlInIE": 0,
 
     "cmdFiles": [{
         "fileName": "startServer",
