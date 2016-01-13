@@ -1,3 +1,7 @@
+/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/static.mixins.less" />
+/// <reference path="../mixins/mixins.less" />
+
 @fontBaseUrl: "/UI/fonts/";
 
 @font-face {
@@ -18,3 +22,12 @@ body {
     padding-right: 5px;
 }
 
+.icon-test {
+    .resetList();
+    font-family: 'FontAwesome';
+
+    li {
+        font-size: 2em;
+        margin-bottom: @halfGutter;
+    }
+}
