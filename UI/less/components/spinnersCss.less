@@ -14,13 +14,12 @@
     .spinner {
         position: relative;
 
-        &:after {
+        &::after {
             @size: 36px;
             @half: (@size / 2);
 
             position: absolute;
             top: 50%;
-            //right: @halfGutter;
 
             margin: ~"-@{half} 0 0 10px";
 
@@ -36,11 +35,24 @@
 
             animation: 1.5s infinite spinner linear;
         }
-    }
 
+        &.steps {
+            &::after {
+                animation-timing-function: steps(8);
+
+                //transform-origin: 50% 50%; /* center: firefox */
+                //transform-origin: 51% 47%; /* center: chrome, opera */
+                //transform-origin: 50% 49%; /* not center, but a little less wonky: ie11 */
+
+                transform-origin: 50% 50%;
+            }
+        }
+    }
 }
 
 .spinnersCss {
+    padding-bottom: @gutter;
+
     li {
         overflow: visible !important;
     }
@@ -65,6 +77,29 @@
         .spinner {
             &::after {
                 .iconFont("\f110");
+            }
+        }
+    }
+
+    li:nth-of-type(5) {
+        .spinner {
+            font-size: 3em;
+
+            color: lightseagreen;
+
+            &::after {
+                .iconFont("\f110");
+
+                @size: 48px;
+                @half: (@size / 2);
+
+                margin-top: ~"-@{half}";
+
+                width: @size;
+                height: @size;
+
+                font-size: @size;
+                line-height: @size;
             }
         }
     }
