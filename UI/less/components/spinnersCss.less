@@ -5,7 +5,7 @@
 
 @keyframes spinner {
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg) scale(1.0);
     }
 }
 
@@ -34,17 +34,13 @@
             text-align: center;
 
             animation: 1.5s infinite spinner linear;
+
+            //transform-origin: center center;
         }
 
         &.steps {
             &::after {
                 animation-timing-function: steps(8);
-
-                //transform-origin: 50% 50%; /* center: firefox */
-                //transform-origin: 51% 47%; /* center: chrome, opera */
-                //transform-origin: 50% 49%; /* not center, but a little less wonky: ie11 */
-
-                transform-origin: 50% 50%;
             }
         }
     }
