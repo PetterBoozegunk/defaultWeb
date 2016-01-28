@@ -41,7 +41,7 @@ var gulp = require("gulp"),
             "less:prod": function () {
                 return gulp.src(settings.src)
                     .pipe(mainLessPipe())
-                    .pipe(plugins.minifyCss())
+                    .pipe(plugins.cssnano())
                     .pipe(gulp.dest(settings.dest));
             },
             "less:dev": function () {

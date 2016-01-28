@@ -3,10 +3,7 @@
         "http://defaultweb.local:666"
     ],
     "startBrowsers": [
-        "firefox.exe",
-        "chrome.exe",
-        "iexplore.exe",
-        "opera.exe"
+        "firefox.exe"
     ],
 
     "cmdFiles": [{
@@ -14,6 +11,12 @@
         "commandLines": [
             "cd ..",
             "start node server.js",
+            "exit"
+        ]
+    }, {
+        "fileName": "vs",
+        "commandLines": [
+            "start devenv.exe",
             "exit"
         ]
     }, {
