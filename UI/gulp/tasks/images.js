@@ -39,11 +39,8 @@ var gulp = require("gulp"),
             "image-min": function () {
                 return gulp.src(settings.images.src)
                     .pipe(plugins.plumber())
-                    .pipe(plugins.smushit({
-                        verbose: true
-                    }))
+                    .pipe(plugins.imagemin())
                     .pipe(gulp.dest(settings.images.dest));
-
             },
             "before:iconFont": ["svg-min-font"]
         }

@@ -43,10 +43,7 @@ var gulp = require("gulp"),
         }],
 
         jsLint: {
-            js: {
-                jslintHappy: true,
-                end_with_newline: false
-            }
+            jslint_happy: true
         },
         uglify: {
             compress: {
@@ -64,7 +61,7 @@ var gulp = require("gulp"),
         prettify: function (src, dest) {
             return gulp.src(src)
                 .pipe(plugins.plumber())
-                .pipe(plugins.jsbeautifier(settings.jsLint))
+                .pipe(plugins.jsPrettify(settings.jsLint))
                 .pipe(gulp.dest(dest));
         },
         tasks: {
@@ -87,6 +84,7 @@ var gulp = require("gulp"),
             "js:prod": function () {
                 return gulp.src(settings.concatSrc)
                     .pipe(plugins.concat(settings.fileName))
+                    .pipe(plugins.stripDebug())
                     .pipe(plugins.uglify(settings.uglify))
                     .pipe(gulp.dest(settings.dest));
             },
