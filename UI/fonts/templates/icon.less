@@ -13,6 +13,7 @@
 <% _.each(glyphs, function(glyph) { %>.<%= className %>-<%= glyph.name %>:before, 
 .<%= className %>-<%= glyph.name %>-content { 
     font-family: "<%= fontName %>";
-    content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toLowerCase() %>";
+    content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>";
+
 }
 <% }); %>
