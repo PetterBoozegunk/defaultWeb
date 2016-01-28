@@ -10,6 +10,7 @@ var gulp = require("gulp"),
         tasks: {
             "clean": function () {
                 return gulp.src(config.compileToFolder + "/**/**")
+                    .pipe(plugins.plumber())
                     .pipe(plugins.rimraf());
             },
 
