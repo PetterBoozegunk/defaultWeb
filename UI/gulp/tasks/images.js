@@ -26,11 +26,13 @@ var gulp = require("gulp"),
         tasks: {
             "svg-min-font": function () {
                 return gulp.src(settings.svg.font.src)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.font.dest));
             },
             "svg-min-image": function () {
                 return gulp.src(settings.svg.images.src)
+                    .pipe(plugins.plumber())
                     .pipe(plugins.svgmin())
                     .pipe(gulp.dest(settings.svg.images.dest));
             },
@@ -39,11 +41,8 @@ var gulp = require("gulp"),
             "image-min": function () {
                 return gulp.src(settings.images.src)
                     .pipe(plugins.plumber())
-                    .pipe(plugins.smushit({
-                        verbose: true
-                    }))
+                    .pipe(plugins.imagemin())
                     .pipe(gulp.dest(settings.images.dest));
-
             },
             "before:iconFont": ["svg-min-font"]
         }

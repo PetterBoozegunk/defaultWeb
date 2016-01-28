@@ -56,7 +56,7 @@ var gulp = require("gulp"),
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.concat(settings.oldIeFileName))
                     .pipe(mainLessPipe())
-                    .pipe(plugins.minifyCss())
+                    .pipe(plugins.cssnano())
                     .pipe(plugins.stripCssComments(settings.comments))
                     .pipe(gulp.dest(settings.dest));
             },

@@ -15,9 +15,9 @@ var gulp = require("gulp"),
         options: {
             proxy: {
                 target: config.developerRoot //,
-                    //proxyRes: [function (res) {
-                    //    res.headers["content-encoding"] = "gzip";
-                    //}]
+                //proxyRes: [function (res) {
+                //    res.headers["content-encoding"] = "gzip";
+                //}]
             },
             //browser: ["firefox", "google chrome", "opera", "iexplore"],
             browser: ["firefox"],
