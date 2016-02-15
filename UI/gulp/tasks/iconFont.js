@@ -12,8 +12,8 @@ var gulp = require("gulp"),
         name: "icon",
         src: ["fonts/svg/*.svg"],
         lesstemplate: "fonts/templates/icon.less",
-        lessdest: ".",
-        fontdest: "less/fonts/",
+        fontdest: "./fonts",
+        lessdest: "less/fonts/",
         dir: "/UI/fonts/",
         className: "icon",
         formats: ["svg", "ttf", "eot", "woff", "woff2"]
@@ -27,20 +27,20 @@ var gulp = require("gulp"),
                 fontPath: settings.dir,
                 className: settings.className
             }))
-            .pipe(gulp.dest(settings.fontdest));
+            .pipe(gulp.dest(settings.lessdest));
     },
     mainTask = function () {
         return gulp.src(settings.src)
             .pipe(plugins.plumber())
             .pipe(plugins.iconfont({
                 fontName: settings.name,
-                appendUnicode: true,
+                //appendUnicode: true,
                 normalize: true,
                 formats: settings.formats,
                 timestamp: runTimestamp
             }))
             .on("glyphs", glyphs)
-            .pipe(gulp.dest(settings.lessdest));
+            .pipe(gulp.dest(settings.fontdest));
     },
 
     iconFont = {
