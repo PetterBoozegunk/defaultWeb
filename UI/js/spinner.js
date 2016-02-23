@@ -50,14 +50,28 @@
 
                 spinner.addSpinnerParentStyles(t);
                 t.append(spinnerObj.el);
+
+                return spinnerObj;
             },
             get: function (e, spinnerOpts) {
-                var t = $(e.target);
+                var t = $(e.target),
+                    spinnerData = t.data("spinnerData") || spinner.add(t, spinnerOpts);
 
-                spinner.add(t, spinnerOpts);
+                t.data("spinnerData", spinnerData);
+            },
+            hide: function (e) {
+                var t = $(e.target),
+                    spinnerData = t.data("spinnerData");
+
+                if (spinnerData) {
+                    spinnerData.stop();
+                }
             },
             bindEvent: function () {
-                $("body").on("spinner:get", spinner.get);
+                var body = $("body");
+
+                body.on("spinner:get", spinner.get);
+                body.on("spinner:hide", spinner.hide);
             }
         };
 
