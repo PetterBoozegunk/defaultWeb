@@ -109,6 +109,15 @@ var path = require("path"),
 
             return cmdStr;
         },
+        addDirectoryCmd: function () {
+            settings.cmdFiles.push({
+                "fileName": "directory",
+                "commandLines": [
+                    "explorer " + currentDir,
+                    "exit"
+                ]
+            });
+        },
         addBrowserCmd: function (browsersCmd) {
             settings.cmdFiles.push({
                 "fileName": "startBrowsers",
@@ -185,10 +194,16 @@ var path = require("path"),
         createFiles: function () {
             settings.cmdFiles.forEach(bat.createFile);
         },
+        automaticBats: {
+            bats: ["Browsers", "StartSln", "Directory", "All"],
+            set: function () {
+                bat.automaticBats.bats.forEach(function (name) {
+                    bat["add" + name + "Cmd"]();
+                });
+            }
+        },
         writeFiles: function () {
-            bat.addBrowsersCmd();
-            bat.addStartSlnCmd();
-            bat.addAllCmd();
+            bat.automaticBats.set();
 
             bat.createFiles();
 
