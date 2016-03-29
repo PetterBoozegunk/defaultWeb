@@ -14,12 +14,6 @@
             "exit"
         ]
     }, {
-        "fileName": "directory",
-        "commandLines": [
-            "explorer .",
-            "exit"
-        ]
-    }, {
         "fileName": "vs",
         "commandLines": [
             "start devenv.exe",
