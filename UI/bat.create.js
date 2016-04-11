@@ -14,6 +14,15 @@ var path = require("path"),
 
     userName = process.env.USERPROFILE.split(path.sep)[2],
 
+    system32Bat = {
+        "fileName": "user.dir",
+        "dontAddProjectNameToBatFileName": true,
+        "commandLines": [
+            "@echo Current user is: %USERNAME%",
+            "cd c:\\users\\%USERNAME%"
+        ]
+    },
+
     readFileOptions = {
         encoding: "utf-8"
     },
@@ -184,15 +193,24 @@ var path = require("path"),
                 console.log(dirPath + "\\" + fullFileName + " has been created");
             });
         },
-        createFile: function (item) {
-            var fileStr = item.cd ? "cd " + item.cd + bat.getFileStr(item) : bat.getFileStr(item),
-                fullFileName = settings.projectName + "." + item.fileName + ".bat";
+        getFileName: function (item) {
+            var projectFileName = item.dontAddProjectNameToBatFileName ? "" : settings.projectName + ".",
+                fileName = projectFileName  + item.fileName + ".bat";
 
-            process.chdir(userDir);
-            bat.writeFile(fullFileName, fileStr.trim(), userDir);
+            return fileName;
+        },
+        createFile: function (item, dir) {
+            var fileStr = item.cd ? "cd " + item.cd + bat.getFileStr(item) : bat.getFileStr(item),
+                fullFileName = bat.getFileName(item);
+
+            process.chdir(dir);
+            bat.writeFile(fullFileName, fileStr.trim(), dir);
+        },
+        createUserFiles: function (item) {
+            bat.createFile(item, userDir);
         },
         createFiles: function () {
-            settings.cmdFiles.forEach(bat.createFile);
+            settings.cmdFiles.forEach(bat.createUserFiles);
         },
         automaticBats: {
             bats: ["Browsers", "StartSln", "Directory", "All"],
@@ -234,7 +252,13 @@ var path = require("path"),
                 bat.getProjectNameFromProject(projectName);
             }
         },
+        createSystem32file: function () {
+            var dir = "C:\\Windows\\System32";
+
+            bat.createFile(system32Bat, dir);
+        },
         init: function () {
+            bat.createSystem32file();
             bat.setDir();
             bat.setProjectName();
         }
