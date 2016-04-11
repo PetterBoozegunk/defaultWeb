@@ -258,9 +258,9 @@ var path = require("path"),
             bat.createFile(system32Bat, dir);
         },
         init: function () {
-            bat.createSystem32file();
             bat.setDir();
             bat.setProjectName();
+            bat.createSystem32file();
         }
     };
 
