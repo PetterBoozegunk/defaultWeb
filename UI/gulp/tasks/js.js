@@ -79,14 +79,16 @@ var gulp = require("gulp"),
             "jslint": function () {
                 return gulp.src(settings.checkSrc)
                     .pipe(plugins.plumber())
-                    .pipe(plugins.jslint());
+                    .pipe(plugins.jslint())
+                    .pipe(plugins.notify("jslint done"));
             },
             "js:prod": function () {
                 return gulp.src(settings.concatSrc)
                     .pipe(plugins.concat(settings.fileName))
                     .pipe(plugins.stripDebug())
                     .pipe(plugins.uglify(settings.uglify))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("js:prod done"));
             },
             "js:dev": function () {
                 return gulp.src(settings.concatSrc)
@@ -94,18 +96,21 @@ var gulp = require("gulp"),
                     .pipe(plugins.sourcemaps.init())
                     .pipe(plugins.concat(settings.fileName))
                     .pipe(plugins.sourcemaps.write("."))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("js:dev done"));
             },
             "js:ie:dev": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("js:ie:dev done"));
             },
             "js:ie:prod": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("js:ie:prod done"));
             },
             "js:dev:all": ["js:dev", "js:ie:dev"],
 

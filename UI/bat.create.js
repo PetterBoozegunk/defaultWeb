@@ -195,7 +195,7 @@ var path = require("path"),
         },
         getFileName: function (item) {
             var projectFileName = item.dontAddProjectNameToBatFileName ? "" : settings.projectName + ".",
-                fileName = projectFileName  + item.fileName + ".bat";
+                fileName = projectFileName + item.fileName + ".bat";
 
             return fileName;
         },

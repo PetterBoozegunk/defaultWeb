@@ -12,7 +12,7 @@
                             var t = $(this),
                                 val = t.val().replace(/\D+/g, ""),
                                 showVal = val.replace(/((\s)?(\d){4})+/g, function (match) {
-                                    console.log("match: ", match);
+                                    window.console.log("match: ", match);
 
                                     return " " + match;
                                 });
