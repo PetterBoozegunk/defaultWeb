@@ -4,6 +4,10 @@
     width: @width;
     overflow: hidden;
 
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
     img {
         display: block;
         position: absolute;
@@ -12,7 +16,8 @@
         right: 0;
         width: 100%;
 
-        visibility: hidden;
+        //visibility: hidden;
+        opacity: 0.0001;
     }
 
     img.coverHeight {

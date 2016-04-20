@@ -42,7 +42,8 @@ var gulp = require("gulp"),
                 return gulp.src(settings.src)
                     .pipe(mainLessPipe())
                     .pipe(plugins.cssnano())
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("less:prod done"));
             },
             "less:dev": function () {
                 return gulp.src(settings.src)
@@ -50,7 +51,8 @@ var gulp = require("gulp"),
                     .pipe(plugins.sourcemaps.init())
                     .pipe(mainLessPipe())
                     .pipe(plugins.sourcemaps.write("."))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("less:dev done"));
             },
             "less:ie:prod": function () {
                 return gulp.src(settings.oldIeSrc)
@@ -58,14 +60,16 @@ var gulp = require("gulp"),
                     .pipe(mainLessPipe())
                     .pipe(plugins.cssnano())
                     .pipe(plugins.stripCssComments(settings.comments))
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("less:ie:prod done"));
             },
             "less:ie:dev": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat(settings.oldIeFileName))
                     .pipe(mainLessPipe())
-                    .pipe(gulp.dest(settings.dest));
+                    .pipe(gulp.dest(settings.dest))
+                    .pipe(plugins.notify("less:ie:dev done"));
             },
             "less:dev:all": ["less:dev", "less:ie:dev"],
 
