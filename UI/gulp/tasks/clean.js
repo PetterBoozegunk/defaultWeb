@@ -12,10 +12,7 @@ var gulp = require("gulp"),
                 return gulp.src(config.compileToFolder + "/**/**")
                     .pipe(plugins.plumber())
                     .pipe(plugins.rimraf());
-            },
-
-            // This will make file-watch crash, just so you know :)
-            "before:prod": ["clean"]
+            }
         }
     };
 

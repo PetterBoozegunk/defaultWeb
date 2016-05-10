@@ -6,24 +6,35 @@
         "firefox.exe"
     ],
 
-    "cmdFiles": [{
-        "fileName": "startServer",
-        "commandLines": [
-            "cd ..",
-            "start node server.js",
-            "exit"
-        ]
-    }, {
-        "fileName": "vs",
-        "commandLines": [
-            "start devenv.exe",
-            "exit"
-        ]
-    }, {
-        "fileName": "gulp",
-        "commandLines": [
-            "start gulp sync-watch",
-            "gulp"
-        ]
-    }]
+    "cmdFiles": [
+        {
+            "fileName": "startServer",
+            "commandLines": [
+                "cd ..",
+                "start node server.js",
+                "exit"
+            ]
+        },
+        {
+            "fileName": "vs",
+            "commandLines": [
+                "start devenv.exe",
+                "exit"
+            ]
+        },
+        {
+            "fileName": "gulp",
+            "commandLines": [
+                "start gulp sync-watch",
+                "gulp"
+            ]
+        },
+        {
+            "fileName": "plato",
+            "commandLines": [
+                "start http://defaultweb.local:666/UI/report/index.html",
+                "exit"
+            ]
+        }
+    ]
 }

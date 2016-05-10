@@ -40,8 +40,7 @@ var gulp = require("gulp"),
                 timestamp: runTimestamp
             }))
             .on("glyphs", glyphs)
-            .pipe(gulp.dest(settings.fontdest))
-            .pipe(plugins.notify("iconFont done"));
+            .pipe(gulp.dest(settings.fontdest));
     },
 
     iconFont = {
