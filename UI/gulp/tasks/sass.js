@@ -1,4 +1,4 @@
-/*global require */
+﻿/*global require */
 /*jslint node: true */
 "use strict";
 
@@ -9,8 +9,8 @@ var gulp = require("gulp"),
     lazypipe = require("lazypipe"),
 
     settings = {
-        dest: config.compileToFolder + "/css2",
-        src: ["sass/styles.scss"],
+        dest: config.compileToFolder + "/css",
+        src: ["sass/styles-sass.scss"],
         comments: {
             all: true
         },
