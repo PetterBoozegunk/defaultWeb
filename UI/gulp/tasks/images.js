@@ -28,15 +28,13 @@ var gulp = require("gulp"),
                 return gulp.src(settings.svg.font.src)
                     .pipe(plugins.plumber())
                     .pipe(plugins.svgmin())
-                    .pipe(gulp.dest(settings.svg.font.dest))
-                    .pipe(plugins.notify("svg-min-font done"));
+                    .pipe(gulp.dest(settings.svg.font.dest));
             },
             "svg-min-image": function () {
                 return gulp.src(settings.svg.images.src)
                     .pipe(plugins.plumber())
                     .pipe(plugins.svgmin())
-                    .pipe(gulp.dest(settings.svg.images.dest))
-                    .pipe(plugins.notify("svg-min-image done"));
+                    .pipe(gulp.dest(settings.svg.images.dest));
             },
 
             "before:image-min": ["svg-min-image"],
@@ -44,8 +42,7 @@ var gulp = require("gulp"),
                 return gulp.src(settings.images.src)
                     .pipe(plugins.plumber())
                     .pipe(plugins.imagemin())
-                    .pipe(gulp.dest(settings.images.dest))
-                    .pipe(plugins.notify("image-min done"));
+                    .pipe(gulp.dest(settings.images.dest));
             },
             "before:iconFont": ["svg-min-font"]
         }

@@ -6,41 +6,58 @@ var gulp = require("gulp"),
     config = require("../config.js"),
     plugins = require("gulp-load-plugins")(),
 
+    defaultProperties = {
+        files: ["*.js"],
+        concat: true, // concat to '/UI/Dist/js/scripts.js'
+        prettify: true, // prettify before jslint
+        check: true // check with jslint
+    },
+
     settings = {
         dest: config.compileToFolder + "/js",
         fileName: "scripts.js",
 
-        concatSrc: ["js/polyfills/*.js", "js/lib/*.js", "js/plugins_external/*.js", "js/plugins/*.js", "js/*.js", "js/tests/*.js"],
-        checkSrc: ["*.js", "js/*.js", "js/plugins/*.js", "js/tests/*.js", "gulp/**", "../../server.js"],
-
-        prettify: [{
-            files: ["js/*.js"],
-            dest: "js"
+        src: [{
+            dir: "js/polyfills/",
+            check: false,
+            prettify: false
         }, {
-            files: ["js/polyfills/*.js"],
-            dest: "js/polyfills"
+            dir: "js/lib/",
+            check: false,
+            prettify: false
         }, {
-            files: ["js/plugins/*.js"],
-            dest: "js/plugins"
+            dir: "js/plugin_external/",
+            check: false,
+            prettify: false
         }, {
-            files: ["js/tests/*.js"],
-            dest: "js/tests"
+            dir: "js/plugins/"
         }, {
-            files: ["gulp/*.js"],
-            dest: "gulp"
+            dir: "js/"
         }, {
-            files: ["gulp/tasks/*.js"],
-            dest: "gulp/tasks"
+            dir: "js/tests/"
         }, {
-            files: ["../server/*.js", "../server/*.json"],
-            dest: "../server"
+            dir: "gulp/",
+            concat: false
         }, {
-            files: ["../server.js"],
-            dest: ".."
+            dir: "gulp/tasks/",
+            concat: false
         }, {
-            files: ["./*.js", "./*.json"],
-            dest: "."
+            dir: "../server/",
+            files: ["*.js", "*.json"],
+            concat: false
+        }, {
+            dir: "../",
+            files: ["server.js"],
+            concat: false
+        }, {
+            dir: "./",
+            files: ["*.js", "*.json"],
+            concat: false
         }],
+
+        concat: [],
+        check: [],
+        prettify: [],
 
         jsLint: {
             jslint_happy: true
@@ -56,8 +73,10 @@ var gulp = require("gulp"),
         oldIeSrc: ["js/oldIe/*.js"]
     },
 
+    setupJsTaskSettings = require("../setupJsTaskSettings.js"),
+
     js = {
-        checkSrc: settings.checkSrc,
+        checkSrc: settings.check,
         prettify: function (src, dest) {
             return gulp.src(src)
                 .pipe(plugins.plumber())
@@ -77,40 +96,35 @@ var gulp = require("gulp"),
             },
             "before:jslint": ["prettify"],
             "jslint": function () {
-                return gulp.src(settings.checkSrc)
+                return gulp.src(settings.check)
                     .pipe(plugins.plumber())
-                    .pipe(plugins.jslint())
-                    .pipe(plugins.notify("jslint done"));
+                    .pipe(plugins.jslint());
             },
             "js:prod": function () {
-                return gulp.src(settings.concatSrc)
+                return gulp.src(settings.concat)
                     .pipe(plugins.concat(settings.fileName))
                     .pipe(plugins.stripDebug())
                     .pipe(plugins.uglify(settings.uglify))
-                    .pipe(gulp.dest(settings.dest))
-                    .pipe(plugins.notify("js:prod done"));
+                    .pipe(gulp.dest(settings.dest));
             },
             "js:dev": function () {
-                return gulp.src(settings.concatSrc)
+                return gulp.src(settings.concat)
                     .pipe(plugins.plumber())
                     .pipe(plugins.sourcemaps.init())
                     .pipe(plugins.concat(settings.fileName))
                     .pipe(plugins.sourcemaps.write("."))
-                    .pipe(gulp.dest(settings.dest))
-                    .pipe(plugins.notify("js:dev done"));
+                    .pipe(gulp.dest(settings.dest));
             },
             "js:ie:dev": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest))
-                    .pipe(plugins.notify("js:ie:dev done"));
+                    .pipe(gulp.dest(settings.dest));
             },
             "js:ie:prod": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest))
-                    .pipe(plugins.notify("js:ie:prod done"));
+                    .pipe(gulp.dest(settings.dest));
             },
             "js:dev:all": ["js:dev", "js:ie:dev"],
 
@@ -125,5 +139,7 @@ var gulp = require("gulp"),
             "js/**": ["js:dev:all"]
         }
     };
+
+setupJsTaskSettings.init(settings, defaultProperties);
 
 module.exports = js;
