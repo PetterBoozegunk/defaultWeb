@@ -1,0 +1,53 @@
+﻿/// <reference path="../vars/vars.less" />
+/// <reference path="../mixins/font.mixins.less" />
+
+form {
+    label {
+        display: block;
+        margin-bottom: @quarterGutter;
+
+        & > span:first-child {
+            display: block;
+        }
+
+        &.checkbox {
+            input {
+                position: absolute;
+                z-index: -1;
+                opacity: 0.01;
+            }
+
+            span {
+                &::before {
+                    margin-right: 0.3em;
+                    .iconFont("\f0c8");
+                }
+            }
+
+            input:checked + span  {
+                &::before {
+                    .iconFont("\f14a");
+                }
+            }
+        }
+
+        &.required {
+            & > span:first-of-type {
+                &::after {
+                    margin-left: 0.5em;
+                    .iconFont("\f069");
+                    vertical-align: super;
+                    font-size: smaller;
+                }
+            }
+        }
+
+        &.error {
+            color: @errorColor;
+
+            input {
+                border-color: @errorColor;
+            }
+        }
+    }
+}
