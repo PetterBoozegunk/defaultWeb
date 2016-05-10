@@ -1,7 +1,6 @@
 {
     "openUrls": [
-        "http://defaultweb.local:666",
-        "http://defaultweb.local:666/UI/report/index.html"
+        "http://defaultweb.local:666"
     ],
     "startBrowsers": [
         "firefox.exe"
