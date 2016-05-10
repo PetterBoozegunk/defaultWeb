@@ -1,0 +1,41 @@
+﻿<!-- layout("/pages/layout/index.phtml") --> 
+
+<div class="row inputStuff">
+  <h1>Form stuff</h1>
+  
+  <form data-validation="on" autocomplete="off">
+    <fieldset>
+      
+      <label>
+        <span>Personnummer (swedish)</span>
+        <input type="text" data-type="personnummer" />
+      </label>
+      
+      <label class="required">
+        <span>Reqired input[type=text]</span>
+        <input type="text" required="required" />
+      </label>
+      
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      
+      <label>
+        <span>Pattern ((\d){3}(\s)?\d{2}, swedish zipcode)</span>
+        <input type="text" pattern="(\d){3}(\s)?\d{2}" />
+      </label>
+      
+      <label class="checkbox">
+        <input type="checkbox" />
+        <span>Custom checkbox</span>
+      </label>
+
+      <div class="buttons">
+        <button type="submit">Submit</button>
+      </div>
+    
+    </fieldset>
+  </form>
+
+</div>
