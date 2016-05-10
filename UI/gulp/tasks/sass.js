@@ -1,4 +1,4 @@
-﻿/*global require */
+/*global require */
 /*jslint node: true */
 "use strict";
 
@@ -26,8 +26,15 @@ var gulp = require("gulp"),
         }
     },
 
-    // There just must be a better way to get jsbeautifier + jslint to handle this better... 
-    mainLessPipe = lazypipe().pipe(plugins.sassGlob).pipe(plugins.sass).pipe(plugins.shorthand).pipe(plugins.pleeease, settings.pleeease).pipe(plugins.stripCssComments, settings.comments).pipe(plugins.removeEmptyLines),
+    mainLessPipe = (function () {
+        return lazypipe()
+            .pipe(plugins.sassGlob)
+            .pipe(plugins.sass)
+            .pipe(plugins.shorthand)
+            .pipe(plugins.pleeease, settings.pleeease)
+            .pipe(plugins.stripCssComments, settings.comments)
+            .pipe(plugins.removeEmptyLines);
+    }()),
 
     sass = {
         tasks: {
