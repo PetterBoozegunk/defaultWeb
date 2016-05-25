@@ -31,22 +31,31 @@ form {
             }
         }
 
-        &.required {
-            & > span:first-of-type {
-                &::after {
-                    margin-left: 0.5em;
-                    .iconFont("\f069");
-                    vertical-align: super;
-                    font-size: smaller;
-                }
-            }
-        }
-
         &.error {
             color: @errorColor;
 
             input {
                 border-color: @errorColor;
+            }
+        }
+    }
+
+    .radio-buttons {
+        label {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    }
+
+    .required {
+        & > span:first-of-type {
+            display: block;
+
+            &::after {
+                margin-left: 0.5em;
+                .iconFont("\f069");
+                vertical-align: super;
+                font-size: smaller;
             }
         }
     }

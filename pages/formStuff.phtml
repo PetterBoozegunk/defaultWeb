@@ -1,6 +1,6 @@
 ﻿<!-- layout("/pages/layout/index.phtml") --> 
 
-<div class="row inputStuff">
+<div class="row formStuff">
   <h1>Form stuff</h1>
   
   <form data-validation="on" autocomplete="off">
@@ -31,8 +31,24 @@
         <span>Custom checkbox</span>
       </label>
 
+      <div class="radio-buttons required">
+        <span>Radio buttons required test</span>
+        <label>
+          <input type="radio" name="radiobuttonstest" value="yes" required="required" />
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="radiobuttonstest" value="no" />
+          <span>No</span>
+        </label>
+        <label>
+          <input type="radio" name="radiobuttonstest" value="maybe" />
+          <span>Maybe</span>
+        </label>
+      </div>
+
       <div class="buttons">
-        <button type="submit">Submit</button>
+        <button type="submit" disabled="disabled">Submit</button>
       </div>
     
     </fieldset>

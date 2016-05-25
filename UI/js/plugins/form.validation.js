@@ -11,12 +11,30 @@
         },
 
         validation = {
+            radioButtonListIsRequired: function (radioButtons) {
+                var isRequired = false;
+
+                radioButtons.each(function () {
+                    isRequired = (!isRequired && this.hasAttribute("required")) ? true : isRequired;
+                });
+
+                return isRequired;
+            },
             required: {
                 "input": {
                     "checkbox": function () {
                         var isRequired = this.hasAttribute("required"),
                             t = $(this),
                             isValid = isRequired ? t.prop("checked") : true;
+
+                        return isValid;
+                    },
+                    "radio": function() {
+                        var t = $(this),
+                            name = t.attr("name"),
+                            radioButtons = $(this.form).find("input[type=radio][name='" + name + "']"),
+                            isRequired = validation.radioButtonListIsRequired(radioButtons),
+                            isValid = isRequired ? radioButtons.filter(":checked").length : true;
 
                         return isValid;
                     }
