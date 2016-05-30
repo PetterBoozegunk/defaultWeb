@@ -435,7 +435,7 @@
                 util.loadScript("https://maps.googleapis.com/maps/api/js?callback=initMaps");
             },
             loadMarkerClusterer: function () {
-                util.loadScript("http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js", maps.loadGoogelMapApi);
+                util.loadScript("/UI/js/exclude/markerclusterer.js", maps.loadGoogelMapApi);
             },
             winInitMaps: function () {
                 maps.init();
