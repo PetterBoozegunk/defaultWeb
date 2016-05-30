@@ -26,7 +26,7 @@ var gulp = require("gulp"),
             check: false,
             prettify: false
         }, {
-            dir: "js/plugin_external/",
+            dir: "js/plugins_external/",
             check: false,
             prettify: false
         }, {

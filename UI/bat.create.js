@@ -18,8 +18,8 @@ var path = require("path"),
         "fileName": "user.dir",
         "dontAddProjectNameToBatFileName": true,
         "commandLines": [
-            "@echo Current user is: %USERNAME%",
-            "cd c:\\users\\%USERNAME%"
+            "@echo Current user is: %USERNAME% (%USERPROFILE%)",
+            "cd %USERPROFILE%"
         ]
     },
 
