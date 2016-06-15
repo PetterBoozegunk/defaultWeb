@@ -28,6 +28,8 @@
     }, {
         "fileName": "plato",
         "commandLines": [
+            "start \"\" gulp platoReport",
+            "cls",
             "start http://defaultweb.local:666/UI/report/index.html",
             "exit"
         ]
