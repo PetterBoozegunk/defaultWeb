@@ -14,12 +14,6 @@
             "exit"
         ]
     }, {
-        "fileName": "vs",
-        "commandLines": [
-            "start devenv.exe",
-            "exit"
-        ]
-    }, {
         "fileName": "gulp",
         "commandLines": [
             "start gulp sync-watch",
