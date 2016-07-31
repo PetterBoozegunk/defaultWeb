@@ -29,7 +29,7 @@
 
                         return isValid;
                     },
-                    "radio": function() {
+                    "radio": function () {
                         var t = $(this),
                             name = t.attr("name"),
                             radioButtons = $(this.form).find("input[type=radio][name='" + name + "']"),

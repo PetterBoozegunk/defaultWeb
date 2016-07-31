@@ -17,8 +17,12 @@ var gulp = require("gulp"),
         dest: config.compileToFolder + "/js",
         fileName: "scripts.js",
 
-        src: [{
+        src: [, {
             dir: "js/polyfills/",
+            check: false,
+            prettify: false
+        }, {
+            dir: "js/bower/**/dist/",
             check: false,
             prettify: false
         }, {
