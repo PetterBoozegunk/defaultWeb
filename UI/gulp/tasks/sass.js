@@ -14,8 +14,11 @@ var gulp = require("gulp"),
         comments: {
             all: true
         },
-        scss : {
-            config: "sass/scss-lint.yml"
+        lint : {
+            src: ["sass/**/*.scss"],
+            options: {
+                config: "sass/scss-lint.yml"
+            }
         },
         pleeease: {
             browsers: ["last 4 versions"],
@@ -30,11 +33,10 @@ var gulp = require("gulp"),
 
     mainLessPipe = (function () {
         return lazypipe()
-            .pipe(plugins.scssLint, settings.scss)
             .pipe(plugins.sassGlob)
             .pipe(plugins.sass)
-            .pipe(plugins.shorthand)
             .pipe(plugins.pleeease, settings.pleeease)
+            .pipe(plugins.shorthand)
             .pipe(plugins.stripCssComments, settings.comments)
             .pipe(plugins.removeEmptyLines);
     }()),
@@ -47,6 +49,11 @@ var gulp = require("gulp"),
                     .pipe(plugins.cssnano())
                     .pipe(gulp.dest(settings.dest));
             },
+            "sass:lint": function () {
+                return gulp.src(settings.lint.src)
+                    .pipe(plugins.scssLint(settings.lint.options));
+            },
+            "before:sass:dev": ["sass:lint"],
             "sass:dev": function () {
                 return gulp.src(settings.src)
                     .pipe(plugins.plumber())

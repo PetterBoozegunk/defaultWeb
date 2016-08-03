@@ -1,0 +1,22 @@
+html,
+body {
+	font-size: $base-font-size;
+}
+
+body {
+	background-color: $body-bg-color;
+	margin: 0;
+
+	nav {
+		a {
+			text-decoration: none;
+			line-height: 1.3rem;
+
+			font: {
+				family: 'Lucida Grande', sans-serif;
+				weight: 600;
+				size: 1rem;
+			}
+		}
+	}
+}
