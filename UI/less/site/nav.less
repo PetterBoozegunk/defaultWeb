@@ -1,29 +1,27 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-
-nav,
-.nav {
-    ul { 
+nav {
+    ul {
         .resetList();
     }
-    
+
     a {
         color: @fontColor;
         text-decoration: none;
     }
+}
 
-    &.submenu {
-        a {
-            &:before {
-                position: relative;
-                top: -1px;
+.submenu {
+  a {
+    &:before {
+      content: '\f054 ';
 
-                font-family: @iconFont;
-                content: "\f054 ";
-                font-size: 0.7em;
-                line-height: 1.6;
-                margin-right: 0.5em;
-            }
-        }
+      font-family: @iconFont;
+      font-size: 0.7em;
+
+      line-height: 1.6;
+      margin-right: 0.5em;
+
+      position: relative;
+      top: -1px;
     }
+  }
 }

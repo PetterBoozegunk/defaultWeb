@@ -21,6 +21,7 @@
     "gulp-js-prettify": "^0.1.0",
     "gulp-jslint": "^1.0.1",
     "gulp-less": "^3.0.5",
+    "gulp-lesshint": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-main-bower-files": "^1.5.2",
     "gulp-notify": "^2.2.0",
