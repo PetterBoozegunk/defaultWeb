@@ -14,7 +14,7 @@ var gulp = require("gulp"),
         comments: {
             all: true
         },
-        lint : {
+        lint: {
             src: ["sass/**/*.scss"],
             options: {
                 config: "sass/scss-lint.yml"
