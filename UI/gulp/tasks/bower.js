@@ -20,7 +20,7 @@ var gulp = require("gulp"),
             "before:bower-files": ["bower"],
             "bower-files": function () {
                 return gulp.src("./bower.json")
-                    .pipe(plugins.mainBowerFiles("/\.(min|slim)\.js$/"))
+                    .pipe(plugins.mainBowerFiles("/\\.(min|slim)\\.js$/"))
                     .pipe(gulp.dest(settings.filesDest));
             },
             "default": ["bower-files"]

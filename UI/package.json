@@ -1,5 +1,6 @@
 {
     "name": "DefaultWeb",
+    "license": "UNLICENSED",
     "version": "0.1.0",
     "author": "Petter Ahlberg",
     "description": "Gulp workflow",
@@ -17,7 +18,7 @@
         "gulp-iconfont-css": "^2.0.0",
         "gulp-imagemin": "^2.4.0",
         "gulp-js-prettify": "^0.1.0",
-        "gulp-jslint": "^0.2.2",
+        "gulp-jslint": "^1.0.1",
         "gulp-less": "^3.0.5",
         "gulp-load-plugins": "^1.2.0",
         "gulp-main-bower-files": "^1.5.2",
@@ -37,9 +38,11 @@
         "gulp-svgicons2svgfont": "^2.4.0",
         "gulp-svgmin": "^1.2.1",
         "gulp-uglify": "^1.5.1",
+        "jslint": "^0.10.3",
         "lazypipe": "^1.0.1",
         "less-plugin-glob": "^1.1.1",
         "lodash": "^4.0.1",
+        "minimatch": "^3.0.2",
         "plato": "^1.5.0"
     }
 }

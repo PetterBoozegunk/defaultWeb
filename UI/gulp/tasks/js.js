@@ -17,7 +17,7 @@ var gulp = require("gulp"),
         dest: config.compileToFolder + "/js",
         fileName: "scripts.js",
 
-        src: [, {
+        src: [{
             dir: "js/polyfills/",
             check: false,
             prettify: false
@@ -102,7 +102,9 @@ var gulp = require("gulp"),
             "jslint": function () {
                 return gulp.src(settings.check)
                     .pipe(plugins.plumber())
-                    .pipe(plugins.jslint());
+                    .pipe(plugins.jslint())
+                    .pipe(plugins.jslint.reporter('default', true))
+                    .pipe(plugins.jslint.reporter('stylish', {}));
             },
             "js:prod": function () {
                 return gulp.src(settings.concat)
