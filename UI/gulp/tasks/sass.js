@@ -14,9 +14,6 @@ var gulp = require("gulp"),
         comments: {
             all: true
         },
-        scss : {
-            config: "sass/scss-lint.yml"
-        },
         pleeease: {
             browsers: ["last 4 versions"],
             minifier: false,
@@ -30,7 +27,6 @@ var gulp = require("gulp"),
 
     mainLessPipe = (function () {
         return lazypipe()
-            .pipe(plugins.scssLint, settings.scss)
             .pipe(plugins.sassGlob)
             .pipe(plugins.sass)
             .pipe(plugins.shorthand)
