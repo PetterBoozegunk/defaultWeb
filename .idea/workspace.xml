@@ -5,41 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89479681-f4e8-4ff4-8d0a-8a9f92637c3f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UI/sass/vars/colors.scss" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/less/styles.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/filter.blur.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/flex-box.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/fontawsomePage.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/formStuff.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/imageCoverPage.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/parallaxPage.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/styleguide.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/video.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/sass/default/html-body.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/sass/styles-sass.scss" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/templates/icon.less" afterPath="$PROJECT_DIR$/UI/fonts/templates/icon.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gulp/tasks/less.js" afterPath="$PROJECT_DIR$/UI/gulp/tasks/less.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gulp/tasks/sass.js" afterPath="$PROJECT_DIR$/UI/gulp/tasks/sass.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/google.maps.js" afterPath="$PROJECT_DIR$/UI/js/google.maps.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/imageCover.js" afterPath="$PROJECT_DIR$/UI/js/imageCover.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/kittens.js" afterPath="$PROJECT_DIR$/UI/js/kittens.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/tests/spinner.test.js" afterPath="$PROJECT_DIR$/UI/js/tests/spinner.test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/sass/scss-lint.yml" afterPath="$PROJECT_DIR$/UI/sass/scss-lint.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/sass/vars/vars.scss" afterPath="$PROJECT_DIR$/UI/sass/vars/vars.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blocks/aside.phtml" afterPath="$PROJECT_DIR$/blocks/aside.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blocks/submenu.phtml" afterPath="$PROJECT_DIR$/blocks/submenu.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/filter-blur.phtml" afterPath="$PROJECT_DIR$/pages/filter-blur.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/formStuff.phtml" afterPath="$PROJECT_DIR$/pages/formStuff.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/googleMaps.phtml" afterPath="$PROJECT_DIR$/pages/googleMaps.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/imageCover.phtml" afterPath="$PROJECT_DIR$/pages/imageCover.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/layout/index.phtml" afterPath="$PROJECT_DIR$/pages/layout/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/parallax.phtml" afterPath="$PROJECT_DIR$/pages/parallax.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/spinner.phtml" afterPath="$PROJECT_DIR$/pages/spinner.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/spinnerCss.phtml" afterPath="$PROJECT_DIR$/pages/spinnerCss.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/styleguide.phtml" afterPath="$PROJECT_DIR$/pages/styleguide.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/video.phtml" afterPath="$PROJECT_DIR$/pages/video.phtml" />
     </list>
     <ignored path="defaultWeb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -961,12 +927,12 @@
       <workItem from="1470214068482" duration="8724000" />
       <workItem from="1470226081571" duration="3349000" />
       <workItem from="1470229619874" duration="5012000" />
-      <workItem from="1470292393936" duration="24385000" />
+      <workItem from="1470292393936" duration="24503000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47294000" />
+    <option name="totallyTimeSpent" value="47412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1002" extended-state="0" />
