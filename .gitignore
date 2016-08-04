@@ -54,3 +54,4 @@ report/
 *.crdownload
 
 UI/bower_components
+.idea/workspace.xml
