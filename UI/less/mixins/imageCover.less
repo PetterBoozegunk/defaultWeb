@@ -1,18 +1,19 @@
 .imageCover(@height: auto, @width: 100%, @size: cover) {
-    position: relative;
-    height: @height;
-    width: @width;
-    overflow: hidden;
 
-    background-size: @size;
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: @size;
+
+    height: @height;
+    overflow: hidden;
+    position: relative;
+    width: @width;
 
     img {
         display: block;
+        opacity: 0.0001;
         width: 100%;
 
-        opacity: 0.0001;
     }
 
     img.coverHeight {

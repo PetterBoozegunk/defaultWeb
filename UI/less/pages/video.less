@@ -1,64 +1,49 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-/// <reference path="../mixins/font.mixins.less" />
-/// <reference path="../mixins/mixins.less" />
-/// <reference path="../grid/grid.less" />
-
 .video {
     .video-container {
-        position: relative;
-        box-sizing: border-box;
         border: solid 2px @mainBodyBg;
+        box-sizing: border-box;
         overflow: hidden;
+        position: relative;
 
         &::after {
-            position: absolute;
-            top: 0;
-            left: 0;
-            
-            box-sizing: border-box;
-
-            content: "";
-            display: block;
-
-            width: 100%;
-            height: 100%;
-            
             background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.5) 60%, @mainBodyBg 80%);
+            box-sizing: border-box;
+            content: '';
+            display: block;
+            height: 100%;
+            left: 0px;
+            position: absolute;
+            top: 0px;
+            width: 100%;
         }
 
-        .topBottomFade  {
+        .topBottomFade {
             &::before,
             &::after {
-                position: absolute;
-                left: 0;
-            
                 box-sizing: border-box;
-
-                content: "";
+                content: '';
                 display: block;
-
-                width: 100%;
                 height: 25%;
-
+                left: 0px;
+                position: absolute;
+                width: 100%;
                 z-index: 1;
             }
 
             &::before {
-                top: 0;
                 background-image: linear-gradient(@mainBodyBg, transparent);
+                top: 0px;
             }
             &::after {
-                bottom: 0;
                 background-image: linear-gradient(transparent, @mainBodyBg);
+                bottom: 0px;
             }
         }
     }
 
     video {
-        position: relative;
-
-        width: 100%;
         min-height: 200px;
+        position: relative;
+        width: 100%;
     }
 }

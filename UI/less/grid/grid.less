@@ -1,7 +1,3 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-/// <reference path="../mixins/mixins.less" />
-
 .col,
 .row {
     box-sizing: border-box;
@@ -9,21 +5,20 @@
 }
 
 .col {
-    float: left;
-    //@mainBodyBg
     border: solid @halfGutter rgba(255, 255, 255, 0.001);
-    border-width: 0 @halfGutter;
+    border-width: 0px @halfGutter;
+    float: left;
 }
 
 .row {
-    zoom: 1;
     clear: both;
+    zoom: 1;
 
     &:before,
     &:after {
-        content: "";
-        display: table;
         clear: both;
+        content: '';
+        display: table;
     }
 }
 
@@ -35,36 +30,20 @@
 }
 
 .colSpan(@nbrCols: 1, @parentColSpan: @nbrColumns) {
-
     @singleColWidth: (100 / @parentColSpan);
     @currentWidth: unit(@singleColWidth * @nbrCols, %);
 
     width: @currentWidth;
-    //border: solid @halfGutter @mainBodyBg;
 }
 
 .section {
-    margin: 0 auto;
+    margin: 0px auto;
     max-width: @siteWidth;
 }
 .outerGridWrapRow {
-    margin-right: ~"-@{halfGutter}";
-    margin-left: ~"-@{halfGutter}";
+    margin-left: -@halfGutter;
+    margin-right: -@halfGutter;
 }
-
-/*.mainContent {
-    nav {
-        .colSpan(2);
-    }
-    
-    article {
-        .colSpan(7);
-    }
-    
-    aside {
-        .colSpan(3);
-    }
-}*/
 
 .colSpan1 {
     .colSpan(1);

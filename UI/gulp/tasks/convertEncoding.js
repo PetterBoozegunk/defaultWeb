@@ -36,9 +36,7 @@ var gulp = require("gulp"),
             "convertEncoding:sass": function () {
                 return convert(settings.src.sass);
             },
-            "before:jslint": ["convertEncoding:js"],
-            "before:less:lint": ["convertEncoding:less"],
-            "before:sass:lint": ["convertEncoding:sass"]
+            "before:default": ["convertEncoding:js", "convertEncoding:less", "convertEncoding:sass"],
         }
     };
 

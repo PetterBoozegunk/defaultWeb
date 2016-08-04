@@ -1,16 +1,12 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-/// <reference path="../mixins/mixins.less" />
-
-.offGrid(@nbrCols: 1, @margin: 0, @parentWidth: @siteWidth) { 
+.offGrid(@nbrCols: 1, @margin: 0, @parentWidth: @siteWidth) {
     @marginPercentWidth: unit((@margin / (@parentWidth - @nbrCols)) * 100, %);
     @elemWidth: unit(((100 / @nbrCols) - @marginPercentWidth) - (@marginPercentWidth / @nbrCols), %);
 
-    .boxSizing(border-box); 
-    
+    .boxSizing(border-box);
+
     float: left;
+    margin: 0px 0px @margin @marginPercentWidth;
     width: @elemWidth;
-    margin: 0 0 @margin @marginPercentWidth;
 
     &:nth-child(@{nbrCols}n) {
         clear: right;

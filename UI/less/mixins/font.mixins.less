@@ -1,15 +1,11 @@
-/// <reference path="../vars/vars.less" />
-
 .remFont(@fontSizePx: @baseFontSize) {
   @pxValue: unit(@fontSizePx);
   @remValue: (@pxValue / unit(@baseFontSize));
 
-  //font-size: ~"@{pxValue}px";
-  font-size: ~"@{remValue}rem";
+  font-size: ~'@{remValue}rem';
 }
 
 .iconFont(@icon) {
-    font-family: @iconFont;
-
-    content: @icon;
+  content: @icon;
+  font-family: @iconFont;
 }

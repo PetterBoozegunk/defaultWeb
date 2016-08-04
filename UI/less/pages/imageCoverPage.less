@@ -1,32 +1,22 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/imageCover.less" />
-
 .imageCoverPage {
     .testImageCover {
 
         & > div {
-            position: relative;
-            margin-bottom: @gutter;
-
+            border: 1px solid #ffa500;
             box-sizing: border-box;
-
-            border: 1px solid orange;
+            margin-bottom: @gutter;
+            position: relative;
 
             &::after {
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                width: 100%;
-
-                color: #fff;
-                font-size: 0.8em;
-
-                padding: @halfGutter;
-
                 background-color: rgba(0, 0, 0, 0.5);
-                
+                color: #ffffff;
+                font-size: 0.8em;
+                left: 0px;
+                padding: @halfGutter;
+                position: absolute;
+                top: 0px;
                 white-space: pre;
+                width: 100%;
             }
         }
 
@@ -36,7 +26,7 @@
             width: 70%;
 
             &::after {
-                content: ".imageCover();\00000A (height = auto, width = 100%, background-size = cover)";
+                content: '.imageCover();\00000A (height = auto, width = 100%, background-size = cover)';
             }
         }
 
@@ -50,15 +40,16 @@
             width: 50%;
 
             &::after {
-                content: ".imageCover(300px, 100%);";
+                content: '.imageCover(300px, 100%);';
             }
         }
 
-        .third { .imageCover(300px, 100%, contain);
+        .third {
+            .imageCover(300px, 100%, contain);
             width: 50%;
 
             &::after {
-                content: ".imageCover(300px, 100%, contain);";
+                content: '.imageCover(300px, 100%, contain);';
             }
         }
 
@@ -66,21 +57,21 @@
             .imageCover(400px);
 
             clear: both;
+            margin: 0px auto @gutter;
             width: 60%;
-            margin: 0 auto @gutter;
 
             &::after {
-                content: ".imageCover(400px);";
+                content: '.imageCover(400px);';
             }
         }
 
         .fifth {
             .imageCover(300px, 100%, contain);
+            margin: 0px auto @gutter;
             width: 80%;
-            margin: 0 auto @gutter;
 
             &::after {
-                content: ".imageCover(300px, 100%, contain);";
+                content: '.imageCover(300px, 100%, contain);';
             }
         }
     }

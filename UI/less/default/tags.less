@@ -1,17 +1,12 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-/// <reference path="../mixins/font.mixins.less" />
-/// <reference path="../mixins/mixins.less" />
-
-html { 
+html {
     font-size: @baseFontSize;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-
     font-family: @mainFontFamily;
+
+    margin: 0px;
+    padding: 0px;
 }
 
 h1,
@@ -21,20 +16,15 @@ h4,
 h5,
 h6,
 p {
-    margin: 0 0 1em;
+    margin: 0px 0px 1em;
 }
 
 
 h1 {
     .remFont(@baseFontSize * 1.5);
-
-    &[class^=icon-]:before {
-        position: relative;
-        top: 0.3em;
-    }
 }
 
-h2 { 
+h2 {
     .remFont(@baseFontSize * 1.4);
 }
 
@@ -54,8 +44,8 @@ h6 {
     .remFont(@baseFontSize);
 }
 
-p { 
-    margin-top: 0;
+p {
+    margin-top: 0px;
 }
 
 a {
@@ -64,22 +54,22 @@ a {
 
 nav,
 article,
-aside { 
+aside {
     & > :first-child {
-        margin-top: 0;
+        margin-top: 0px;
     }
 
     img,
     svg,
     svg image {
-        max-width: 100%;
-        display: block;
         box-sizing: border-box;
+        display: block;
+        max-width: 100%;
     }
 }
 
 code,
-pre { 
+pre {
     background: @codePreBgColor;
     max-width: 100%;
     overflow: auto;

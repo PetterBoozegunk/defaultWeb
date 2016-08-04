@@ -1,9 +1,9 @@
 .blur(@blur: 0) {
-    @minusBlur: ~"-@{blur}";
+    @minusBlur: -@blur;
 
+    left: @minusBlur;
     position: relative;
     top: @minusBlur;
-    left: @minusBlur;
 }
 
 .blur-test-10 {

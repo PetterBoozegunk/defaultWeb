@@ -1,20 +1,17 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/font.mixins.less" />
-
 code {
-    .remFont(15px);
+    .remFont(13px);
 
     .comment,
     .multiLineComment {
-        color: green;
-        margin: 1em 0 0.3em;
+        color: #008000;
+        margin: 1em 0px 0.3em;
     }
 
     .comment {
         display: inline-block;
 
         &:before {
-            content: "//";
+            content: '//';
         }
 
         &.block {
@@ -23,41 +20,43 @@ code {
     }
 
     .multiLineComment {
-        display: block;
         @indent: 2em;
 
+        display: block;
         padding-left: @indent;
 
         &:before,
         &:after {
+            display: block;
+            left: -@indent;
             position: relative;
-            left: ~"-@{indent}";
-            display: block;
         }
 
         &:before {
-            content: "/*";
+            content: '/*';
         }
-        
+
         &:after {
-            content: "*/";
+            content: '*/';
         }
     }
 
-    &.html,
-    &.js {
-        &:before {
-            margin-top: 1em;
-            font-weight: bold;
-            display: block;
-        }
-    }
 
-    &.html:before {
-        content: "HTML for this example: ";
-    }
+}
 
-    &.js:before {
-        content: "Javascript for this example: ";
+.html,
+.js {
+    &:before {
+     display: block;
+     font-weight: bold;
+     margin-top: 1em;
     }
+}
+
+.html:before {
+    content: 'HTML for this example: ';
+}
+
+.js:before {
+    content: 'Javascript for this example: ';
 }

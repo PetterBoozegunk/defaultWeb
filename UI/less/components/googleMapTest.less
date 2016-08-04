@@ -1,28 +1,23 @@
-/// <reference path="../vars/vars.less" />
-/// <reference path="../mixins/static.mixins.less" />
-/// <reference path="../mixins/font.mixins.less" />
-/// <reference path="../mixins/mixins.less" />
-
 .googleMap {
 
     + .markersList {
-        .resetList();
-        position: absolute;
-        overflow: auto;
-        background: #fff;
-        padding: 10px;
-        border: solid 1px @mainBorderColor;
-
         @boxShadow: 8px;
-        box-shadow: @boxShadow @boxShadow @boxShadow 0 rgba(0, 0, 0, .5);
 
+        .resetList();
         .remFont(10px);
 
+        background: #ffffff;
+        border: solid 1px @mainBorderColor;
+        box-shadow: @boxShadow @boxShadow @boxShadow 0px rgba(0, 0, 0, 0.5);
+        overflow: auto;
+        padding: 10px;
+        position: absolute;
+
         li {
-            position: relative;
-            padding-left: 50px;
-            min-height: 52px;
             margin-bottom: 5px;
+            min-height: 52px;
+            padding-left: 50px;
+            position: relative;
 
             &:hover {
                 background-color: @mainBorderColor;
@@ -46,32 +41,32 @@
         }
     }
 
-    &.map1 { 
+    &.map1 {
         @dims: 200px;
 
-        width: @dims;
         height: @dims;
+        width: @dims;
     }
 
-    &.map2 { 
-        width: 400px;
+    &.map2 {
         height: 300px;
+        width: 400px;
     }
 
-    &.map3 { 
-        width: 300px;
+    &.map3 {
         height: 200px;
+        width: 300px;
     }
 
     &.map4 {
         display: block;
-        width: auto;
         height: 500px;
+        width: auto;
     }
 
     &.map5 {
         display: block;
-        width: auto;
         height: 300px;
+        width: auto;
     }
 }
