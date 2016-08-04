@@ -3,7 +3,10 @@
 
 	> div {
 		display: flex;
-		margin: 0 -#{$half-gutter} $gutter;
+
+		&:not(.flex-test-2) {
+			margin: 0 -#{$half-gutter};
+		}
 	}
 
 	.box {
@@ -60,7 +63,6 @@
 
 .flex-test-2 {
 	flex-flow: row wrap;
-	margin: 0;
 
 	header,
 	nav,
