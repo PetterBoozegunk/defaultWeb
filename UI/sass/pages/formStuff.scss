@@ -1,0 +1,10 @@
+.form-stuff {
+	fieldset {
+		> label,
+		> .radio-buttons {
+			border-bottom: solid 1px $main-border-color;
+			margin-bottom: $half-gutter;
+			padding-bottom: $half-gutter;
+		}
+	}
+}

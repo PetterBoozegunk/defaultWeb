@@ -1,0 +1,56 @@
+form {
+	label {
+		display: block;
+		margin-bottom: $quarter-gutter;
+
+		> span:first-child {
+			display: block;
+		}
+
+	}
+
+	.checkbox {
+		input {
+			opacity: .01;
+			position: absolute;
+			z-index: -1;
+		}
+
+		span::before {
+			margin-right: .3em;
+			@include icon-font('\f0c8');
+		}
+
+		input:checked + span::before {
+			@include icon-font('\f14a');
+		}
+	}
+
+	.error {
+		color: $error-color;
+
+		input {
+			border-color: $error-color;
+		}
+	}
+
+	.radio-buttons {
+		label {
+			display: inline-block;
+			margin-bottom: 0;
+		}
+	}
+
+	.required {
+		> span:first-of-type {
+			display: block;
+		}
+
+		> span:first-of-type::after {
+			font-size: smaller;
+			margin-left: .5em;
+			@include icon-font('\f069');
+			vertical-align: super;
+		}
+	}
+}

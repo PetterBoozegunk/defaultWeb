@@ -1,0 +1,79 @@
+@keyframes spinner {
+	to {
+		transform: rotate(360deg) scale(1);
+	}
+}
+
+.spinners-css {
+	padding-bottom: $gutter;
+
+	.spinner {
+		position: relative;
+
+		&::after {
+			$size: 36px;
+			$half: ($size / 2);
+			@include icon-font('\f021');
+
+			animation: 1.5s infinite spinner linear;
+			font-size: $size;
+			height: $size;
+			line-height: $size;
+			margin: -$half 0 0 10px;
+			position: absolute;
+			text-align: center;
+			top: 50%;
+			width: $size;
+		}
+
+		&.steps::after {
+			animation-timing-function: steps(8);
+		}
+	}
+
+	li {
+		overflow: visible;
+	}
+
+	li:nth-of-type(2) {
+		color: $brown;
+	}
+
+	li:nth-of-type(3) {
+		color: $firebrick;
+
+		.spinner {
+			@include rem-font(40px);
+		}
+
+		.spinner::after {
+			@include icon-font('\f013');
+		}
+	}
+
+	li:nth-of-type(4) {
+		.spinner::after {
+			@include icon-font('\f110');
+		}
+	}
+
+	li:nth-of-type(5) {
+		.spinner {
+			color: $lightblue;
+			font-size: 3em;
+		}
+
+		.spinner::after {
+			@include icon-font('\f110');
+
+			$size: 48px;
+			$half: ($size / 2);
+
+			font-size: $size;
+			height: $size;
+			line-height: $size;
+			margin-top: -$half;
+			width: $size;
+		}
+	}
+}

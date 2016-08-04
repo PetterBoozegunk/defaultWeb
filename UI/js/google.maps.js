@@ -49,7 +49,7 @@
         },
 
         maps = {
-            blocks: $(".googleMap"),
+            blocks: $(".google-map"),
             "default": {
                 markers: [{
                     "lat": 59.334156,

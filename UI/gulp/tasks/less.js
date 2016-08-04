@@ -11,8 +11,7 @@ var gulp = require("gulp"),
 
     settings = {
         dest: config.compileToFolder + "/css",
-        src: ["less/styles.less"],
-        lintsrc: ["less/**"],
+        src: ["less/styles-less.less"],
         options: {
             plugins: [lessPluginGlob]
         },
@@ -59,13 +58,6 @@ var gulp = require("gulp"),
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(settings.dest));
             },
-            "lesshint": function () {
-                return gulp.src(settings.lintsrc)
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.lesshint())
-                    .pipe(plugins.lesshint.reporter());
-            },
-            "before:less:dev": ["lesshint"],
             "less:ie:prod": function () {
                 return gulp.src(settings.oldIeSrc)
                     .pipe(plugins.concat(settings.oldIeFileName))

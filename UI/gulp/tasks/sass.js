@@ -10,12 +10,14 @@ var gulp = require("gulp"),
 
     settings = {
         dest: config.compileToFolder + "/css",
-        src: ["sass/styles-sass.scss"],
+        src: ["sass/styles.scss"],
         comments: {
             all: true
         },
         lint: {
-            src: ["sass/**/*.scss"],
+            src: [
+                "sass/**/*.scss"
+            ],
             options: {
                 config: "sass/scss-lint.yml"
             }

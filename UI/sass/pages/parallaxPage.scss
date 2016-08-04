@@ -1,0 +1,13 @@
+.parallax-page {
+	.row {
+		margin: 0 -#{$half-gutter};
+	}
+
+	.w50 {
+		width: 50%;
+	}
+
+	.w50:nth-child(2) .parallax {
+		height: 200px;
+	}
+}

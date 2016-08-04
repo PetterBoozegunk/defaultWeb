@@ -1,0 +1,23 @@
+.parallax {
+	$height: 300px;
+	$quarter: ($height / 4);
+	$border-shadow-color: rgba(0, 0, 0, .3);
+
+	border: solid 1px $border-shadow-color;
+	border-width: 1px 0;
+	box-shadow: 0 0 15px $border-shadow-color inset;
+	height: $height;
+	margin: 0 auto $gutter;
+	overflow: hidden;
+	padding: 0;
+
+	> div {
+		background-position: center center;
+		background-size: cover;
+		height: 200%;
+		position: relative;
+		transform: translateY(-25%);
+		width: 100%;
+		z-index: -1;
+	}
+}

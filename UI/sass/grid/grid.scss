@@ -1,0 +1,100 @@
+.col,
+.row {
+	box-sizing: border-box;
+	min-height: 1px;
+}
+
+.col {
+	border: solid $half-gutter $transparent;
+	border-width: 0 $half-gutter;
+	float: left;
+}
+
+.row {
+	clear: both;
+	zoom: 1;
+
+	&:before,
+	&:after {
+		clear: both;
+		content: ' ';
+		display: table;
+	}
+}
+
+@mixin col-push($nbr-cols: 1, $parent-col-span: $nbr-columns) {
+	$single-col-width: (100 / $parent-col-span);
+	$current-margin-left: percentage($single-col-width * $nbr-cols) / 100;
+
+	margin-left: $current-margin-left;
+}
+
+@mixin col-span($nbr-cols: 1, $parent-col-span: $nbr-columns) {
+	$single-col-width: (100 / $parent-col-span);
+	$current-width: percentage($single-col-width * $nbr-cols) / 100;
+
+	width: $current-width;
+}
+
+.section {
+	margin: 0 auto;
+	max-width: $sitewidth;
+}
+
+.outer-grid-wrap-row {
+	margin-left: -$half-gutter;
+	margin-right: -$half-gutter;
+}
+
+.col-span1 {
+	@include col-span(1);
+}
+
+.col-span2 {
+	@include col-span(2);
+}
+
+.col-span3 {
+	@include col-span(3);
+}
+
+.col-span4 {
+	@include col-span(4);
+}
+
+.col-span5 {
+	@include col-span(5);
+}
+
+.col-span6 {
+	@include col-span(6);
+}
+
+.col-span7 {
+	@include col-span(7);
+}
+
+.col-span8 {
+	@include col-span(8);
+}
+
+.col-span9 {
+	@include col-span(9);
+
+	// how to make nested columns work
+	.col-span3 {
+		@include col-span(3, 9);
+	}
+}
+
+.col-span10 {
+	@include col-span(10);
+}
+
+.col-span11 {
+	@include col-span(11);
+}
+
+.col-span12 {
+	@include col-span(12);
+}

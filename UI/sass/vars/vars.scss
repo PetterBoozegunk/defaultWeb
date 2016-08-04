@@ -1,1 +1,39 @@
-$base-font-size: 16px;$body-bg-color: #ff69b4; //hotpink
+
+$base-font-size: 16px;
+$main-font-family: Sans-Serif;
+
+//* -- grid -- */
+$sitewidth: 1024px;
+$gutter: 30px;
+$half-gutter: ($gutter / 2);
+$quarter-gutter: ($gutter / 4);
+
+$nbr-columns: 12;
+$small-gutter: 10px;
+//* -- /grid -- */
+
+$main-section-padding: 20px;
+
+//* -- colors -- */
+
+$base-font-color: #000;
+$font-color: adjust-color($base-font-color, $lightness: 10); // less: lighten(#000, 10%);
+$link-color: #00f;
+
+$main-body-bg-color: #fff;
+$main-border-color: #ccc;
+
+$header-bg-color: #ffa500;
+$header-link-color: #fff;
+
+$footer-bg-color: #006400;
+$footer-font-color: #fff;
+
+$code-pre-bg-color: #e2e2e2;
+$comment-color: #008000;
+
+$error-color: #f00;
+
+$transparent: rgba(255, 255, 255, .001);
+
+//* -- /colors -- */

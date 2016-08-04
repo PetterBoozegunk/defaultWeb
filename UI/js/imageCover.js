@@ -21,7 +21,7 @@
                 }
             },
             setAll: function () {
-                $(".imageCover").each(imageCover.set);
+                $(".image-cover").each(imageCover.set);
             },
             bindEvent: function () {
                 $("body").on("window:resize ajaxSearch:done imageCover:run", imageCover.setAll);

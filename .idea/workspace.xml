@@ -5,48 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89479681-f4e8-4ff4-8d0a-8a9f92637c3f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/icon.eot" afterPath="$PROJECT_DIR$/UI/fonts/icon.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/icon.ttf" afterPath="$PROJECT_DIR$/UI/fonts/icon.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/icon.woff" afterPath="$PROJECT_DIR$/UI/fonts/icon.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/icon.woff2" afterPath="$PROJECT_DIR$/UI/fonts/icon.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UI/sass/vars/colors.scss" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/less/styles.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/filter.blur.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/flex-box.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/fontawsomePage.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/formStuff.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/imageCoverPage.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/parallaxPage.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/styleguide.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/pages/video.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/sass/default/html-body.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UI/sass/styles-sass.scss" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/icon.svg" afterPath="$PROJECT_DIR$/UI/fonts/icon.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/svg/petter.svg" afterPath="$PROJECT_DIR$/UI/fonts/svg/petter.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/fonts/templates/icon.less" afterPath="$PROJECT_DIR$/UI/fonts/templates/icon.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gulp/tasks/convertEncoding.js" afterPath="$PROJECT_DIR$/UI/gulp/tasks/convertEncoding.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gulp/tasks/less.js" afterPath="$PROJECT_DIR$/UI/gulp/tasks/less.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/exclude/markerclusterer.js" afterPath="$PROJECT_DIR$/UI/js/exclude/markerclusterer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/oldIe/frameborder.js" afterPath="$PROJECT_DIR$/UI/js/oldIe/frameborder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/examplesList.less" afterPath="$PROJECT_DIR$/UI/less/components/examplesList.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/exampleslibs.less" afterPath="$PROJECT_DIR$/UI/less/components/exampleslibs.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/fileList.less" afterPath="$PROJECT_DIR$/UI/less/components/fileList.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/googleMapTest.less" afterPath="$PROJECT_DIR$/UI/less/components/googleMapTest.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/libsList.less" afterPath="$PROJECT_DIR$/UI/less/components/libsList.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/parallax.less" afterPath="$PROJECT_DIR$/UI/less/components/parallax.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/spinnerTest.less" afterPath="$PROJECT_DIR$/UI/less/components/spinnerTest.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/components/spinnersCss.less" afterPath="$PROJECT_DIR$/UI/less/components/spinnersCss.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/default/codeTag.less" afterPath="$PROJECT_DIR$/UI/less/default/codeTag.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/default/tags.less" afterPath="$PROJECT_DIR$/UI/less/default/tags.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/fonts/fonts.less" afterPath="$PROJECT_DIR$/UI/less/fonts/fonts.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/fonts/icon.less" afterPath="$PROJECT_DIR$/UI/less/fonts/icon.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/grid/grid.less" afterPath="$PROJECT_DIR$/UI/less/grid/grid.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/grid/offGrid.less" afterPath="$PROJECT_DIR$/UI/less/grid/offGrid.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/mixins/font.mixins.less" afterPath="$PROJECT_DIR$/UI/less/mixins/font.mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/mixins/imageCover.less" afterPath="$PROJECT_DIR$/UI/less/mixins/imageCover.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/mixins/mixins.less" afterPath="$PROJECT_DIR$/UI/less/mixins/mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/mixins/static.mixins.less" afterPath="$PROJECT_DIR$/UI/less/mixins/static.mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/oldIe/filter.blur.less" afterPath="$PROJECT_DIR$/UI/less/oldIe/filter.blur.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/oldIe/test.less" afterPath="$PROJECT_DIR$/UI/less/oldIe/test.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/filter.blur.less" afterPath="$PROJECT_DIR$/UI/less/pages/filter.blur.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/flex-box.less" afterPath="$PROJECT_DIR$/UI/less/pages/flex-box.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/fontawsomePage.less" afterPath="$PROJECT_DIR$/UI/less/pages/fontawsomePage.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/formStuff.less" afterPath="$PROJECT_DIR$/UI/less/pages/formStuff.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/imageCoverPage.less" afterPath="$PROJECT_DIR$/UI/less/pages/imageCoverPage.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/parallaxPage.less" afterPath="$PROJECT_DIR$/UI/less/pages/parallaxPage.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/styleguide.less" afterPath="$PROJECT_DIR$/UI/less/pages/styleguide.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/less/pages/video.less" afterPath="$PROJECT_DIR$/UI/less/pages/video.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/package.json" afterPath="$PROJECT_DIR$/UI/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/sass/default/html-body.scss" afterPath="$PROJECT_DIR$/UI/sass/default/html-body.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gulp/tasks/sass.js" afterPath="$PROJECT_DIR$/UI/gulp/tasks/sass.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/google.maps.js" afterPath="$PROJECT_DIR$/UI/js/google.maps.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/imageCover.js" afterPath="$PROJECT_DIR$/UI/js/imageCover.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/kittens.js" afterPath="$PROJECT_DIR$/UI/js/kittens.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/js/tests/spinner.test.js" afterPath="$PROJECT_DIR$/UI/js/tests/spinner.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/sass/scss-lint.yml" afterPath="$PROJECT_DIR$/UI/sass/scss-lint.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/sass/vars/vars.scss" afterPath="$PROJECT_DIR$/UI/sass/vars/vars.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blocks/aside.phtml" afterPath="$PROJECT_DIR$/blocks/aside.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blocks/submenu.phtml" afterPath="$PROJECT_DIR$/blocks/submenu.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/filter-blur.phtml" afterPath="$PROJECT_DIR$/pages/filter-blur.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/formStuff.phtml" afterPath="$PROJECT_DIR$/pages/formStuff.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/googleMaps.phtml" afterPath="$PROJECT_DIR$/pages/googleMaps.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/imageCover.phtml" afterPath="$PROJECT_DIR$/pages/imageCover.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/layout/index.phtml" afterPath="$PROJECT_DIR$/pages/layout/index.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/parallax.phtml" afterPath="$PROJECT_DIR$/pages/parallax.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/spinner.phtml" afterPath="$PROJECT_DIR$/pages/spinner.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/spinnerCss.phtml" afterPath="$PROJECT_DIR$/pages/spinnerCss.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/styleguide.phtml" afterPath="$PROJECT_DIR$/pages/styleguide.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/video.phtml" afterPath="$PROJECT_DIR$/pages/video.phtml" />
     </list>
     <ignored path="defaultWeb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,22 +60,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="flex-box.less" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UI/less/pages/flex-box.less">
+      <file leaf-file-name="sass.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/gulp/tasks/sass.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="exampleslibs.less" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/UI/less/components/exampleslibs.less">
+      <file leaf-file-name="vars.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/sass/vars/vars.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+            <state relative-caret-position="455">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="googleMapTest.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/sass/components/googleMapTest.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="googleMaps.phtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/googleMaps.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="google.maps.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/js/google.maps.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="styles.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UI/sass/styles.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/dist/css/styles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="597">
+              <caret line="805" column="6" selection-start-line="805" selection-start-column="6" selection-end-line="805" selection-end-column="6" />
+              <folding>
+                <element signature="e#5509#5667#2" expanded="true" />
+                <element signature="e#5775#5933#2" expanded="true" />
+                <element signature="e#6041#6199#2" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,57 +149,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/UI/sass/site/smaller.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/nav.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/mainContent.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/kittens.scss" />
+        <option value="$PROJECT_DIR$/UI/js/kittens.js" />
+        <option value="$PROJECT_DIR$/UI/sass/site/header.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/forms.scss" />
+        <option value="$PROJECT_DIR$/blocks/submenu.phtml" />
+        <option value="$PROJECT_DIR$/UI/sass/grid/grid.scss" />
+        <option value="$PROJECT_DIR$/pages/styleguide.phtml" />
         <option value="$PROJECT_DIR$/UI/sass/vars/vars.scss" />
-        <option value="$PROJECT_DIR$/UI/sass/default/html.scss" />
-        <option value="$PROJECT_DIR$/UI/sass/default/body.scss" />
-        <option value="$PROJECT_DIR$/UI/sass/default/html-body.scss" />
-        <option value="$PROJECT_DIR$/UI/dist/css/styles-sass.css" />
-        <option value="$PROJECT_DIR$/UI/gulp/tasks/assemble.js" />
-        <option value="$PROJECT_DIR$/UI/sass/styles-sass.scss" />
-        <option value="$PROJECT_DIR$/UI/package.json" />
-        <option value="$PROJECT_DIR$/UI/less/styles.less" />
-        <option value="$PROJECT_DIR$/UI/less/vars/vars.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/uses.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/smaller.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/nav.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/mainContent.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/kittens.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/header.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/forms.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/footer.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/example.less" />
-        <option value="$PROJECT_DIR$/UI/less/site/body.less" />
-        <option value="$PROJECT_DIR$/UI/gulp/tasks/less.js" />
-        <option value="$PROJECT_DIR$/UI/less/pages/video.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/styleguide.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/parallaxPage.less" />
-        <option value="$PROJECT_DIR$/UI/gulp/tasks/convertEncoding.js" />
-        <option value="$PROJECT_DIR$/UI/less/pages/imageCoverPage.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/formStuff.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/flex-box.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/fontawsomePage.less" />
-        <option value="$PROJECT_DIR$/UI/less/pages/filter.blur.less" />
-        <option value="$PROJECT_DIR$/UI/less/oldIe/test.less" />
-        <option value="$PROJECT_DIR$/UI/less/oldIe/filter.blur.less" />
-        <option value="$PROJECT_DIR$/UI/less/mixins/static.mixins.less" />
-        <option value="$PROJECT_DIR$/UI/less/mixins/mixins.less" />
-        <option value="$PROJECT_DIR$/UI/less/mixins/imageCover.less" />
-        <option value="$PROJECT_DIR$/UI/less/mixins/font.mixins.less" />
-        <option value="$PROJECT_DIR$/UI/less/grid/offGrid.less" />
-        <option value="$PROJECT_DIR$/UI/less/grid/grid.less" />
-        <option value="$PROJECT_DIR$/UI/less/fonts/icon.less" />
-        <option value="$PROJECT_DIR$/UI/fonts/templates/icon.less" />
-        <option value="$PROJECT_DIR$/UI/less/fonts/fonts.less" />
+        <option value="$PROJECT_DIR$/UI/sass/site/footer.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/example.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/site/body.scss" />
+        <option value="$PROJECT_DIR$/pages/video.phtml" />
         <option value="$PROJECT_DIR$/UI/less/default/tags.less" />
-        <option value="$PROJECT_DIR$/UI/less/default/codeTag.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/spinnerTest.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/spinnersCss.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/parallax.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/libsList.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/googleMapTest.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/fileList.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/examplesList.less" />
-        <option value="$PROJECT_DIR$/UI/less/components/exampleslibs.less" />
+        <option value="$PROJECT_DIR$/UI/gulp/tasks/less.js" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/video.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/styleguide.scss" />
+        <option value="$PROJECT_DIR$/pages/parallax.phtml" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/parallaxPage.scss" />
+        <option value="$PROJECT_DIR$/pages/imageCover.phtml" />
+        <option value="$PROJECT_DIR$/UI/sass/mixins/imageCover.scss" />
+        <option value="$PROJECT_DIR$/UI/js/imageCover.js" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/imageCoverPage.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/formStuff.scss" />
+        <option value="$PROJECT_DIR$/pages/formStuff.phtml" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/fontawsomePage.scss" />
+        <option value="$PROJECT_DIR$/UI/dist/css/styles.css" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/flex-box.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/vars/colors.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/pages/filter.blur.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/oldIe/filter.blur.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/oldIe/test.scss" />
+        <option value="$PROJECT_DIR$/pages/spinner.phtml" />
+        <option value="$PROJECT_DIR$/UI/js/tests/spinner.test.js" />
+        <option value="$PROJECT_DIR$/UI/sass/scss-lint.yml" />
+        <option value="$PROJECT_DIR$/UI/gulp/tasks/sass.js" />
+        <option value="$PROJECT_DIR$/UI/sass/components/spinnerTest.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/components/spinnersCss.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/components/parallax.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/components/libsList.scss" />
+        <option value="$PROJECT_DIR$/blocks/aside.phtml" />
+        <option value="$PROJECT_DIR$/pages/spinnerCss.phtml" />
+        <option value="$PROJECT_DIR$/pages/filter-blur.phtml" />
+        <option value="$PROJECT_DIR$/UI/sass/components/exampleslibs.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/components/examplesList.scss" />
+        <option value="$PROJECT_DIR$/UI/sass/components/googleMapTest.scss" />
+        <option value="$PROJECT_DIR$/pages/googleMaps.phtml" />
+        <option value="$PROJECT_DIR$/UI/js/google.maps.js" />
+        <option value="$PROJECT_DIR$/UI/sass/styles.scss" />
       </list>
     </option>
   </component>
@@ -161,10 +210,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1698" />
-    <option name="height" value="1020" />
+    <option name="width" value="1680" />
+    <option name="height" value="1002" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -265,7 +312,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="less" />
+              <option name="myItemId" value="sass" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -283,7 +330,95 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="less" />
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vars" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mixins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defaultWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -305,7 +440,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gulp" />
+              <option name="myItemId" value="less" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,11 +458,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gulp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tasks" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -341,11 +472,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
+              <option name="myItemId" value="pages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,15 +486,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="blocks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -379,7 +498,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/common-ux" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="settings.editor.splitter.proportion" value="0.2304038" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -387,6 +506,7 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
+    <property name="editorconfig.notification" value="spaces" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -841,15 +961,15 @@
       <workItem from="1470214068482" duration="8724000" />
       <workItem from="1470226081571" duration="3349000" />
       <workItem from="1470229619874" duration="5012000" />
-      <workItem from="1470292393936" duration="7490000" />
+      <workItem from="1470292393936" duration="24385000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30399000" />
+    <option name="totallyTimeSpent" value="47294000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1698" height="1020" extended-state="0" />
+    <frame x="0" y="0" width="1680" height="1002" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -863,8 +983,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2589396" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26184538" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -875,8 +996,33 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288835" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27305827" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26184538" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -919,132 +1065,179 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UI/gulp/setupJsTaskSettings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-243">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/sass/vars/vars.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/sass/default/html-body.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/sass/scss-lint.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="151" column="17" selection-start-line="151" selection-start-column="17" selection-end-line="151" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/dist/css/styles-sass.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/vars/vars.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/uses.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/smaller.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/nav.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/nav.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/mainContent.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/kittens.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/header.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/footer.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/forms.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+        <state relative-caret-position="411">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/forms.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/header.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        <state relative-caret-position="198">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/styles.less">
+    <entry file="file://$PROJECT_DIR$/blocks/submenu.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/pages/styleguide.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/styleguide.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/grid/grid.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="26" column="73" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/footer.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/example.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/site/body.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/less/default/tags.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UI/gulp/tasks/less.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="66" column="14" selection-start-line="66" selection-start-column="14" selection-end-line="67" selection-end-column="44" />
+        <state relative-caret-position="748">
+          <caret line="79" column="10" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/body.less">
+    <entry file="file://$PROJECT_DIR$/pages/video.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/video.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/styleguide.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/parallax.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/parallaxPage.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/pages/imageCoverPage.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/imageCover.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/js/imageCover.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/mixins/imageCover.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/imageCoverPage.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
@@ -1052,161 +1245,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/site/example.less">
+    <entry file="file://$PROJECT_DIR$/pages/formStuff.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="44">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/video.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/styleguide.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/formStuff.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="11" selection-end-column="37" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/gulp/tasks/convertEncoding.js">
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/fontawsomePage.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="38" column="101" selection-start-line="38" selection-start-column="101" selection-end-line="38" selection-end-column="101" />
+        <state relative-caret-position="22">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/parallaxPage.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/vars/colors.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        <state relative-caret-position="198">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/imageCoverPage.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/flex-box.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        <state relative-caret-position="499">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/formStuff.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/oldIe/test.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="5" selection-end-column="39" />
+        <state relative-caret-position="22">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/fontawsome.phtml">
+    <entry file="file://$PROJECT_DIR$/UI/sass/oldIe/filter.blur.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/pages/filter.blur.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/js/tests/spinner.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/dist/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="805" column="6" selection-start-line="805" selection-start-column="6" selection-end-line="805" selection-end-column="6" />
+          <folding>
+            <element signature="e#5509#5667#2" expanded="true" />
+            <element signature="e#5775#5933#2" expanded="true" />
+            <element signature="e#6041#6199#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/gulp/tasks/sass.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/scss-lint.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="184" column="18" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/spinner.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/js/spinner.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/fontawsomePage.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/mixins/static.mixins.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/oldIe/filter.blur.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/oldIe/test.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/filter.blur.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="26" selection-start-line="0" selection-start-column="18" selection-end-line="1" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/mixins/mixins.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/mixins/imageCover.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="13" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/mixins/font.mixins.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/grid/offGrid.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/fonts/icon.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/fonts/templates/icon.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/gulp/tasks/iconFont.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-573">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -1214,106 +1365,124 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/grid/grid.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/spinnerTest.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="43" selection-end-column="30" />
+        <state relative-caret-position="154">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/fonts/fonts.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/spinnersCss.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="399" selection-start-line="5" selection-start-column="399" selection-end-line="5" selection-end-column="399" />
+        <state relative-caret-position="433">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/default/tags.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/spinnerTest.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/default/codeTag.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/spinnersCss.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/parallax.less">
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/parallax.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/libsList.less">
+    <entry file="file://$PROJECT_DIR$/blocks/aside.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        <state relative-caret-position="154">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/googleMapTest.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="68" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/fileList.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/examplesList.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/pages/flex-box.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/less/components/exampleslibs.less">
+    <entry file="file://$PROJECT_DIR$/pages/spinnerCss.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/filter-blur.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/libsList.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/mixins/static.mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/exampleslibs.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/examplesList.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/vars/vars.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/components/googleMapTest.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/googleMaps.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/js/google.maps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/sass/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
           <folding />
         </state>
       </provider>
