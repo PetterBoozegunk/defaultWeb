@@ -1,3 +1,7 @@
 .fontawsome {
 	margin: 0 -#{$quarter-gutter};
+
+	.icon-test {
+		@include reset-list();
+	}
 }
