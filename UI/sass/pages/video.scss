@@ -1,0 +1,53 @@
+.video {
+	.video-container {
+		border: solid 2px $main-body-bg-color;
+		box-sizing: border-box;
+		overflow: hidden;
+		position: relative;
+
+		$start-color: rgba(255, 255, 255, .1);
+		$end-color: rgba(255, 255, 255, .5);
+
+		&::after {
+			background-image: radial-gradient(circle at 50% 50%, $start-color 0, $end-color 60%, $main-body-bg-color 80%);
+			box-sizing: border-box;
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+	}
+
+	.top-bottom-fade {
+		&::before,
+		&::after {
+			box-sizing: border-box;
+			content: '';
+			display: block;
+			height: 25%;
+			left: 0;
+			position: absolute;
+			width: 100%;
+			z-index: 1;
+		}
+
+		&::before {
+			background-image: linear-gradient($main-body-bg-color, transparent);
+			top: 0;
+		}
+
+		&::after {
+			background-image: linear-gradient(transparent, $main-body-bg-color);
+			bottom: 0;
+		}
+	}
+
+	video {
+		min-height: 200px;
+		position: relative;
+		width: 100%;
+	}
+}

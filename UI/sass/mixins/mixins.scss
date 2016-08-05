@@ -1,0 +1,18 @@
+@mixin opacity($opacity: 0) {
+	$ie-opacity: ($opacity * 100);
+	$ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie-opacity})';
+
+	-ms-filter: $ms-filter;
+	opacity: $opacity;
+}
+
+@mixin ellipsis() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin no-ellipsis() {
+	overflow: visible;
+	white-space: normal;
+}

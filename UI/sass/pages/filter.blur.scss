@@ -1,0 +1,20 @@
+@mixin blur($blur: 0) {
+	-ms-filter: blur($blur);
+	filter: blur($blur);
+}
+
+[class*='blur-test'] {
+	overflow: hidden;
+}
+
+.blur-test-10 {
+	@include blur(10px);
+}
+
+.blur-test-15 {
+	@include blur(15px);
+}
+
+.blur-test-20 {
+	@include blur(20px);
+}

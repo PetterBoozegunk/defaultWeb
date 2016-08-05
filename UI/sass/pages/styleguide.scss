@@ -1,0 +1,44 @@
+.styleguide {
+	padding-top: $gutter;
+
+	.section {
+		border-bottom: solid 1px $main-border-color;
+		margin-bottom: $gutter;
+		padding-bottom: $gutter;
+	}
+
+	$col-bg: #0094ff;
+	$border-color: #fff;
+
+	.col {
+		background: $col-bg;
+		border-bottom-width: $gutter;
+		border-color: $border-color;
+
+		.box {
+			padding: $gutter 0;
+		}
+
+		h3,
+		h4 {
+			color: adjust-color($col-bg, $lightness: -20%);
+			margin: 0;
+			text-align: center;
+		}
+
+		.col {
+			border-width: $gutter $half-gutter;
+		}
+	}
+
+	.outer-grid-wrap-row h3 {
+		margin-bottom: $gutter;
+	}
+
+	nav,
+	article,
+	aside {
+		height: 150px;
+		padding: $gutter 0;
+	}
+}

@@ -1,0 +1,24 @@
+nav {
+	ul {
+		@include reset-list();
+	}
+
+	a {
+		color: $font-color;
+		text-decoration: none;
+	}
+}
+
+.submenu {
+	a {
+		&:before {
+			content: '\f054 ';
+			font-family: $icon-font;
+			font-size: .7em;
+			line-height: 1.6;
+			margin-right: .5em;
+			position: relative;
+			top: -1px;
+		}
+	}
+}

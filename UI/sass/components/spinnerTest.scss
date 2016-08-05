@@ -1,0 +1,28 @@
+[class*='spinner-test'] {
+	$spinner-dims: 2em;
+
+	display: inline-block;
+
+	height: $spinner-dims;
+	width: $spinner-dims;
+}
+
+.spinner-test2 {
+	$spinner-dims: 18.4589em;
+
+	color: $orange;
+
+	display: inline-block;
+
+	height: $spinner-dims;
+	width: $spinner-dims;
+}
+
+.spinner-test3 {
+	$spinner-dims: 13.4569em;
+
+	display: inline-block;
+
+	height: $spinner-dims;
+	width: $spinner-dims;
+}

@@ -1,0 +1,15 @@
+.examples-list {
+	$margin-padding-top: 2em;
+	@include reset-list();
+
+	li {
+		border-top: dashed 3px $main-border-color;
+		margin-top: $margin-padding-top;
+		overflow: auto;
+		padding-top: $margin-padding-top;
+
+		h2 {
+			margin: 0;
+		}
+	}
+}

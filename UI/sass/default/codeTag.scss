@@ -1,0 +1,61 @@
+code {
+	@include rem-font(13px);
+
+	.comment,
+	.multi-line-comment {
+		color: $comment-color;
+		margin: 1em 0 .3em;
+	}
+
+	.comment {
+		display: inline-block;
+
+		&:before {
+			content: '//';
+		}
+
+		&.block {
+			display: block;
+		}
+	}
+
+	.multi-line-comment {
+		$indent: 2em;
+
+		display: block;
+		padding-left: $indent;
+
+		&:before,
+		&:after {
+			display: block;
+			left: -$indent;
+			position: relative;
+		}
+
+		&:before {
+			content: '/*';
+		}
+
+		&:after {
+			content: '*/';
+		}
+	}
+
+}
+
+.html,
+.js {
+	&:before {
+		display: block;
+		font-weight: bold;
+		margin-top: 1em;
+	}
+}
+
+.html:before {
+	content: 'HTML for this example: ';
+}
+
+.js:before {
+	content: 'Javascript for this example: ';
+}

@@ -1,0 +1,80 @@
+.image-cover-page {
+
+	.test-image-cover > div {
+		$bg-color: rgba(0, 0, 0, .5);
+		$after-color: #fff;
+		$border-color: #ffa500;
+
+		border: 1px solid $border-color;
+		box-sizing: border-box;
+		margin-bottom: $gutter;
+		position: relative;
+
+		&::after {
+			background-color: $bg-color;
+			color: $after-color;
+			font-size: .8em;
+			left: 0;
+			padding: $half-gutter;
+			position: absolute;
+			top: 0;
+			white-space: pre;
+			width: 100%;
+		}
+	}
+
+	.first {
+		@include image-cover();
+
+		width: 70%;
+
+		&::after {
+			content: '@include image-cover();\00000A (height = auto, width = 100%, background-size = cover)';
+		}
+	}
+
+	.second,
+	.third {
+		float: left;
+	}
+
+	.second {
+		@include image-cover(300px, 100%);
+		width: 50%;
+
+		&::after {
+			content: '@include image-cover(300px, 100%);';
+		}
+	}
+
+	.third {
+		@include image-cover(300px, 100%, contain);
+		width: 50%;
+
+		&::after {
+			content: '@include image-cover(300px, 100%, contain);';
+		}
+	}
+
+	.fourth {
+		@include image-cover(400px);
+
+		clear: both;
+		margin: 0 auto $gutter;
+		width: 60%;
+
+		&::after {
+			content: '@include image-cover(400px);';
+		}
+	}
+
+	.fifth {
+		@include image-cover(300px, 100%, contain);
+		margin: 0 auto $gutter;
+		width: 80%;
+
+		&::after {
+			content: '@include image-cover(300px, 100%, contain);';
+		}
+	}
+}

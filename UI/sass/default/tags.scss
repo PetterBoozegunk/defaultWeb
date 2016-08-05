@@ -1,0 +1,74 @@
+html {
+	font-size: $base-font-size;
+}
+
+body {
+	font-family: $main-font-family;
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0 0 1em;
+}
+
+h1 {
+	@include rem-font($base-font-size * 1.5);
+}
+
+h2 {
+	@include rem-font($base-font-size * 1.4);
+}
+
+h3 {
+	@include rem-font($base-font-size * 1.3);
+}
+
+h4 {
+	@include rem-font($base-font-size * 1.2);
+}
+
+h5 {
+	@include rem-font($base-font-size * 1.1);
+}
+
+h6 {
+	@include rem-font($base-font-size);
+}
+
+p {
+	margin-top: 0;
+}
+
+a {
+	color: $link-color;
+}
+
+nav,
+article,
+aside {
+	> :first-child {
+		margin-top: 0;
+	}
+
+	img,
+	svg,
+	svg image {
+		box-sizing: border-box;
+		display: block;
+		max-width: 100%;
+	}
+}
+
+code,
+pre {
+	background: $code-pre-bg-color;
+	max-width: 100%;
+	overflow: auto;
+}

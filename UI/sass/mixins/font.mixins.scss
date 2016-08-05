@@ -1,0 +1,11 @@
+@mixin rem-font($font-size-px: $base-font-size) {
+	$px-value: $font-size-px;
+	$rem-value: ($px-value / $base-font-size);
+
+	font-size: #{$rem-value}rem;
+}
+
+@mixin icon-font($icon) {
+	content: $icon;
+	font-family: $icon-font;
+}

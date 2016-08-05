@@ -1,0 +1,34 @@
+$font-base-url: '/UI/fonts/';
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('#{$font-base-url}fontawesome-webfont.eot?v=4.4.0');
+	src: url('#{$font-base-url}fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'),
+		url('#{$font-base-url}fontawesome-webfont.woff2?v=4.4.0') format('woff2'),
+		url('#{$font-base-url}fontawesome-webfont.woff?v=4.4.0') format('woff'),
+		url('#{$font-base-url}fontawesome-webfont.ttf?v=4.4.0') format('truetype'),
+		url('#{$font-base-url}fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+$icon-font: FontAwesome;
+
+body {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+[class*='icon-']:before {
+	padding-right: 5px;
+}
+
+.icon-test {
+	@include reset-list();
+	font-family: 'FontAwesome';
+
+	li {
+		font-size: 2em;
+		margin-bottom: $half-gutter;
+	}
+}

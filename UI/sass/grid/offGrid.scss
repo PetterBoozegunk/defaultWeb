@@ -1,0 +1,13 @@
+@mixin off-grid($nbr-cols: 1, $margin: 0, $parent-width: $sitewidth) {
+	$margin-percent-width: ($margin / ($parent-width - $nbr-cols)) * 100;
+	$elem-width: ((100 / $nbr-cols) - $margin-percent-width) - ($margin-percent-width / $nbr-cols);
+
+	box-sizing: border-box;
+	float: left;
+	margin: 0 0 $margin $margin-percent-width;
+	width: '#{$elem-width}%';
+
+	&:nth-child(#{$nbr-cols}) {
+		clear: right;
+	}
+}

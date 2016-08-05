@@ -1,0 +1,108 @@
+.flex-box {
+	background-image: radial-gradient(circle at 50% 50%, $red 0%, $orange 15%, $yellow 30%, $lightgreen 45%, $green 60%, $darkgreen 75%, $darkblue 90%);
+
+	> div {
+		display: flex;
+
+		&:not(.flex-test-2) {
+			margin: 0 -#{$half-gutter};
+		}
+	}
+
+	.box {
+		background: $orange;
+		flex: 0 1 auto;
+		margin: 0 $half-gutter;
+		padding: 5px;
+		text-align: center;
+	}
+}
+
+.flex-test-1 {
+	flex-direction: row;
+	height: 300px;
+
+	.box {
+		&:nth-child(1) {
+			align-self: auto;
+			background-image: linear-gradient($cyan, $hotpink);
+			order: 3;
+		}
+
+		&:nth-child(2) {
+			align-self: flex-end;
+			background-image: linear-gradient($green, $lightgreen);
+			order: 3;
+		}
+
+		&:nth-child(3) {
+			align-self: flex-start;
+			background-image: linear-gradient($blue, $lightblue);
+			order: 3;
+		}
+
+		&:nth-child(4) {
+			align-self: center;
+			background-image: linear-gradient($red, $yellow);
+			order: 3;
+		}
+
+		&:nth-child(5) {
+			align-self: baseline;
+			background-image: linear-gradient($firebrick, $purple);
+			order: 3;
+		}
+
+		&:nth-child(6) {
+			align-self: stretch;
+			background-image: linear-gradient($black, $white);
+			order: 3;
+		}
+	}
+}
+
+.flex-test-2 {
+	flex-flow: row wrap;
+
+	header,
+	nav,
+	article,
+	aside,
+	footer {
+		flex: 1 100%;
+		padding: $gutter;
+	}
+
+	header,
+	footer {
+		padding: $half-gutter $gutter;
+	}
+
+	nav,
+	aside {
+		flex: 1 auto;
+	}
+
+	$fade: .6;
+
+	header {
+		background: transparentize($red, $fade);
+	}
+
+	nav {
+		background: transparentize($green, $fade);
+	}
+
+	article {
+		background: transparentize($pink, $fade);
+		flex: 2 0;
+	}
+
+	aside {
+		background: transparentize($firebrick, $fade);
+	}
+
+	footer {
+		background: transparentize($purple, $fade);
+	}
+}
