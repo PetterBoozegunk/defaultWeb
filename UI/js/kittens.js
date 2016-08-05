@@ -78,7 +78,7 @@
                     var orgImg = this,
                         tempImg = document.createElement("img");
 
-                    tempImg.className = "tempKittenCheck";
+                    tempImg.className = "temp-kitten-check";
                     tempImg.src = orgImg.style.backgroundImage.replace(/(^url\([\"]?|[\"]?\))/g, "");
 
                     $(tempImg).on("load", function () {

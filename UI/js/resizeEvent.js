@@ -9,7 +9,6 @@
                 var body = $("body");
 
                 body.trigger("window:resize");
-
                 body.removeClass("resize");
             },
             checkResize: function () {
