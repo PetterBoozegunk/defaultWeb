@@ -11,7 +11,7 @@ var gulp = require("gulp"),
     settings = {
         name: "icon",
         src: ["fonts/svg/*.svg"],
-        lesstemplate: "fonts/templates/icon.less",
+        lesstemplate: "fonts/templates/icon.scss",
         fontdest: "./fonts",
         lessdest: "less/fonts/",
         dir: "/UI/fonts/",
