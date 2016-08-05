@@ -11,8 +11,13 @@ var gulp = require("gulp"),
             to: "utf8"
         },
         src: {
-            js: ["js/**"],
-            less: ["less/**"],
+            js: [
+                "*.js",
+                "gulp/**",
+                "js/**",
+                "bower/**/*.js",
+                "bower_components/**/*.js"
+            ],
             sass: ["sass/**"]
         }
     },
@@ -30,13 +35,10 @@ var gulp = require("gulp"),
             "convertEncoding:js": function () {
                 return convert(settings.src.js);
             },
-            "convertEncoding:less": function () {
-                return convert(settings.src.less);
-            },
             "convertEncoding:sass": function () {
                 return convert(settings.src.sass);
             },
-            "before:default": ["convertEncoding:js", "convertEncoding:less", "convertEncoding:sass"],
+            "before:default": ["convertEncoding:js", "convertEncoding:sass"],
         }
     };
 
