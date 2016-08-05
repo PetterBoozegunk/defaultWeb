@@ -7,7 +7,6 @@
     "repository": " ",
     "devDependencies": {
         "browser-sync": "^2.11.1",
-        "es5-shim": "^4.5.8",
         "gulp": "^3.9.0",
         "gulp-bower": "0.0.13",
         "gulp-bower-files": "^0.2.7",
@@ -16,7 +15,6 @@
         "gulp-convert-encoding": "^1.0.0",
         "gulp-cssnano": "^2.1.0",
         "gulp-iconfont": "^5.0.1",
-        "gulp-iconfont-css": "^2.0.0",
         "gulp-imagemin": "^2.4.0",
         "gulp-js-prettify": "^0.1.0",
         "gulp-jslint": "^1.0.1",
