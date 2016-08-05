@@ -24,7 +24,7 @@ body {
 }
 
 .icon-test {
-	//.resetList();
+	@include reset-list();
 	font-family: 'FontAwesome';
 
 	li {

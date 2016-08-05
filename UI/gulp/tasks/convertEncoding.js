@@ -25,7 +25,7 @@ var gulp = require("gulp"),
     convert = function (src) {
         return gulp.src(src)
             .pipe(plugins.convertEncoding(settings.options))
-            .pipe(gulp.dest(function(file) {
+            .pipe(gulp.dest(function (file) {
                 return file.base;
             }));
     },

@@ -26,8 +26,7 @@ var gulp = require("gulp"),
         watchFiles: [
             config.compileToFolder + "/css/*.css",
             config.compileToFolder + "/js/*.js",
-            "../pages/**",
-            "../blocks/**"
+            "../**/*.phtml"
         ]
     },
 

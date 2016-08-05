@@ -11,15 +11,15 @@ var gulp = require("gulp"),
     settings = {
         name: "icon",
         src: ["fonts/svg/*.svg"],
-        lesstemplate: "fonts/templates/icon.scss",
+        templatepath: "fonts/templates/icon.scss",
         fontdest: "./fonts",
-        lessdest: "less/fonts/",
+        filedest: "sass/fonts/",
         dir: "/UI/fonts/",
         className: "icon",
         formats: ["svg", "ttf", "eot", "woff", "woff2"]
     },
     glyphs = function (glyphs) {
-        gulp.src(settings.lesstemplate)
+        gulp.src(settings.templatepath)
             .pipe(plugins.plumber())
             .pipe(plugins.consolidate("lodash", {
                 glyphs: glyphs,
@@ -27,7 +27,7 @@ var gulp = require("gulp"),
                 fontPath: settings.dir,
                 className: settings.className
             }))
-            .pipe(gulp.dest(settings.lessdest));
+            .pipe(gulp.dest(settings.filedest));
     },
     mainTask = function () {
         return gulp.src(settings.src)
