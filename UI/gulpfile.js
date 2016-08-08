@@ -13,6 +13,4 @@ config.developerRoot = "http://defaultweb.local:666/";
 
 util.init();
 
-/*
-    Checkout /UI/gulp/tasks/examples.js for instructions how to gulp with an almost empty glupfile.
-*/
+// Checkout /UI/gulp/tasks/examples.js for instructions how to gulp with an almost empty glupfile.

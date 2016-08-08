@@ -71,9 +71,7 @@ var gulp = require("gulp"),
             jslint_happy: true
         },
         esLint: {
-            rules: {
-                "quotes": [1, "double"]
-            }
+            configFile: ".eslintrc"
         },
 
         uglify: {

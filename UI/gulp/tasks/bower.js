@@ -3,7 +3,6 @@
 "use strict";
 
 var gulp = require("gulp"),
-    config = require("../config.js"),
     plugins = require("gulp-load-plugins")(),
 
     settings = {

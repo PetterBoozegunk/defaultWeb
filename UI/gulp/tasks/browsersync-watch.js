@@ -2,12 +2,7 @@
 /*jslint node: true, stupid: true */
 "use strict";
 
-var gulp = require("gulp"),
-    config = require("../config.js"),
-    plugins = require("gulp-load-plugins")(),
-
-    reloadTimeout = null,
-
+var config = require("../config.js"),
     bs = require("browser-sync").create(),
     reload = bs.reload,
 

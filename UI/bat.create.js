@@ -23,9 +23,6 @@ var path = require("path"),
         ]
     },
 
-    readFileOptions = {
-        encoding: "utf-8"
-    },
     settings = require("./bat.settings.json"),
 
     util = {

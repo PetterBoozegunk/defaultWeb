@@ -3,7 +3,6 @@
 "use strict";
 
 var gulp = require("gulp"),
-    config = require("../config.js"),
     plugins = require("gulp-load-plugins")(),
 
     runTimestamp = Math.round(Date.now() / 1000),
@@ -18,7 +17,7 @@ var gulp = require("gulp"),
         className: "icon",
         formats: ["svg", "ttf", "eot", "woff", "woff2"]
     },
-    glyphs = function (glyphs) {
+    glyphsFunc = function (glyphs) {
         gulp.src(settings.templatepath)
             .pipe(plugins.plumber())
             .pipe(plugins.consolidate("lodash", {
@@ -39,7 +38,7 @@ var gulp = require("gulp"),
                 formats: settings.formats,
                 timestamp: runTimestamp
             }))
-            .on("glyphs", glyphs)
+            .on("glyphs", glyphsFunc)
             .pipe(gulp.dest(settings.fontdest));
     },
 
