@@ -98,7 +98,7 @@ var gulp = require("gulp"),
                     js.prettify(prettifyObj.files, prettifyObj.dest);
                 });
             },
-            "before:js:lint": ["prettify"],
+            "before:js:lint": ["js:prettify"],
             "js:lint": function () {
                 return gulp.src(settings.check)
                     .pipe(plugins.plumber())

@@ -15,7 +15,6 @@
         matchLayout = /(<!--([\s]+)?layout\(['"]?[\w\_\.\/]+['"]?\)([\s]+)?-->)/g,
         matchIncludes = /(<!--([\s]+)?include\(['"]?[\w\_\.\/]+['"]?\)([\s]+)?-->)/g,
 
-        // ReSharper disable once JoinDeclarationAndInitializerJs (This cannot be done here... But anyone is welcome to try.)
         server,
 
         util = {
@@ -45,8 +44,11 @@
                     server.getIncludes(rnrObject, 0);
                 }
             },
+            isTemplate: function (rnrObject) {
+                return (rnrObject.layout || rnrObject.includes);
+            },
             getAction: function (rnrObject) {
-                return (rnrObject.layout || rnrObject.includes) ? resp.handlePhtmlTemplates : resp.gzip;
+                return resp.isTemplate(rnrObject) ? resp.handlePhtmlTemplates : resp.gzip;
             },
             handlePHtml: function (rnrObject) {
                 rnrObject.data = rnrObject.data.toString("utf-8");
@@ -80,7 +82,6 @@
                 resp.gzip(rnrObject);
             }
         },
-        // ReSharper disable once InconsistentNaming (RnRObject is a constructor but Reshaper does not get that for some reason...)
         RnRObject = function (request, response) {
             var that = this;
 
