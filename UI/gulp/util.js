@@ -65,7 +65,6 @@ var gulp = require("gulp"),
                 util.setGulpTask(type, name, funcArrayObj);
             }, this, obj);
         },
-
         addDefaultTask: function (fileName) {
             var tasks = require("./tasks/" + fileName).tasks,
                 currentDefaultTask = util.returnArray(tasks["default"]),
@@ -75,7 +74,6 @@ var gulp = require("gulp"),
 
             config.tasks["default"] = defaultTask;
         },
-
         addTaskType: function (type, name, typeObj) {
             var nameList = name.replace(/\s/g, "").split(",");
 
@@ -93,7 +91,6 @@ var gulp = require("gulp"),
                 }
             });
         },
-
         setConfigBeforeTask: function (tasksObj, eqTaskName, taskName) {
             if (!config.beforetasks[eqTaskName]) {
                 config.beforetasks[eqTaskName] = [];
@@ -129,7 +126,6 @@ var gulp = require("gulp"),
             files.forEach(util.addTasksToConfig);
             files.forEach(util.addWatchToConfig);
         },
-
         addWatch: function (watchObj) {
             if (!config.tasks.watch) {
                 config.tasks.watch = function () {
@@ -170,7 +166,6 @@ var gulp = require("gulp"),
                 }
             });
         },
-
         setBeforeTaskType: function (task) {
             return (task instanceof Array) ? function () {
                 gulp.start(task);
@@ -190,18 +185,13 @@ var gulp = require("gulp"),
                 util.setBeforeTask(taskName, beforeTasksArray, task);
             });
         },
-
         init: function () {
             var files = fs.readdirSync("./gulp/tasks");
 
             util.addToConfig(files);
             util.getNamedTaskArrays();
             util.setBeforeTasks();
-
             util.addWatch(config.watch);
-
-            //console.log(config);
-
             util.setGulp("task", config.tasks);
         }
     };
