@@ -88,18 +88,18 @@ var gulp = require("gulp"),
                 .pipe(gulp.dest(dest));
         },
         tasks: {
-            "platoReport": function () {
+            "js:platoReport": function () {
                 gulp.start(plugins.shell.task(["node gulp/plato.js simple"]));
             },
-            "prettify": function () {
+            "js:prettify": function () {
                 var prettifyArray = settings.prettify;
 
                 prettifyArray.forEach(function (prettifyObj) {
                     js.prettify(prettifyObj.files, prettifyObj.dest);
                 });
             },
-            "before:jslint": ["prettify"],
-            "jslint": function () {
+            "before:js:lint": ["prettify"],
+            "js:lint": function () {
                 return gulp.src(settings.check)
                     .pipe(plugins.plumber())
                     .pipe(plugins.jslint())
@@ -134,7 +134,7 @@ var gulp = require("gulp"),
             },
             "js:dev:all": ["js:dev", "js:ie:dev"],
 
-            "js:all": ["jslint", "platoReport", "js:dev:all"],
+            "js:all": ["js:lint", "js:platoReport", "js:dev:all"],
 
             // All "default" tasks will be added to the main default task
             "default": ["js:dev:all"]

@@ -55,6 +55,9 @@
 
                 return dateIsValid ? (dateIsValid < now) : false;
             },
+            getDateIsValid: function (year, month, day) {
+                return (year && (typeof month === "number") && day) ? new Date(year, month, day) : false;
+            },
             checkDateIsValid: function (pnrStr) {
                 var dateStr = pnrStr.replace(/\d{4}$/, ""),
 
@@ -62,7 +65,7 @@
                     month = persnr.getValidMonth(persnr.strToNumber(dateStr.substring(4, 6)) - 1),
                     day = persnr.getValidDate(year, month, dateStr.substring(6, 8)),
 
-                    dateIsValid = (year && (typeof month === "number") && day) ? new Date(year, month, day) : false;
+                    dateIsValid = persnr.getDateIsValid(year, month, day);
 
                 return persnr.checkDateIsInThePast(dateIsValid);
             },

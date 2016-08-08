@@ -92,11 +92,7 @@ var gulp = require("gulp"),
             });
         },
         setConfigBeforeTask: function (tasksObj, eqTaskName, taskName) {
-            if (!config.beforetasks[eqTaskName]) {
-                config.beforetasks[eqTaskName] = [];
-            }
-
-            config.beforetasks[eqTaskName] = config.beforetasks[eqTaskName].concat(tasksObj[taskName]);
+            config.beforetasks[eqTaskName] = (config.beforetasks[eqTaskName] || []).concat(tasksObj[taskName]);
 
             delete tasksObj[taskName];
         },

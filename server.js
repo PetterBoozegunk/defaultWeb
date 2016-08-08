@@ -123,18 +123,21 @@
 
             return etag;
         },
-        statCallback: function () {
-            var rnrObject = this,
-                args = arguments,
-                stat = args[1],
-                etag = rnrObject.setEtag(stat, rnrObject);
-
+        callbackEnd: function (rnrObject, etag) {
             if (etag && rnrObject.request.headers["if-none-match"] === etag) {
                 rnrObject.response.statusCode = 304;
                 rnrObject.response.end();
             } else {
                 rnrObject.contextCallback(rnrObject, fs.readFile, [rnrObject.fullPath, rnrObject.readFileCallback]);
             }
+        },
+        statCallback: function () {
+            var rnrObject = this,
+                args = arguments,
+                stat = args[1],
+                etag = rnrObject.setEtag(stat, rnrObject);
+
+            this.callbackEnd(rnrObject, etag);
         },
         exists: function (exists) {
             var rnrObject = this;
