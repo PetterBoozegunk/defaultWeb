@@ -6,6 +6,10 @@ var gulp = require("gulp"),
     config = require("../config.js"),
     plugins = require("gulp-load-plugins")(),
 
+    removeJsonFiles = function (fileName) {
+        return !/\.json$/.test(fileName);
+    },
+
     defaultProperties = {
         files: ["*.js"],
         concat: true, // concat to '/UI/Dist/js/scripts.js'
@@ -66,6 +70,12 @@ var gulp = require("gulp"),
         jsLint: {
             jslint_happy: true
         },
+        esLint: {
+            rules: {
+                "quotes": [1, "double"]
+            }
+        },
+
         uglify: {
             compress: {
                 drop_debugger: true,
@@ -103,8 +113,15 @@ var gulp = require("gulp"),
                 return gulp.src(settings.check)
                     .pipe(plugins.plumber())
                     .pipe(plugins.jslint())
-                    .pipe(plugins.jslint.reporter('default', true))
-                    .pipe(plugins.jslint.reporter('stylish', {}));
+                    .pipe(plugins.jslint.reporter("default", true))
+                    .pipe(plugins.jslint.reporter("stylish", {}));
+            },
+            "es:lint": function () {
+                return gulp.src(settings.check.filter(removeJsonFiles))
+                    .pipe(plugins.plumber())
+                    .pipe(plugins.eslint(settings.esLint))
+                    .pipe(plugins.eslint.format())
+                    .pipe(plugins.eslint.failAfterError());
             },
             "js:prod": function () {
                 return gulp.src(settings.concat)
