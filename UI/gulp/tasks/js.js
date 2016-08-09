@@ -79,10 +79,7 @@ var gulp = require("gulp"),
                 drop_debugger: true,
                 drop_console: true
             }
-        },
-
-        oldIeFileName: "oldIe.js",
-        oldIeSrc: ["js/oldIe/*.js"]
+        }
     },
 
     setupJsTaskSettings = require("../setupJsTaskSettings.js"),
@@ -136,20 +133,8 @@ var gulp = require("gulp"),
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(settings.dest));
             },
-            "js:ie:dev": function () {
-                return gulp.src(settings.oldIeSrc)
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest));
-            },
-            "js:ie:prod": function () {
-                return gulp.src(settings.oldIeSrc)
-                    .pipe(plugins.concat(settings.oldIeFileName))
-                    .pipe(gulp.dest(settings.dest));
-            },
-            "js:dev:all": ["js:dev", "js:ie:dev"],
 
-            "js:all": ["js:lint", "es:lint", "js:platoReport", "js:dev:all"],
+            "js:all": ["js:lint", "es:lint", "js:platoReport", "js:dev"],
 
             // All "default" tasks will be added to the main default task
             "default": ["js:dev:all"]
@@ -157,7 +142,7 @@ var gulp = require("gulp"),
 
         // watch object {"watch-this-(dir|glob|file)": "do-this-task (Array)"}
         watch: {
-            "js/**": ["js:dev:all"]
+            "js/**": ["js:dev"]
         }
     };
 
