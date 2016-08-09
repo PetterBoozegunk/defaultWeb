@@ -9,9 +9,7 @@ var gulp = require("gulp"),
 
     util = {
         returnArray: function (checkArray) {
-            var returnArray = (checkArray instanceof Array) ? checkArray : [];
-
-            return returnArray;
+            return (checkArray instanceof Array) ? checkArray : [];
         },
         forEach: function (func, that, obj) {
             Object.keys(obj).forEach(function (key) {
@@ -35,9 +33,12 @@ var gulp = require("gulp"),
 
             return objectType;
         },
+        checkNull: function (item) {
+            return (item === null) ? "null" : typeof item;
+        },
         getObjectType: function (item) {
             var instanceOfArray = util.instanceOfArray,
-                objectType;
+                objectType = util.checkNull(item);
 
             instanceOfArray.forEach(function (instofObj) {
                 objectType = util.checkType(item, instofObj, objectType);
@@ -45,13 +46,8 @@ var gulp = require("gulp"),
 
             return objectType;
         },
-        getTrueType: function (item) {
-            var objectType = util.getObjectType(item);
-
-            return objectType || typeof item;
-        },
         setGulpTask: function (watchOrTask, name, funcArrayObj) {
-            var itemType = util.getTrueType(funcArrayObj);
+            var itemType = util.getObjectType(funcArrayObj);
 
             if (itemType === "object") {
                 gulp[watchOrTask](name, funcArrayObj.beforetask, funcArrayObj.task);
