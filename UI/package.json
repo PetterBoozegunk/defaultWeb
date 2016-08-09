@@ -28,6 +28,7 @@
         "gulp-sass": "^2.3.1",
         "gulp-sass-glob": "^1.0.6",
         "gulp-scss-lint": "^0.4.0",
+        "gulp-scss-lint-stylish2": "^2.0.2",
         "gulp-shell": "^0.5.2",
         "gulp-shorthand": "^1.1.0",
         "gulp-sourcemaps": "^1.6.0",
@@ -43,5 +44,8 @@
         "lodash": "^4.0.1",
         "minimatch": "^3.0.2",
         "plato": "^1.5.0"
+    },
+    "dependencies": {
+        "gulp-scss-lint-stylish2": "^2.0.2"
     }
 }

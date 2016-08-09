@@ -17,7 +17,7 @@ $main-section-padding: 20px;
 //* -- colors -- */
 
 $base-font-color: #000;
-$font-color: adjust-color($base-font-color, $lightness: 10); // less: lighten(#000, 10%);
+$font-color: adjust-color($base-font-color, $lightness: 10);
 $link-color: #00f;
 
 $main-body-bg-color: #fff;
