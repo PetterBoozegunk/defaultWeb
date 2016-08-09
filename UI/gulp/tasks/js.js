@@ -14,7 +14,7 @@ var gulp = require("gulp"),
         files: ["*.js"],
         concat: true, // concat to '/UI/Dist/js/scripts.js'
         prettify: true, // prettify before jslint
-        check: true // check with jslint
+        check: true // check with jslint & eslint
     },
 
     settings = {
@@ -134,7 +134,8 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(settings.dest));
             },
 
-            "js:all": ["js:lint", "es:lint", "js:platoReport", "js:dev"],
+            "js:lint:all": ["js:lint", "es:lint"],
+            "js:all": ["js:lint:all", "js:platoReport", "js:dev"],
 
             // All "default" tasks will be added to the main default task
             "default": ["js:dev"]

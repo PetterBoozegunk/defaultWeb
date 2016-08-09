@@ -23,11 +23,6 @@ var gulp = require("gulp"),
                     .pipe(gulp.dest(settings.filesDest));
             },
             "default": ["bower-files"]
-        },
-
-        // watch object {"watch-this-(dir|glob|file)": "do-this-task (Array)"}
-        watch: {
-
         }
     };
 
