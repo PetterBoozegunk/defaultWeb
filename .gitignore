@@ -43,15 +43,15 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/UI/dist/
+/UI/dist
+/UI/report
+/UI/bower
+/UI/bower_components
 
 node_modules
-
-/UI/report
 
 *.mswwsettings
 
 report/
 *.crdownload
 
-UI/bower_components
