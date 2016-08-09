@@ -149,7 +149,7 @@ var gulp = require("gulp"),
             },
             "js:dev:all": ["js:dev", "js:ie:dev"],
 
-            "js:all": ["js:lint", "js:platoReport", "js:dev:all"],
+            "js:all": ["js:lint", "es:lint", "js:platoReport", "js:dev:all"],
 
             // All "default" tasks will be added to the main default task
             "default": ["js:dev:all"]

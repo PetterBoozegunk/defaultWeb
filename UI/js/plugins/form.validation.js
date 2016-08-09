@@ -1,15 +1,12 @@
 /*jslint browser: true */
 (function (window) {
     "use strict";
-
     var $ = window.jQuery,
-
         util = {
             returnString: function (val) {
                 return val ? val.toString() : "";
             }
         },
-
         validation = {
             radioButtonListIsRequired: function (radioButtons) {
                 var isRequired = false;
@@ -24,27 +21,24 @@
                 "input": {
                     "checkbox": function () {
                         var isRequired = this.hasAttribute("required"),
-                            t = $(this),
-                            isValid = isRequired ? t.prop("checked") : true;
+                            t = $(this);
 
-                        return isValid;
+                        return isRequired ? t.prop("checked") : true;
                     },
                     "radio": function () {
                         var t = $(this),
                             name = t.attr("name"),
                             radioButtons = $(this.form).find("input[type=radio][name='" + name + "']"),
-                            isRequired = validation.radioButtonListIsRequired(radioButtons),
-                            isValid = isRequired ? radioButtons.filter(":checked").length : true;
+                            isRequired = validation.radioButtonListIsRequired(radioButtons);
 
-                        return isValid;
+                        return isRequired ? radioButtons.filter(":checked").length : true;
                     }
                 },
                 "default": function () {
                     var isRequired = this.hasAttribute("required"),
-                        val = $(this).val(),
-                        isValid = isRequired ? (val !== "") : true;
+                        val = $(this).val();
 
-                    return isValid;
+                    return isRequired ? (val !== "") : true;
                 },
                 checkTagType: function (tagName, type) {
                     return (type && validation.required[tagName] && validation.required[tagName][type]);
@@ -54,51 +48,44 @@
                 },
                 getType: function () {
                     var tagName = this.tagName.toLowerCase(),
-                        type = this.type,
-                        validationFunc = validation.required.getValidationFunc(tagName, type);
+                        type = this.type;
 
-                    return validationFunc;
+                    return validation.required.getValidationFunc(tagName, type);
                 }
             },
             types: {
                 "required": function () {
-                    var requiredValidationFunc = validation.required.getType.call(this),
-                        isValid = requiredValidationFunc.call(this);
+                    var requiredValidationFunc = validation.required.getType.call(this);
 
-                    return isValid;
+                    return requiredValidationFunc.call(this);
                 },
                 "email": function () {
                     // regexp found here: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
                     var isEmailInput = (this.type && this.type.toLowerCase() === "email"),
                         val = util.returnString($(this).val()),
-                        looksLikeEmail = val.match(/[a-z0-9!#$%&'*+\/=?\^_`{|}~\-]+(?:\.[a-z0-9!#$%&'*+\/=?\^_`{|}~\-]+)*@(?:[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?/),
-                        isValid = (isEmailInput && val) ? looksLikeEmail : true;
+                        looksLikeEmail = val.match(/[a-z0-9!#$%&'*+\/=?\^_`{|}~\-]+(?:\.[a-z0-9!#$%&'*+\/=?\^_`{|}~\-]+)*@(?:[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?/);
 
-                    return isValid;
+                    return (isEmailInput && val) ? looksLikeEmail : true;
                 },
                 "pattern": function () {
                     //  text, search, tel, url, email or password
                     var type = util.returnString(this.type).toLowerCase(),
                         canHavePattern = /^(text|search|tel|url|email|password)$/.test(type),
                         pattern = this.getAttribute("pattern"),
-                        val = $(this).val(),
-                        isValid = (canHavePattern && pattern && val) ? (new RegExp("^" + pattern + "$")).test(val) : true;
+                        val = $(this).val();
 
-                    return isValid;
+                    return (canHavePattern && pattern && val) ? (new RegExp("^" + pattern + "$")).test(val) : true;
                 },
                 "personnummer": function () {
                     var t = $(this),
-                        isPersonnummer = t.attr("data-type") === "personnummer",
-                        isValid = (isPersonnummer && t.val()) ? t.trigger("personnummer:check").data("isValid") : true;
+                        isPersonnummer = t.attr("data-type") === "personnummer";
 
-                    return isValid;
+                    return (isPersonnummer && t.val()) ? t.trigger("personnummer:check").data("isValid") : true;
                 }
             },
             getFilterFunc: function (type, validOrNot) {
                 return function () {
-                    var validity = (validOrNot === "valid") ? validation.types[type].call(this) : !validation.types[type].call(this);
-
-                    return validity;
+                    return (validOrNot === "valid") ? validation.types[type].call(this) : !validation.types[type].call(this);
                 };
             },
             getChangeType: function (previousValidityState) {

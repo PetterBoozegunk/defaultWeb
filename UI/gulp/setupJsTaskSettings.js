@@ -59,12 +59,15 @@ var defaultProperties = {},
                 });
             }
         },
+        setAddMethod: function (propName, obj) {
+            var addMethod = setupJsTaskSettings.addToArrayMethods[propName] || setupJsTaskSettings.addToArrayMethods["default"];
+
+            addMethod(propName, obj);
+        },
         addToJsSrcArray: function (obj) {
             Object.keys(obj).forEach(function (propName) {
                 if (obj[propName] === true) {
-                    var addMethod = setupJsTaskSettings.addToArrayMethods[propName] || setupJsTaskSettings.addToArrayMethods["default"];
-
-                    addMethod(propName, obj);
+                    setupJsTaskSettings.setAddMethod(propName, obj);
                 }
             });
         },
@@ -72,10 +75,12 @@ var defaultProperties = {},
             dirArray.forEach(setupJsTaskSettings.addToJsSrcArray);
         },
         init: function (sets, defaultProps) {
+            var dirArray;
+
             defaultProperties = defaultProps;
             settings = sets;
 
-            var dirArray = setupJsTaskSettings.getDirArray();
+            dirArray = setupJsTaskSettings.getDirArray();
 
             setupJsTaskSettings.addToJsSrcArrays(dirArray);
         }

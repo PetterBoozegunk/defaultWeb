@@ -35,7 +35,7 @@ var gulp = require("gulp"),
             // The task "clean" will run before the "examples" task
             "before:examples": ["clean"], // This HAS to be an Array
 
-            // Set an array of tasks to be run 
+            // Set an array of tasks to be run
             "examples": ["example1", "example2"],
 
             // To add a task to a list of tasks just end the name with :listName
@@ -49,7 +49,7 @@ var gulp = require("gulp"),
             },
 
             // Add tasks to the default task.
-            // This will run when running "gulp" 
+            // This will run when running "gulp"
             "default": ["example1"] // This HAS to be an Array
         },
 

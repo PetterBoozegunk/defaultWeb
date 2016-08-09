@@ -1,10 +1,7 @@
 /*jslint browser: true */
-
 (function (window) {
     "use strict";
-
     var $ = window.jQuery,
-
         persnr = {
             strToNumber: function (str) {
                 return parseFloat(str);

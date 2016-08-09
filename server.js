@@ -1,8 +1,7 @@
 /*jslint node: true */
 /*global require, Buffer */
+"use strict";
 (function () {
-    "use strict";
-
     var settings = require("./server/settings.json"),
         mimetypes = require("./server/mimetypes.json"),
 
@@ -47,18 +46,20 @@
             isTemplate: function (rnrObject) {
                 return (rnrObject.layout || rnrObject.includes);
             },
-            getAction: function (rnrObject) {
+            getActionFunc: function (rnrObject) {
                 return resp.isTemplate(rnrObject) ? resp.handlePhtmlTemplates : resp.gzip;
             },
             handlePHtml: function (rnrObject) {
+                var actionFunc;
+
                 rnrObject.data = rnrObject.data.toString("utf-8");
 
                 rnrObject.layout = rnrObject.data.match(matchLayout);
                 rnrObject.includes = rnrObject.data.match(matchIncludes);
 
-                var action = resp.getAction(rnrObject);
+                actionFunc = resp.getActionFunc(rnrObject);
 
-                action(rnrObject);
+                actionFunc(rnrObject);
             },
             "200": function (rnrObject) {
                 var isPHtml = /\.phtml$/.test(rnrObject.fullPath);

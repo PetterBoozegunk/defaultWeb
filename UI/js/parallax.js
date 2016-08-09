@@ -1,18 +1,14 @@
 /*jslint browser: true */
 (function (window) {
     "use strict";
-
     var $ = window.jQuery,
-
         viewPort = {
             top: 0,
             height: 0,
             bottom: 0
         },
-
         areaHeightsCache = {},
         translateYPercentCache = {},
-
         util = {
             getViewPort: function () {
                 viewPort = {
@@ -40,14 +36,17 @@
             elemIsInViewPort: function (elemDims) {
                 return (elemDims.top < viewPort.bottom && elemDims.bottom > viewPort.top);
             },
+            setElemInViewPort: function (item) {
+                var elemDims = util.getElemDims(parallax.elems[item]);
+
+                if (parallax.elemIsInViewPort(elemDims)) {
+                    this.elemsInViewPort.push(parallax.elems[item]);
+                }
+            },
             filterElem: function (item, index) {
                 // This works because it can only be true if both "item" and "index" is a number
                 if (parseInt(item, 10) === index) {
-                    var elemDims = util.getElemDims(parallax.elems[item]);
-
-                    if (parallax.elemIsInViewPort(elemDims)) {
-                        this.elemsInViewPort.push(parallax.elems[item]);
-                    }
+                    parallax.setElemInViewPort.call(this, item);
                 }
             },
             filterElems: function () {
@@ -60,9 +59,11 @@
                 return thisObj.elemsInViewPort;
             },
             getElemsInViewPort: function () {
+                var elemsInViewPort;
+
                 util.getViewPort();
 
-                var elemsInViewPort = parallax.filterElems();
+                elemsInViewPort = parallax.filterElems();
 
                 return $(elemsInViewPort);
             },

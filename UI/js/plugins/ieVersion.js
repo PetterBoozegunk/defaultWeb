@@ -1,7 +1,6 @@
 /*jslint browser: true */
 (function (window) {
     "use strict";
-
     // modified script found at http://www.pinlady.net/PluginDetect/IE/
 
     var ua = navigator.userAgent,
@@ -13,7 +12,7 @@
         ieVersion = {
             classId: [
                 "{45EA75A0-A269-11D1-B5BF-0000F8051515}", // Internet Explorer Help
-                "{3AF36230-A269-11D1-B5BF-0000F8051515}", // Offline Browsing Pack 
+                "{3AF36230-A269-11D1-B5BF-0000F8051515}", // Offline Browsing Pack
                 "{89820200-ECBD-11CF-8B85-00AA005B4383}"
             ],
             setBehavior: function (obj) {

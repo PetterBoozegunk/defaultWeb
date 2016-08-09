@@ -1,7 +1,6 @@
 /*jslint browser: true */
 (function (window) {
     "use strict";
-
     var $ = window.jQuery,
         tests = {
             "0": function () {

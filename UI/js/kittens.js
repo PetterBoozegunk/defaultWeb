@@ -2,7 +2,6 @@
 // Replace 400 and 500 error images with a kitten.
 (function (window) {
     "use strict";
-
     var $ = window.jQuery,
         images = {
             loadedImages: {},
