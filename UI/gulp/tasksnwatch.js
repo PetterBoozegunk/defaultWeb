@@ -50,7 +50,7 @@ var gulp = require("gulp"),
             var itemType = tasksnwatch.getObjectType(funcArrayObj);
 
             if (itemType === "object") {
-                gulp[watchOrTask](name, funcArrayObj.beforetask, funcArrayObj.task);
+                gulp[watchOrTask](name, funcArrayObj.beforetask, funcArrayObj.tasks);
             } else {
                 gulp[watchOrTask](name, funcArrayObj);
             }
@@ -166,7 +166,7 @@ var gulp = require("gulp"),
         setBeforeTask: function (taskName, beforetasksArray, task) {
             config.tasks[taskName] = {
                 beforetask: beforetasksArray,
-                task: tasksnwatch.setBeforeTaskType(task)
+                tasks: tasksnwatch.setBeforeTaskType(task)
             };
         },
         setBeforeTasks: function () {
