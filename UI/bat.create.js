@@ -83,6 +83,12 @@ var path = require("path"),
             });
 
             return slnFileName;
+        },
+        getCmdObject: function (fileName, commandLines) {
+            return {
+                "fileName": fileName,
+                "commandLines": commandLines // This HAS tyo be an Array
+            };
         }
     },
 
@@ -109,20 +115,19 @@ var path = require("path"),
             return (browserName === "iexplore.exe") ? bat.getIeCmdLines(openUrls) : bat.getBrowserCmdLine(browserName, openUrls);
         },
         getBrowserCmd: function (browserName) {
-            var openUrls = settings.openUrls.join(" "),
+            var openUrls = settings.openUrls.join(" ") || [],
                 ieOpenUrl = settings.openUrls[settings.openUrlInIE || 0],
                 cmdStr = bat.getBrowserCmdStr(browserName, openUrls, ieOpenUrl);
 
             return cmdStr;
         },
         addDirectoryCmd: function () {
-            settings.cmdFiles.push({
-                "fileName": "directory",
-                "commandLines": [
-                    "explorer " + currentDir,
-                    "exit"
-                ]
-            });
+            var cmdLines = [
+                "explorer " + currentDir,
+                "exit"
+            ];
+
+            return util.getCmdObject("directory", cmdLines);
         },
         addBrowserCmd: function (browsersCmd) {
             settings.cmdFiles.push({
@@ -133,7 +138,7 @@ var path = require("path"),
         addBrowsersCmd: function () {
             var browsersCmd = [];
 
-            settings.startBrowsers.forEach(function (browserName) {
+            (settings.startBrowsers || []).forEach(function (browserName) {
                 browsersCmd.push(bat.getBrowserCmd(browserName));
             });
 
@@ -141,13 +146,12 @@ var path = require("path"),
             bat.addBrowserCmd(browsersCmd);
         },
         addStartSlnCmd: function () {
+            var cmdLines = [
+                "start " + slnDir + "\\" + slnFileName, "exit"
+            ];
+
             if (slnDir && slnFileName) {
-                settings.cmdFiles.push({
-                    "fileName": "startSln",
-                    "commandLines": [
-                        "start " + slnDir + "\\" + slnFileName, "exit"
-                    ]
-                });
+                settings.cmdFiles.push(util.getCmdObject("startSln", cmdLines));
             }
         },
         getAllCmds: function () {

@@ -55,8 +55,7 @@ var gulp = require("gulp"),
             },
             "sass:lint": function () {
                 return gulp.src(settings.lint.src)
-                    .pipe(plugins.scssLint(settings.lint.options))
-                    .pipe(reporter.printSummary);
+                    .pipe(plugins.scssLint(settings.lint.options));
             },
             "before:sass:dev": ["sass:lint"],
             "sass:dev": function () {

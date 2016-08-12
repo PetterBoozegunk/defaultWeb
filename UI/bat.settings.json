@@ -16,6 +16,8 @@
     }, {
         "fileName": "gulp",
         "commandLines": [
+            "call rimraf dist/**/*",
+            "cls",
             "start gulp sync-watch",
             "gulp"
         ]
