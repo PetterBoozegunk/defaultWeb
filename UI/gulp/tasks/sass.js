@@ -8,7 +8,6 @@ var gulp = require("gulp"),
 
     lazypipe = require("lazypipe"),
 
-    reporter = plugins.scssLintStylish2(),
     settings = {
         dest: config.compileToFolder + "/css",
         src: ["sass/styles.scss"],
@@ -20,8 +19,7 @@ var gulp = require("gulp"),
                 "sass/**/*.scss"
             ],
             options: {
-                config: "sass/scss-lint.yml",
-                customReport: reporter.issues
+                config: "sass/scss-lint.yml"
             }
         },
         pleeease: {
