@@ -17,7 +17,6 @@
         "fileName": "gulp",
         "commandLines": [
             "call rimraf dist/**/*",
-            "cls",
             "start gulp sync-watch",
             "gulp"
         ]
@@ -25,7 +24,6 @@
         "fileName": "plato",
         "commandLines": [
             "call gulp platoReport",
-            "cls",
             "start http://defaultweb.local:666/UI/report/index.html",
             "exit"
         ]
