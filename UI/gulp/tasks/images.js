@@ -43,6 +43,12 @@ var gulp = require("gulp"),
                     .pipe(plugins.imagemin())
                     .pipe(gulp.dest(settings.images.dest));
             },
+			  "image": function () {
+				  return gulp.src(settings.images.src)
+						  .pipe(plugins.plumber())
+						  .pipe(plugins.image())
+						  .pipe(gulp.dest(settings.images.dest));
+			  },
             "before:iconFont": ["svg-min-font"]
         }
     };

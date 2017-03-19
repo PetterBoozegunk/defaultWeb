@@ -33,7 +33,7 @@ var gulp = require("gulp"),
         }
     },
 
-    mainLessPipe = (function () {
+    mainCssPipe = (function () {
         return lazypipe()
             .pipe(plugins.sassGlob)
             .pipe(plugins.sass)
@@ -47,7 +47,7 @@ var gulp = require("gulp"),
         tasks: {
             "sass:prod": function () {
                 return gulp.src(settings.src)
-                    .pipe(mainLessPipe())
+                    .pipe(mainCssPipe())
                     .pipe(plugins.cssnano())
                     .pipe(gulp.dest(settings.dest));
             },
@@ -60,7 +60,7 @@ var gulp = require("gulp"),
                 return gulp.src(settings.src)
                     .pipe(plugins.plumber())
                     .pipe(plugins.sourcemaps.init())
-                    .pipe(mainLessPipe())
+                    .pipe(mainCssPipe())
                     .pipe(plugins.sourcemaps.write("."))
                     .pipe(gulp.dest(settings.dest));
             },
